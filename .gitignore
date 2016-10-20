@@ -1,4 +1,3 @@
-<<<<<<< 9f27734dc95b5258ae2e0db5fc5d7d58baab341a
 # Logs
 logs
 *.log
@@ -36,6 +35,3 @@ jspm_packages
 
 # Optional REPL history
 .node_repl_history
-=======
-node_modules
->>>>>>> Project init
