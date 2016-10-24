@@ -6,7 +6,7 @@ server.use('/public', express.static(__dirname + '/public'));
 
 server.get('/*', function(req, res){
   console.log('[SERVER.GET] Catch all hit');
-  res.sendFile(path.join(__dirname + '/src/index.html'));
+  res.sendFile(path.join(__dirname + '/public/index.html'));
 });
 
 var port = process.env.PORT || 8080;
