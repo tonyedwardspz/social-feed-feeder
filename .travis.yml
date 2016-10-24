@@ -1,4 +1,7 @@
 language: node_js
+before_deploy:
+  - test $TRAVIS_TEST_RESULT = 0
+  - gulp build
 deploy:
   provider: heroku
   api_key:
