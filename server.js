@@ -1,7 +1,13 @@
-var http = require('http');
+var express = require('express');
 
-var server = http.createServer(function(req, res) {
-  res.writeHead(200);
-  res.end('Thanks for being awesome!');
+var server = express();
+server.use('/public', express.static(__dirname + '/public'));
+
+server.get('/*', function(req, res){
+  res.sendFile(__dirname + '/public/index.html');
 });
-server.listen(process.env.PORT || 8080);
+
+var port = process.env.PORT || 8080;
+server.listen(port || 8080, function() {
+  console.log('server listening on port ' + port);
+});
