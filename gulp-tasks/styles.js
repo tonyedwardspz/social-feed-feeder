@@ -27,7 +27,7 @@ gulp.task('styles:sass', function() {
     ]))
     .pipe(minifyCSS())
     .pipe(sourcemaps.write())
-    .pipe(gulp.dest('./public'));
+    .pipe(gulp.dest('./public/styles'));
 });
 
 gulp.task('styles', function(cb) {
