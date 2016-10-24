@@ -7,6 +7,6 @@ gulp.task('html:watch', function() {
 
 gulp.task('html', function() {
   return gulp.src('./src/*.html')
-    .pipe(minifyHtml())
+    // .pipe(minifyHtml())
     .pipe(gulp.dest('./public'));
 });

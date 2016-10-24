@@ -5,6 +5,9 @@ var minifyCSS = require('gulp-minify-css');
 var autoprefixer = require('gulp-autoprefixer');
 var sass = require('gulp-sass');
 var sourcemaps = require('gulp-sourcemaps');
+var replace = require('gulp-replace');
+var fs = require('fs');
+var file = require('gulp-file');
 
 gulp.task('styles:watch', function() {
   gulp.watch('./src/styles/*.scss', ['styles']);
@@ -30,11 +33,24 @@ gulp.task('styles:sass', function() {
     .pipe(gulp.dest('./public/styles'));
 });
 
+gulp.task('styles:inline', function(){
+  let indexContents = fs.readFileSync('./public/index.html', 'utf8').replace(/INLINE-CSS/g, function() {
+      var style = fs.readFileSync('./public/styles/inline.css', 'utf8');
+      return '<style>\n' + style + '\n</style>';
+  });
+  del('./public/index.html', {dot: false});
+  console.log(indexContents);
+
+  return file('index.html', indexContents, { src: true })
+    .pipe(gulp.dest('./public'));
+});
+
 gulp.task('styles', function(cb) {
   del('./public/styles/*.css', {dot: true});
 
   runSequence(
-    'styles:sass',
+    ['styles:sass'],
+    ['styles:inline'],
     cb
   );
 });
