@@ -1,6 +1,6 @@
 {
   "name": "social-feed-feeder",
-  "version": "1.0.23",
+  "version": "1.0.31",
   "description": "A buffer feed feeder for social marketers",
   "main": "server.js",
   "homepage": "https://social-feed-feeder.herokuapp.com/",
@@ -22,6 +22,7 @@
     "gulp-bump": "^1.0.0",
     "gulp-concat": "^2.6.0",
     "gulp-env": "^0.2.0",
+    "gulp-file": "^0.3.0",
     "gulp-imagemin": "^2.3.0",
     "gulp-minify-css": "^1.2.1",
     "gulp-minify-html": "^1.0.4",
