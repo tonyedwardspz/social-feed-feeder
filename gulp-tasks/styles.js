@@ -5,7 +5,6 @@ var minifyCSS = require('gulp-minify-css');
 var autoprefixer = require('gulp-autoprefixer');
 var sass = require('gulp-sass');
 var sourcemaps = require('gulp-sourcemaps');
-var replace = require('gulp-replace');
 var fs = require('fs');
 var file = require('gulp-file');
 
@@ -15,7 +14,7 @@ gulp.task('styles:watch', function() {
 
 gulp.task('styles:sass', function() {
   return gulp.src('./src/styles/*.scss')
-    .pipe(sourcemaps.init())
+    // .pipe(sourcemaps.init())
     .pipe(sass().on('error', sass.logError))
     .pipe(autoprefixer([
       'ie >= 10',
@@ -29,7 +28,7 @@ gulp.task('styles:sass', function() {
       'bb >= 10'
     ]))
     .pipe(minifyCSS())
-    .pipe(sourcemaps.write())
+    // .pipe(sourcemaps.write())
     .pipe(gulp.dest('./public/styles'));
 });
 
@@ -39,7 +38,6 @@ gulp.task('styles:inline', function(){
       return '<style>\n' + style + '\n</style>';
   });
   del('./public/index.html', {dot: false});
-  console.log(indexContents);
 
   return file('index.html', indexContents, { src: true })
     .pipe(gulp.dest('./public'));
