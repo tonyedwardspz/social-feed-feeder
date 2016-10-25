@@ -1,26 +1,31 @@
+'user strict';
+
+const CONFIG = {
+  campaigns : `/campaigns`,
+  user : `/user/auth`,
+  *[Symbol.iterator]() {
+    let properties = Object.keys(this);
+    for (let i of properties) {
+        yield this[i];
+    }
+  }
+};
+
 (function(){
 
-  let app = {};
+  let app = {
+    db : null
+  };
 
-  let bucket = new BucketController();
 
-  fetch('/user/auth')
-  .then(
-    function(response) {
-      if (response.status !== 200) {
-        console.log('Looks like there was a problem. Status Code: ' +
-          response.status);
-        return;
-      }
+  let database = new Database();
+  app.campaignsController = new CampaignsController(database);
 
-      // Examine the text in the response
-      response.json().then(function(data) {
-        console.log(data);
-      });
-    }
-  )
-  .catch(function(err) {
-    console.log('Fetch Error :-S', err);
-  });
+  // // test routes work
+  // for (let value of CONFIG) {
+  //     app.db.retrieve(value);
+  // }
+
+  app.campaignsController.getAllCampaigns();
 
 })();
