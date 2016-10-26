@@ -20,12 +20,14 @@ const CONFIG = {
 
   let database = new Database();
   app.campaignsController = new CampaignsController(database);
+  app.usersController = new UsersController(database);
 
   // // test routes work
   // for (let value of CONFIG) {
   //     app.db.retrieve(value);
   // }
 
-  app.campaignsController.getAllCampaigns();
+  app.campaignsController.getAll();
+  app.usersController.getAll();
 
 })();

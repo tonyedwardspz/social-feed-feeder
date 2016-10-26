@@ -1,5 +1,8 @@
 var express = require('express');
 var path    = require('path');
+require('dotenv').config();
+var mongodb = require('mongodb');
+// var database = require('./server/database/database');
 
 var app = express();
 app.use('/public', express.static(__dirname + '/public'));
@@ -17,7 +20,19 @@ app.get('/user/auth', function(req, res){
 });
 
 // TODO: Connect to DB
+var db;
 
+// Connect to the database before starting the application server.
+mongodb.MongoClient.connect(process.env.MONGODB_URI, function (err, database) {
+  if (err) {
+    console.log(err);
+    process.exit(1);
+  }
+
+  // Save database object from the callback for reuse.
+  db = database;
+  console.log('Database connection ready');
+});
 
 
 
@@ -28,6 +43,22 @@ function handleError(res, reason, message, code) {
   console.log('ERROR: ' + reason);
   res.status(code || 500).json({'error': message});
 }
+
+app.get('/users', function(req, res) {
+  console.log('[ROUTE] Users:GET hit');
+
+  db.collection('users').find({}).toArray(function(err, docs) {
+    if (err) {
+      handleError(res, err.message, 'Failed to get contacts.');
+    } else {
+      console.log(docs);
+      res.status(200).json(docs);
+      return docs;
+    }
+  });
+});
+
+
 
 // GET: finds all campaigns
 app.get('/campaigns', function(req, res) {
