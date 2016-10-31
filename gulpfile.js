@@ -14,5 +14,5 @@ gulp.task('default', function(cb) {
 });
 
 gulp.task('dev', function() {
-  return runSequence('clean', allTasks, 'watch');
+  return runSequence('clean', allTasks, 'watch', 'nodemon');
 });

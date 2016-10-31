@@ -4,7 +4,7 @@
     "npm": "3.10.8"
   },
   "name": "social-feed-feeder",
-  "version": "1.0.32",
+  "version": "1.0.33",
   "description": "A buffer feed feeder for social marketers",
   "main": "server.js",
   "homepage": "https://social-feed-feeder.herokuapp.com/",
@@ -17,8 +17,12 @@
   "author": "tonyedwardspz",
   "license": "MIT",
   "dependencies": {
-    "babel-preset-es2015": "^6.16.0",
+    "babel-polyfill": "^6.16.0",
+    "babel-preset-es2015": "^6.18.0",
+    "babelify": "^7.3.0",
+    "browserify": "^13.1.1",
     "del": "^2.0.2",
+    "dotenv": "^2.0.0",
     "express": "^4.13.3",
     "glob": "^5.0.15",
     "gulp": "^3.9.0",
@@ -38,10 +42,15 @@
     "gulp-uglify": "^1.4.2",
     "gulp-util": "^3.0.6",
     "mocha": "^3.1.2",
+    "mongodb": "^2.2.11",
     "require-dir": "^0.3.0",
     "run-sequence": "^1.1.4",
     "slm": "^0.5.1",
     "sw-precache": "^2.2.0",
+    "vinyl-buffer": "^1.0.0",
     "vinyl-source-stream": "^1.1.0"
+  },
+  "devDependencies": {
+    "nodemon": "^1.11.0"
   }
 }

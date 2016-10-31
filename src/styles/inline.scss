@@ -85,6 +85,10 @@ h1 {
   }
 }
 
+.hidden {
+  display: none;
+}
+
 @-webkit-keyframes rotate {
   from {
     -webkit-transform: rotate(0);
