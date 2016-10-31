@@ -15,6 +15,14 @@ function clearDOM() {
   app.shell.innerHTML = '';
 }
 
+function getCookie(name) {
+  var value = '; ' + document.cookie;
+  var parts = value.split('; ' + name + '=');
+  if (parts.length === 2) {
+    return parts.pop().split(';').shift();
+  }
+}
+
 var app;
 
 (function(){
@@ -27,13 +35,17 @@ var app;
     userController: new UserController(),
     dashboardView: new DashboardView(),
     dashboardController: new DashboardController(),
-    campaignController: new CampaignsController(),
-    campaignView: new CampaignView()
+    campaignView: new CampaignView(),
+    campaignController: new CampaignsController()
   };
 
   app.shell.innerHTML = app.userView.loginScreen();
   app.spinner.classList.add('hidden');
 
+  if (getCookie('user_auth') === 'true'){
+    console.log('User authenticated');
+    app.dashboardController.index();
+  }
 
 
   app.shell.addEventListener('click', function(e){
@@ -41,9 +53,7 @@ var app;
     if (e.target !== e.currentTarget) {
       if (e.target.id === 'login' ){
         console.log('Login Button Clicked');
-        if (app.userController.auth()) {
-          app.dashboardController.index();
-        }
+        window.location = 'user/auth';
       } else if (e.target.id === 'campaign_index') {
         app.campaignController.index();
       } else if (e.target.className === 'campaign_show'){

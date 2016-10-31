@@ -1,38 +1,100 @@
 var express = require('express');
 var path    = require('path');
 require('dotenv').config();
-var mongodb = require('mongodb');
-// var database = require('./server/database/database');
+var passport = require('passport');
+var BufferAppStrategy = require('passport-bufferapp').Strategy;
+var request = require('request');
+var mongoose = require ('mongoose');
+var cookieParser = require('cookie-parser');
+
+var BufferUser = new mongoose.Schema({
+    name: String,
+    bufferID: String
+});
+
+var User = mongoose.model('user', BufferUser);
 
 var app = express();
 app.use('/public', express.static(__dirname + '/public'));
 app.use('/scripts', express.static(__dirname + '/public/scripts'));
 app.use('/styles', express.static(__dirname + '/styles'));
+app.use(passport.initialize());
+app.use(passport.session());
+app.use(cookieParser());
 
 app.get('/manifest.json', function(req, res){
   res.sendFile(path.join(__dirname + '/public/manifest.json'));
 });
 
-app.get('/user/auth', function(req, res){
-  console.log('[ROUTE] User Auth hit');
-  res.setHeader('Content-Type', 'application/json');
-  res.send(JSON.stringify({ a: 'This is the JSON response' }));
+passport.serializeUser(function(user, done) {
+    done(null, user.id);
 });
 
-// TODO: Connect to DB
-var db;
+passport.deserializeUser(function(id, done) {
+    User.findOne({
+        _id: id
+    }, '-salt -hashed_password', function(err, user) {
+        done(err, user);
+    });
+});
 
-// Connect to the database before starting the application server.
-mongodb.MongoClient.connect(process.env.MONGODB_URI, function (err, database) {
-  if (err) {
-    console.log(err);
-    process.exit(1);
+
+passport.use(new BufferAppStrategy({
+    clientID: process.env.BUFFER_CLIENT_ID,
+    clientSecret: process.env.BUFFER_CLIENT_SECRET,
+    callbackURL: process.env.BUFFER_REDIRECT_URI
+  },
+  function(accessToken, refreshToken, profile, done) {
+    console.log('Buffer function hit:' + accessToken);
+    console.log('buffer ID: ' + profile.id);
+    // return done();
+
+    User.findOne({ 'bufferID': '559d94e4f97cadcd745293d5' }, function(err, user) {
+      console.log('User: ' + user);
+      if (err) {
+        return done(err);
+      } else {
+        return done(null, user);
+      }
+    });
+
+    request.get('https://api.bufferapp.com/1/profiles.json?access_token='+accessToken, function (e, r, body) {
+          console.log('BUFFER IDS: ' + body);
+
+
+      });
+
   }
+));
 
-  // Save database object from the callback for reuse.
-  db = database;
-  console.log('Database connection ready');
+app.get('/user/auth', passport.authenticate('bufferapp'), function() {
+  console.log('auth hit');
 });
+
+app.get('/user/auth/buffer/callback', passport.authenticate('bufferapp', { failWithError: true }),
+  function(req, res){
+    console.log('AUTH SUCCESS');
+    res.cookie('user_auth', 'true');
+    // res.sendFile(path.join(__dirname + '/public/index.html'));
+    res.writeHead(302, {'Location': '/'});
+    res.end();
+  },
+  function(err, req, res, next) {
+    console.log('Auth failure: ' + err);
+    res.send(err);
+  }
+);
+
+// connect to the DB
+mongoose.connect(process.env.MONGODB_URI, function (err, res) {
+  if (err) {
+    console.log ('ERROR connecting to DB: ' + err);
+  } else {
+    console.log ('Succeeded connected to DB');
+  }
+});
+
+
 
 
 
