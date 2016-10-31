@@ -25,7 +25,7 @@ var app;
     db : new Database(),
     userView: new UserView(),
     userController: new UserController(),
-    dashboardView: new Dashboard(),
+    dashboardView: new DashboardView(),
     dashboardController: new DashboardController(),
     campaignController: new CampaignsController(),
     campaignView: new CampaignView()
@@ -44,24 +44,18 @@ var app;
         if (app.userController.auth()) {
           app.dashboardController.index();
         }
-      } else if (e.target.id === 'campaigns') {
-        clearDOM();
+      } else if (e.target.id === 'campaign_index') {
         app.campaignController.index();
+      } else if (e.target.className === 'campaign_show'){
+        app.campaignController.show(e.target.dataset.id);
+      } else if (e.target.id === 'campaign_new') {
+        app.campaignController.new();
       }
-
-
     }
 
 
   });
 
-  // document.querySelector('.campaign_but').addEventListener('click', function(e) {
-  //   e.preventDefault();
-  //   var id = this.id;
-  //   console.log('Campaign button hit: ID ' + id);
-  //
-  //
-  // });
 
   // clearDOM();
   // let database = new Database();

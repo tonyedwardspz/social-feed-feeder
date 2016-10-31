@@ -9,20 +9,23 @@ class CampaignsController extends BaseController {
   /** Shows a list of campaigns */
   index() {
     // Generate the HTML, passing in an array of campaign objects
-    var campaignIndexHTML = app.campaignView.getIndex([
+    var html = app.campaignView.getIndex([
       {'id' : '1', 'name': 'Campaign 1'},{'id':'2', 'name': 'Campaign 2'}
     ]);
 
-    this.updateShell(campaignIndexHTML);
+    this.updateShell(html);
   }
 
   /** Shows an indevidual campaign */
   show(id) {
-
+    var html = app.campaignView.show({'id' : id, 'name': 'Campaign 1'});
+    this.updateShell(html);
   }
 
   /** Shows the new campaign screen */
   new() {
+    var html = app.campaignView.new();
+    this.updateShell(html);
 
   }
 
