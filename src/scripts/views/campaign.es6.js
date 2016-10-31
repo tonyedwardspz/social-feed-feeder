@@ -4,8 +4,17 @@ class CampaignView {
   }
 
   getIndex(campaigns) {
-    return `<h1>Campaign Index<h1>
-            <p>This is the campaign index<p>`;
+    console.log('Campaign View: Get index');
+    var campaignHTML = `<h1>Campaign Index<h1>`;
+
+    for(let i = 0; i < campaigns.length; i++) {
+      console.log(campaigns[i].id);
+      campaignHTML += `<button>Campaign ${campaigns[i].name}</button>`;
+    }
+
+    campaignHTML += `<button class='new'>New</button>`;
+    console.log(campaignHTML);
+    return campaignHTML;
   }
 
   getNew(campaign) {

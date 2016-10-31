@@ -47,15 +47,15 @@ function handleError(res, reason, message, code) {
 app.get('/users', function(req, res) {
   console.log('[ROUTE] Users:GET hit');
 
-  db.collection('users').find({}).toArray(function(err, docs) {
-    if (err) {
-      handleError(res, err.message, 'Failed to get contacts.');
-    } else {
-      console.log(docs);
-      res.status(200).json(docs);
-      return docs;
-    }
-  });
+  // db.collection('users').find({}).toArray(function(err, docs) {
+  //   if (err) {
+  //     handleError(res, err.message, 'Failed to get contacts.');
+  //   } else {
+  //     console.log(docs);
+  //     res.status(200).json(docs);
+  //     return docs;
+  //   }
+  // });
 });
 
 

@@ -1,6 +1,10 @@
-class ApplicationController {
-  constructor(database) {
-    this.db = database;
+class BaseController {
+  constructor() {
     console.log('Base Controller');
+  }
+
+  updateShell(html) {
+    clearDOM();
+    app.shell.innerHTML = html;
   }
 }

@@ -1,8 +1,8 @@
 'use strict';
 
-class UsersController extends ApplicationController {
-  constructor(database) {
-    super(database);
+class UserController extends BaseController {
+  constructor() {
+    super();
     console.log('Users Controller');
   }
 
@@ -13,7 +13,7 @@ class UsersController extends ApplicationController {
   }
 
   auth(){
-
+    return true;
   }
 
   authCallback() {

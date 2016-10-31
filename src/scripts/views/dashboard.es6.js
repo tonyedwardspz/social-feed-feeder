@@ -4,7 +4,9 @@ class Dashboard {
   }
 
   getDashboard(){
+    console.log('get dashboard');
     return `<h1>Dashboard View<h1>
-            <p>This is the main dashboard view<p>`;
+            <p>This is the main dashboard view<p>
+            <button id='campaigns'>View Campaigns</button>`;
   }
 }
