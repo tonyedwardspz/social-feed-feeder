@@ -9,7 +9,9 @@ var cookieParser = require('cookie-parser');
 
 var BufferUser = new mongoose.Schema({
     name: String,
-    bufferID: String
+    bufferID: String,
+    accessToken: String,
+    accountIDS: Array
 });
 
 var User = mongoose.model('user', BufferUser);
@@ -47,23 +49,50 @@ passport.use(new BufferAppStrategy({
   function(accessToken, refreshToken, profile, done) {
     console.log('Buffer function hit:' + accessToken);
     console.log('buffer ID: ' + profile.id);
+    console.log(profile._json.name);
     // return done();
 
-    User.findOne({ 'bufferID': '559d94e4f97cadcd745293d5' }, function(err, user) {
+    User.findOne({ 'bufferID': profile.id }, function(err, user) {
       console.log('User: ' + user);
       if (err) {
         return done(err);
-      } else {
-        return done(null, user);
-      }
-    });
+      } else if (!user) {
+        user = new User({
+            name: profile._json.name,
+            bufferID: profile.id,
+            accessToken: accessToken
+        });
 
-    request.get('https://api.bufferapp.com/1/profiles.json?access_token='+accessToken, function (e, r, body) {
+        request.get('https://api.bufferapp.com/1/profiles.json?access_token='+accessToken, function (e, r, body) {
+
+          var accs = JSON.parse(body);
+          for(let i = 0; i < accs.length; i++) {
+            console.log(accs[i].id);
+            user.accountIDS.push(accs[i].id);
+          }
+
+          user.save(function(err) {
+              if (err) {console.log(err);}
+              return done(err, user);
+          });
+        });
+      } else {
+        request.get('https://api.bufferapp.com/1/profiles.json?access_token='+accessToken, function (e, r, body) {
           console.log('BUFFER IDS: ' + body);
 
+          var accs = JSON.parse(body);
+          for(let i = 0; i < accs.length; i++) {
+            console.log(accs[i].id);
+            user.accountIDS.push(accs[i].id);
+          }
 
-      });
-
+          user.save(function(err) {
+              if (err) {console.log(err);}
+              return done(err, user);
+          });
+        });
+      }
+    });
   }
 ));
 
