@@ -14,7 +14,7 @@ require('./server/config/passport')(passport);
 
 // Configure the express app
 var app = express();
-require('./server/config/express')(app, passport);
+require('./server/config/express')(app, passport, __dirname);
 
 // Load route configuration
 require('./server/config/routes')(app, passport);

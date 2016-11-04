@@ -69,15 +69,17 @@ module.exports = function(app, passport) {
    //-------------- Post Routes --------------\\
 
 
+
    //-------------- Misc Routes --------------\\
-   // Catch all Route to the main dash
-   app.get('/', function(req, res){
-     console.log('[SERVER.GET] Catch all hit');
-     res.sendFile(path.join(__dirname + '/public/index.html'));
-   });
 
    // Serve manifest file
    app.get('/manifest.json', function(req, res){
      res.sendFile(path.join(__dirname + '/public/manifest.json'));
+   });
+
+   // Catch all Route to the main dash (MUST BE LAST ROUTE)
+   app.get('/', function(req, res){
+     console.log('[SERVER.GET] Catch all hit');
+     res.sendFile(path.resolve(__dirname, '../../public/index.html'));
    });
 };
