@@ -26,7 +26,6 @@ class CampaignsController extends BaseController {
   new() {
     var html = app.campaignView.new();
     this.updateShell(html);
-
   }
 
   /** Creates and saves a new campaign */
