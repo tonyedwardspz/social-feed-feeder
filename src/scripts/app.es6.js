@@ -1,16 +1,5 @@
 'user strict';
 
-// const CONFIG = {
-//   campaigns : `/campaigns`,
-//   user : `/user/auth`,
-//   *[Symbol.iterator]() {
-//     let properties = Object.keys(this);
-//     for (let i of properties) {
-//         yield this[i];
-//     }
-//   }
-// };
-
 function clearDOM() {
   app.shell.innerHTML = '';
 }
@@ -60,24 +49,12 @@ var app;
         app.campaignController.show(e.target.dataset.id);
       } else if (e.target.id === 'campaign_new') {
         app.campaignController.new();
+      } else if (e.target.id === 'campaign_save') {
+        e.preventDefault();
+        app.campaignController.create();
       }
     }
 
 
   });
-
-
-  // clearDOM();
-  // let database = new Database();
-  // app.campaignsController = new CampaignsController(database);
-  // app.usersController = new UsersController(database);
-
-  // // test routes work
-  // for (let value of CONFIG) {
-  //     app.db.retrieve(value);
-  // }
-
-  // app.campaignsController.getAll();
-  // app.usersController.getAll();
-
 })();
