@@ -12,19 +12,15 @@ class UserController extends BaseController {
   }
 
   authSuccess(req, res) {
-    return function(req, res) {
-      console.log('[User] Auth Success');
-      res.cookie('user_auth', 'true');
-      res.writeHead(302, {'Location': '/'});
-      res.end();
-    };
+    console.log('[User] Auth Success');
+    res.cookie('user_auth', 'true');
+    res.writeHead(302, {'Location': '/'});
+    res.end();
   }
 
   authFailure(err, req, res, next) {
-    return function(err, req, res, next) {
-      console.log('[User] Auth failure: ' + err);
-      res.send(err);
-    };
+    console.log('[User] Auth failure: ' + err);
+    res.send(err);
   }
 
   // PATCH/PUT /users/:id

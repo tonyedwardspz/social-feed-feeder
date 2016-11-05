@@ -6,8 +6,6 @@ var campaigns = require('../controllers/campaigns');
 var buckets = require('../controllers/buckets');
 var posts = require('../controllers/posts');
 
-
-
 module.exports = function(app, passport) {
 
   //-------------- User / Authentication Routes --------------\\
@@ -18,8 +16,12 @@ module.exports = function(app, passport) {
     passport.authenticate('bufferapp', {
       failWithError: true
     }),
-    users.authSuccess,
-    users.authFailure
+    function(req, res) {
+      users.authSuccess(req, res);
+    },
+    function(err, req, res, next) {
+      users.authFailure(err, req, res, next);
+    }
   );
 
   app.put('/users/:id', users.update);
