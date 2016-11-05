@@ -6,11 +6,17 @@ class Database {
     console.log(`[DB] Constructor`);
   }
 
-  publish(route) {
+  publish(route, object) {
     // Send request to DB
     console.log(`[DB] Publish`);
 
     // Send data to the server
+    fetch(route, {
+      method:'POST',
+      data: JSON.stringify(object)
+    })
+    .then()
+    .catch();
   }
 
   retrieve(route, cb) {
