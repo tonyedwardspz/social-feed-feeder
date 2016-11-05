@@ -6,7 +6,7 @@ class Database {
   }
 
   get() {
-    return this.db;
+
   }
 
   createConnection(){

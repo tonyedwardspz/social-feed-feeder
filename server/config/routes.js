@@ -1,73 +1,83 @@
 'use strict';
 
 var path = require('path');
+var users = require('../controllers/users');
+var campaigns = require('../controllers/campaigns');
+var buckets = require('../controllers/buckets');
+var posts = require('../controllers/posts');
 
 module.exports = function(app, passport) {
 
-  var users = require('../controllers/users');
-  var campaigns = require('../controllers/campaigns');
-  var buckets = require('../controllers/buckets');
-  var posts = require('../controllers/posts');
-
   //-------------- User / Authentication Routes --------------\\
 
-  app.get('/user/auth', passport.authenticate('bufferapp'), function() {
-    console.log('auth hit');
-  });
+  app.get('/user/auth', passport.authenticate('bufferapp'), users.auth);
 
-  app.get('/user/auth/buffer/callback', passport.authenticate('bufferapp', { failWithError: true }),
-    function(req, res){
-      console.log('AUTH SUCCESS');
-      res.cookie('user_auth', 'true');
-      // res.sendFile(path.join(__dirname + '/public/index.html'));
-      res.writeHead(302, {'Location': '/'});
-      res.end();
+  app.get('/user/auth/buffer/callback',
+    passport.authenticate('bufferapp', {
+      failWithError: true
+    }),
+    function(req, res) {
+      users.authSuccess(req, res);
     },
     function(err, req, res, next) {
-      console.log('Auth failure: ' + err);
-      res.send(err);
+      users.authFailure(err, req, res, next);
     }
   );
+
+  app.put('/users/:id', users.update);
 
   //-------------- Campaign Routes --------------\\
 
   // GET: finds all campaigns
-  app.get('/campaigns', function(req, res) {
-    console.log('[ROUTE] Campaign:GET hit');
-    res.send(JSON.stringify({ a: 'Response from Campaigns GET' }));
-  });
+  app.get('/campaigns', campaigns.index);
 
   // POST: creates a new campaign
-  app.post('campaigns', function(req, res) {
-    console.log('[ROUTE] Campaign:POST hit');
-    res.send(JSON.stringify({ a: 'Response from Campaigns POST' }));
-  });
+  app.post('/campaigns', campaigns.create);
 
   // GET: find campaign by id
-   app.get('/campaigns/:id', function(req, res) {
-     console.log('[ROUTE] Campaign:GET:id hit');
-     res.send(JSON.stringify({ a: 'Response from Campaigns GET:id' }));
-   });
+  app.get('/campaigns/:id', campaigns.show);
 
   // PUT: update campaign by id
-   app.put('/campaigns/:id', function(req, res) {
-     console.log('[ROUTE] Campaign:PUT hit');
-     res.send(JSON.stringify({ a: 'Response from Campaigns PUT' }));
-   });
+  app.put('/campaigns/:id', campaigns.update);
 
   // DELETE: deletes campaign by id
-   app.delete('campaigns/:id', function(req, res) {
-     console.log('[ROUTE] Campaign:DELETE hit');
-     res.send(JSON.stringify({ a: 'Response from Campaigns DELETE' }));
-   });
+  app.delete('/campaigns/:id', campaigns.delete);
 
 
    //-------------- Bucket Routes --------------\\
 
+   // GET: finds all buckets
+   app.get('/buckets', buckets.index);
+
+   // POST: creates a new buckets
+   app.post('/buckets', buckets.create);
+
+   // GET: find buckets by id
+   app.get('/buckets/:id', buckets.show);
+
+   // PUT: update buckets by id
+   app.put('/buckets/:id', buckets.update);
+
+   // DELETE: deletes buckets by id
+   app.delete('/buckets/:id', buckets.delete);
 
 
    //-------------- Post Routes --------------\\
 
+   // GET: finds all posts
+   app.get('/posts', posts.index);
+
+   // POST: creates a new posts
+   app.post('/posts', posts.create);
+
+   // GET: find posts by id
+   app.get('/posts/:id', posts.show);
+
+   // PUT: update posts by id
+   app.put('/posts/:id', posts.update);
+
+   // DELETE: deletes posts by id
+   app.delete('/posts/:id', posts.delete);
 
 
    //-------------- Misc Routes --------------\\
