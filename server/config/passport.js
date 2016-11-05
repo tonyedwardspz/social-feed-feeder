@@ -10,6 +10,7 @@ var BufferUser = new mongoose.Schema({
     name: String,
     bufferID: String,
     accessToken: String,
+    refreshToken: String,
     accountIDS: Array
 });
 var User = mongoose.model('user', BufferUser);
@@ -47,17 +48,16 @@ module.exports = function(passport) {
           user = new User({
               name: profile._json.name,
               bufferID: profile.id,
-              accessToken: accessToken
+              accessToken: accessToken,
+              refreshToken: refreshToken
           });
 
-          request.get('https://api.bufferapp.com/1/profiles.json?access_token='+accessToken, function (e, r, body) {
+          request.get('https://api.bufferapp.com/1/profiles.json?access_token=' + accessToken, function (e, r, body) {
 
-            if (user.accountIDS === []) {
-              var accs = JSON.parse(body);
-              for(let i = 0; i < accs.length; i++) {
-                console.log(accs[i].id);
-                user.accountIDS.push(accs[i].id);
-              }
+            let accs = JSON.parse(body);
+            for(let i = 0; i < accs.length; i++) {
+              console.log(accs[i].id);
+              user.accountIDS.push(accs[i].id);
             }
 
             user.save(function(err) {
@@ -66,13 +66,15 @@ module.exports = function(passport) {
             });
           });
         } else {
-          request.get('https://api.bufferapp.com/1/profiles.json?access_token='+accessToken, function (e, r, body) {
-            console.log('BUFFER IDS: ' + body);
+          request.get('https://api.bufferapp.com/1/profiles.json?access_token=' + accessToken, function (e, r, body) {
+            console.log('BUFFER RESPONSE: ' + body);
 
-            var accs = JSON.parse(body);
-            for(let i = 0; i < accs.length; i++) {
-              console.log(accs[i].id);
-              user.accountIDS.push(accs[i].id);
+            if (user.accountIDS.length < 1) {
+              let accs = JSON.parse(body);
+              for(let i = 0; i < accs.length; i++) {
+                console.log(accs[i].id);
+                user.accountIDS.push(accs[i].id);
+              }
             }
 
             user.save(function(err) {
