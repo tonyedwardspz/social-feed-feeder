@@ -2,15 +2,7 @@
 
 var BaseController = require('./base');
 var mongoose = require ('mongoose');
-
-
-var CampaignModel = new mongoose.Schema({
-  name: String,
-  description: String,
-  expiry: Date,
-  dailyPosts: Number,
-  userID: String
-});
+var MongoCampaign = require('../models/campaign').getMongooseModel;
 
 class CampaignController extends BaseController {
   constructor() {
@@ -41,8 +33,7 @@ class CampaignController extends BaseController {
 
   // POST /campaigns
   create(req, res) {
-    console.log(req.body);
-    var MongoCampaign = mongoose.model('campaign', CampaignModel);
+
     let campaign = new MongoCampaign({
       name: req.body.name,
       description: req.body.description,
