@@ -17,6 +17,7 @@ var app;
 (function(){
 
   app = {
+    user: null,
     shell: document.querySelector('main'),
     spinner: document.querySelector('.loader'),
     db : new Database(),
@@ -33,6 +34,11 @@ var app;
 
   if (getCookie('user_auth') === 'true'){
     console.log('User authenticated');
+    if (app.user === null) {
+      app.user = new User();
+    }
+    console.log(app.user);
+
     app.dashboardController.index();
   }
 
