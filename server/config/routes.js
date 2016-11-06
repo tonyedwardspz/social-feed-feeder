@@ -26,6 +26,8 @@ module.exports = function(app, passport) {
 
   app.put('/users/:id', users.update);
 
+  app.get('/users/getAllData', users.getAllData);
+
   //-------------- Campaign Routes --------------\\
 
   // GET: finds all campaigns
