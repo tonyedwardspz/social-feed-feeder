@@ -1,19 +1,9 @@
 'use strict';
 
-var passport = require('passport');
 var BufferAppStrategy = require('passport-bufferapp').Strategy;
 var request = require('request');
-var mongoose = require ('mongoose');
-
-// Create mongoose models for auth flow
-var BufferUser = new mongoose.Schema({
-    name: String,
-    bufferID: String,
-    accessToken: String,
-    refreshToken: String,
-    accountIDS: Array
-});
-var User = mongoose.model('user', BufferUser);
+// var mongoose = require('mongoose');
+var User = require('../models/user').getMongooseModel();
 
 module.exports = function(passport) {
   passport.serializeUser(function(user, done) {
@@ -28,20 +18,19 @@ module.exports = function(passport) {
       });
   });
 
-
   passport.use(new BufferAppStrategy({
       clientID: process.env.BUFFER_CLIENT_ID,
       clientSecret: process.env.BUFFER_CLIENT_SECRET,
       callbackURL: process.env.BUFFER_REDIRECT_URI
     },
     function(accessToken, refreshToken, profile, done) {
-      console.log('Buffer function hit:' + accessToken);
-      console.log('buffer ID: ' + profile.id);
-      console.log(profile._json.name);
+      // console.log('Buffer function hit:' + accessToken);
+      // console.log('buffer ID: ' + profile.id);
+      // console.log(profile._json.name);
       // return done();
 
       User.findOne({ 'bufferID': profile.id }, function(err, user) {
-        console.log('User: ' + user);
+        // console.log('User: ' + user);
         if (err) {
           return done(err);
         } else if (!user) {
@@ -67,12 +56,11 @@ module.exports = function(passport) {
           });
         } else {
           request.get('https://api.bufferapp.com/1/profiles.json?access_token=' + accessToken, function (e, r, body) {
-            console.log('BUFFER RESPONSE: ' + body);
+            // console.log('BUFFER RESPONSE: ' + body);
 
             if (user.accountIDS.length < 1) {
               let accs = JSON.parse(body);
               for(let i = 0; i < accs.length; i++) {
-                console.log(accs[i].id);
                 user.accountIDS.push(accs[i].id);
               }
             }
