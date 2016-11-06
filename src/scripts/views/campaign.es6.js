@@ -23,14 +23,13 @@ class CampaignView {
             <input name='name' id='name'/>
 
             <label for='description'>Description</label>
-            <textarea name='description' id='description'>
-            </textarea>
+            <textarea name='description' id='description'></textarea>
 
             <label for='expiry'>Expiry Date</label>
             <input name='expiry' id='expiry' type='date' />
 
             <label for='dailyPosts'>Daily Posts</label>
-            <input name='dailyPosts' id='dailyPosts' type='number' />
+            <input name='dailyPosts' id='dailyPosts' type='number' min='0' max='10'/>
 
             <button id='campaign_save'>Save</button>
             <button id='campaign_index'>Cancel</button>
