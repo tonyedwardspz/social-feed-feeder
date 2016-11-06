@@ -31,7 +31,7 @@ class CampaignsController extends BaseController {
   /** Creates and saves a new campaign */
   create() {
     let form = document.querySelector('form');
-    var campaign = Campaign.createFromForm(form);
+    let campaign = Campaign.createFromForm(form);
     app.db.publish('/campaigns', campaign);
     console.log(campaign);
   }

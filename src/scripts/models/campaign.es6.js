@@ -1,14 +1,13 @@
 class Campaign {
-  constructor(name, description, expiry, dailyPosts) {
+  constructor(name, description, expiry, dailyPosts, userID = app.user.id) {
     this.name = name;
     this.description = description;
     this.expiry = expiry;
     this.dailyPosts = dailyPosts;
+    this.userID = userID;
   }
 
   static createFromForm(form) {
-    console.log(form.name.value);
-
     return new Campaign(
       form.name.value,
       form.description.value,

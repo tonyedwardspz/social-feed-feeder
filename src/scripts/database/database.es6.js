@@ -9,14 +9,25 @@ class Database {
   publish(route, object) {
     // Send request to DB
     console.log(`[DB] Publish`);
+    let str = JSON.stringify(object);
+
+    let headers = new Headers({
+      'Content-Type': 'application/json'
+    });
 
     // Send data to the server
     fetch(route, {
       method:'POST',
-      data: JSON.stringify(object)
+      mode: 'cors', 
+      headers: headers,
+      body: str
     })
-    .then()
-    .catch();
+    .then(response => {
+      console.log(response);
+    })
+    .catch(error => {
+      console.log(error);
+    });
   }
 
   retrieve(route, cb) {
