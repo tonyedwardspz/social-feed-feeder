@@ -2,6 +2,7 @@
 
 var cookieParser = require('cookie-parser');
 var express = require('express');
+var bodyParser = require('body-parser');
 
 module.exports = function(app, passport, root){
 
@@ -16,5 +17,9 @@ module.exports = function(app, passport, root){
 
   // MMMMM..... cookies
   app.use(cookieParser());
+
+  // Set various body parsers
+  app.use(bodyParser.urlencoded({ extended: false }));
+  app.use(bodyParser.json());
 
 };
