@@ -4,14 +4,22 @@ var mongoose = require('mongoose');
 
 class User {
   constructor() {
-
+    this.mongooseModel = mongoose.model('user', this.getMongooseSchema());
   }
 
-  static getMongooseModel() {
-    return mongoose.model('user', this.getMongooseSchema());
+  setID(id) {
+    this.id = id;
   }
 
-  static getMongooseSchema() {
+  getID() {
+    return this.id;
+  }
+
+  getMongooseModel() {
+    return this.mongooseModel;
+  }
+
+  getMongooseSchema() {
     return new mongoose.Schema({
         name: String,
         bufferID: String,

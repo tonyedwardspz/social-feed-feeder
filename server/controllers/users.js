@@ -1,6 +1,9 @@
 'use strict';
 
 var BaseController = require('./base');
+var User = require('../singletons/user-singleton').getInstance();
+// var UserMM = User.getMongooseModel();
+
 
 class UserController extends BaseController {
   constructor() {
@@ -12,7 +15,9 @@ class UserController extends BaseController {
   }
 
   authSuccess(req, res) {
-    console.log(req.user);
+    // console.log(req.user);
+    // User.setID(req.user.bufferID);
+
     console.log('[User] Auth Success');
     res.cookie('user_auth', 'true');
     res.cookie('user_id', req.user.bufferID);
@@ -24,10 +29,6 @@ class UserController extends BaseController {
   authFailure(err, req, res, next) {
     console.log('[User] Auth failure: ' + err);
     res.send(err);
-  }
-
-  getAllData(req, res) {
-    
   }
 
   // PATCH/PUT /users/:id

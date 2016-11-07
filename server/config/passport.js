@@ -3,7 +3,7 @@
 var BufferAppStrategy = require('passport-bufferapp').Strategy;
 var request = require('request');
 // var mongoose = require('mongoose');
-var User = require('../models/user').getMongooseModel();
+var User = require('../singletons/user-singleton').getInstance().getMongooseModel();
 
 module.exports = function(passport) {
   passport.serializeUser(function(user, done) {
