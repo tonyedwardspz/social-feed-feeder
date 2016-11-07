@@ -1,17 +1,17 @@
-'use strict'
+'use strict';
 
 var mongoose = require('mongoose');
 
 class Campaign {
   constructor() {
-
+    this.mongooseModel = mongoose.model('campaign', this.getMongooseSchema());
   }
 
-  static getMongooseModel() {
-    return mongoose.model('campaign', this.getMongooseSchema);
+  getMongooseModel() {
+    return this.mongooseModel;
   }
 
-  static getMongooseSchema() {
+  getMongooseSchema() {
     return new mongoose.Schema({
       name: String,
       description: String,
@@ -23,4 +23,4 @@ class Campaign {
 
 }
 
-module.exports = Campaign;
+module.exports = new Campaign();
