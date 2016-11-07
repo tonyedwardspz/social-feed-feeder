@@ -18,7 +18,7 @@ class Database {
     // Send data to the server
     fetch(route, {
       method:'POST',
-      mode: 'cors', 
+      mode: 'cors',
       headers: headers,
       body: str
     })
@@ -30,11 +30,21 @@ class Database {
     });
   }
 
-  retrieve(route, cb) {
+  retrieve(route, user, cb) {
     // Send request to DB
     console.log(`[DB] Retrieve`);
 
-    fetch(route).then(response => {
+    let str = JSON.stringify(user);
+
+    let headers = new Headers({
+      'Content-Type': 'application/json'
+    });
+
+    fetch(route, {
+      method:'POST',
+      headers: headers,
+      body: str
+    }).then(response => {
       console.log('[STATUS]', response);
       if (response.status !== 200) {
         console.log('Looks like there was a problem. Status Code: ' +

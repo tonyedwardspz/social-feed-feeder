@@ -6,6 +6,9 @@ var CampaignMM = Campaign.getMongooseModel();
 // var User = require('../singletons/user-singleton').getInstance();
 
 class DashboardController extends BaseController {
+  constructor() {
+    super('dashboard controller');
+  }
 
   // TODO - Convert to promise to allow us to construct data
   // after all async calls have been made.

@@ -39,7 +39,7 @@ var app;
     }
     console.log(app.user);
 
-    app.dashboardController.index();
+    app.dashboardController.index(app.user);
   }
 
 
