@@ -4,7 +4,9 @@ var express = require('express');
 var passport = require('passport');
 
 // Load environmental variables (only applied to dev environment)
-require('dotenv').config();
+if (!process.env.PRODUCTION) {
+  require('dotenv').config();
+}
 
 // Load the database connection
 require('./server/database/database');
