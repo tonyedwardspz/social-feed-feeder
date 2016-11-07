@@ -1,8 +1,7 @@
 'use strict';
 
 var BaseController = require('./base');
-var mongoose = require ('mongoose');
-var MongoCampaign = require('../models/campaign').getMongooseModel;
+var MongoCampaign = require('../models/campaign').getMongooseModel();
 
 class CampaignController extends BaseController {
   constructor() {
@@ -35,6 +34,7 @@ class CampaignController extends BaseController {
   create(req, res) {
 
     let campaign = new MongoCampaign({
+      campaignID: req.body.campaignID,
       name: req.body.name,
       description: req.body.description,
       expiry: req.body.expiry,
