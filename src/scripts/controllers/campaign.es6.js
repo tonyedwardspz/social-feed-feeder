@@ -30,9 +30,14 @@ class CampaignsController extends BaseController {
 
   /** Creates and saves a new campaign */
   create() {
+    // disable the save button to prevent duplicate submissions
+    document.getElementById('campaign_save').disabled = true;
+
     let form = document.querySelector('form');
     let campaign = Campaign.createFromForm(form);
     app.db.publish('/campaigns', campaign);
+
+    window.location = '?campaigns';
     console.log(campaign);
   }
 
