@@ -21,6 +21,22 @@ class Campaign {
       userID: String
     });
   }
+
+  getDatabasePromise(userID) {
+    let mongoModel = this.getMongooseModel();
+    return new Promise(
+      function(resolve, reject) {
+        mongoModel.find({ 'userID': userID}, function(err, data) {
+          if (err) {
+
+            reject(err);
+          } else {
+            resolve({ 'campaigns' : data });
+          }
+        });
+      }
+    );
+  }
 }
 
 module.exports = new Campaign();

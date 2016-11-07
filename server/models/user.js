@@ -29,6 +29,21 @@ class User {
     });
   }
 
+  getDatabasePromise(userID) {
+    let mongoModel = this.getMongooseModel();
+    return new Promise(
+      function(resolve, reject) {
+        mongoModel.find({ 'bufferID': userID}, function(err, data) {
+          if (err) {
+            reject(err);
+          } else {
+            resolve({ 'user' : data });
+          }
+        });
+      }
+    );
+  }
+
 }
 
 module.exports = User;
