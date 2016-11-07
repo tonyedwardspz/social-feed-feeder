@@ -1,9 +1,11 @@
 'use strict';
 
 var mongoose = require('mongoose');
+let BaseModel = require('./base');
 
-class Campaign {
+class Campaign extends BaseModel {
   constructor() {
+    super();
     this.mongooseModel = mongoose.model('campaign', this.getMongooseSchema());
   }
 
@@ -24,18 +26,7 @@ class Campaign {
 
   getDatabasePromise(userID) {
     let mongoModel = this.getMongooseModel();
-    return new Promise(
-      function(resolve, reject) {
-        mongoModel.find({ 'userID': userID}, function(err, data) {
-          if (err) {
-
-            reject(err);
-          } else {
-            resolve({ 'campaigns' : data });
-          }
-        });
-      }
-    );
+    return this.getPromise(mongoModel, userID, 'campaigns');
   }
 }
 

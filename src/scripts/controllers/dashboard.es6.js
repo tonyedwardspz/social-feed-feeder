@@ -9,7 +9,7 @@ class DashboardController extends BaseController {
   index(user) {
 
     app.db.retrieve('/getAllData', user, data => {
-      console.log('DASH-User: ' + data.campaigns[0].name);
+      console.log('DASH- Fetch all data: ' + data);
       var html = app.dashboardView.getDashboard(data.campaigns,
                                                 data.campaigns,
                                                 data.campaigns);

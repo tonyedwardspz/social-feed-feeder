@@ -29,14 +29,14 @@ module.exports = function(passport) {
       // console.log(profile._json.name);
       // return done();
 
-      User.findOne({ 'bufferID': profile.id }, function(err, user) {
+      User.findOne({ 'userID': profile.id }, function(err, user) {
         // console.log('User: ' + user);
         if (err) {
           return done(err);
         } else if (!user) {
           user = new User({
               name: profile._json.name,
-              bufferID: profile.id,
+              userID: profile.id,
               accessToken: accessToken,
               refreshToken: refreshToken
           });

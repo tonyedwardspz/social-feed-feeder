@@ -1,9 +1,11 @@
 'use strict'
 
 var mongoose = require('mongoose');
+let BaseModel = require('./base');
 
-class User {
+class User extends BaseModel{
   constructor() {
+    super();
     this.mongooseModel = mongoose.model('user', this.getMongooseSchema());
   }
 
@@ -22,7 +24,7 @@ class User {
   getMongooseSchema() {
     return new mongoose.Schema({
         name: String,
-        bufferID: String,
+        userID: String,
         accessToken: String,
         refreshToken: String,
         accountIDS: Array
@@ -31,19 +33,8 @@ class User {
 
   getDatabasePromise(userID) {
     let mongoModel = this.getMongooseModel();
-    return new Promise(
-      function(resolve, reject) {
-        mongoModel.find({ 'bufferID': userID}, function(err, data) {
-          if (err) {
-            reject(err);
-          } else {
-            resolve({ 'user' : data });
-          }
-        });
-      }
-    );
+    return this.getPromise(mongoModel, userID, 'users');
   }
-
 }
 
 module.exports = User;
