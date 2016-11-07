@@ -6,7 +6,11 @@ class DashboardController extends BaseController {
     console.log('From Dashboard Controller');
   }
 
-  index() {
+  index(user) {
+    app.db.retrieve('/getAllData', user, data => {
+      console.log('DASH-User: ' + data.campaigns[0].name);
+    });
+
     var html = app.dashboardView.getDashboard({id:1});
     this.updateShell(html);
   }

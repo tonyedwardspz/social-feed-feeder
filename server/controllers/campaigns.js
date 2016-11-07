@@ -1,6 +1,8 @@
 'use strict';
 
 var BaseController = require('./base');
+var mongoose = require ('mongoose');
+var MongoCampaign = require('../models/campaign').getMongooseModel;
 
 class CampaignController extends BaseController {
   constructor() {
@@ -31,6 +33,21 @@ class CampaignController extends BaseController {
 
   // POST /campaigns
   create(req, res) {
+
+    let campaign = new MongoCampaign({
+      name: req.body.name,
+      description: req.body.description,
+      expiry: req.body.expiry,
+      dailyPosts: req.body.dailyPosts,
+      userID: req.body.userID
+    });
+
+    // TODP - Change to success / failure
+    campaign.save(function(err) {
+        if (err) {console.log(err);}
+        // return done(err, user);
+    });
+
     console.log('[ROUTE] Campaign:POST hit');
     res.send(JSON.stringify({ a: 'Response from Campaigns POST' }));
   }
