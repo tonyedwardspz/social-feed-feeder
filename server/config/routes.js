@@ -5,8 +5,13 @@ var users = require('../controllers/users');
 var campaigns = require('../controllers/campaigns');
 var buckets = require('../controllers/buckets');
 var posts = require('../controllers/posts');
+var dash = require('../controllers/dashboard');
 
 module.exports = function(app, passport) {
+
+  //-------------- Dashboard / Data Routes --------------\\
+
+  app.post('/getAllData', dash.getAllData);
 
   //-------------- User / Authentication Routes --------------\\
 
@@ -25,8 +30,6 @@ module.exports = function(app, passport) {
   );
 
   app.put('/users/:id', users.update);
-
-  app.get('/users/getAllData', users.getAllData);
 
   //-------------- Campaign Routes --------------\\
 
