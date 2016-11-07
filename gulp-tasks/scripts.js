@@ -11,7 +11,9 @@ gulp.task('scripts:watch', function() {
 });
 
 gulp.task('scripts:es6', function() {
-  return gulp.src(['./node_modules/babel-polyfill/dist/polyfill.min.js','./src/scripts/*/*.js', './src/scripts/app.es6.js'])
+  return gulp.src(['./node_modules/babel-polyfill/dist/polyfill.min.js',
+                   './src/scripts/*/*.js',
+                   './src/scripts/app.es6.js'])
     .pipe(concat('app.js'))
     .pipe(babel({ presets: ['es2015'] }))
     // .pipe(uglify())
