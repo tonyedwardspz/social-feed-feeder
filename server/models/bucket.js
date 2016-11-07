@@ -2,9 +2,9 @@
 
 var mongoose = require('mongoose');
 
-class Campaign {
+class Bucket {
   constructor() {
-    this.mongooseModel = mongoose.model('campaign', this.getMongooseSchema());
+    this.mongooseModel = mongoose.model('bucket', this.getMongooseSchema());
   }
 
   getMongooseModel() {
@@ -16,11 +16,12 @@ class Campaign {
       campaignID: String,
       name: String,
       description: String,
-      expiry: Date,
-      dailyPosts: Number,
-      userID: String
+      priority: Number,
+      maxPerDay: Number,
+      repeat: Boolean,
+      frequency: Number
     });
   }
 }
 
-module.exports = new Campaign();
+module.exports = new Bucket();

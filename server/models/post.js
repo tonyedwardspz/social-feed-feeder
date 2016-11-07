@@ -2,9 +2,9 @@
 
 var mongoose = require('mongoose');
 
-class Campaign {
+class Post {
   constructor() {
-    this.mongooseModel = mongoose.model('campaign', this.getMongooseSchema());
+    this.mongooseModel = mongoose.model('post', this.getMongooseSchema());
   }
 
   getMongooseModel() {
@@ -13,14 +13,14 @@ class Campaign {
 
   getMongooseSchema() {
     return new mongoose.Schema({
-      campaignID: String,
+      bucketID: String,
       name: String,
       description: String,
-      expiry: Date,
-      dailyPosts: Number,
-      userID: String
+      lastPostDate: Date,
+      content: String,
+      expiry: Date
     });
   }
 }
 
-module.exports = new Campaign();
+module.exports = new Post();
