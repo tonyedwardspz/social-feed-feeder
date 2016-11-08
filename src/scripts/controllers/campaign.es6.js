@@ -1,3 +1,5 @@
+/* globals Campaign, BaseController */
+ /*exported CampaignsController */
 'use strict';
 
 class CampaignsController extends BaseController {
