@@ -15,6 +15,7 @@ class Post extends BaseModel{
 
   getMongooseSchema() {
     return new mongoose.Schema({
+      postID: String,
       bucketID: String,
       userID: String,
       name: String,
