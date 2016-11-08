@@ -28,11 +28,12 @@ class DashboardController extends BaseController {
     Promise.all(promises).then(function() {
       console.log('All DATA PROMISES RESOLVED');
       // returned data is in arguments[n]
+      console.log(arguments[0]);
       for (let i = 0; i < arguments[0].length; i++) {
         console.log(arguments[0][i]);
       }
 
-      res.send(JSON.stringify(arguments[0][0]));
+      res.send(JSON.stringify(arguments[0]));
     }, function(err) {
       // error occurred
       console.log('ERROR: ' + err);
