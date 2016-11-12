@@ -35,9 +35,9 @@ gulp.task('styles:sass', function() {
 });
 
 gulp.task('styles:inline', function(){
-  let indexContents = fs.readFileSync('./public/index.html', 'utf8').replace(/INLINE-CSS/g, function() {
-      var style = fs.readFileSync('./public/styles/inline.css', 'utf8');
-      return '<style>\n' + style + '\n</style>';
+    let indexContents = fs.readFileSync('./src/index.html', 'utf8').replace(/INLINE-CSS/g, function() {
+    var style = fs.readFileSync('./public/styles/inline.css', 'utf8');
+    return '<style>\n' + style + '\n</style>';
   });
   del('./public/index.html', {dot: false});
 
