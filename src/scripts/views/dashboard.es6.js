@@ -5,18 +5,18 @@ class DashboardView {
 
   getDashboard(campaigns, buckets, posts){
     console.log('get dashboard');
-    return `<h1>Dashboard View<h1>
+    return `<h2>Dashboard View</h2>
             <p>This is the main dashboard view<p>
-            <div class="boxes">
-              <div class="box">
+            <div class="row">
+              <div class="column">
                 <span>${campaigns.length}</span>
                 <span>Campaigns</span>
               </div>
-              <div class="box">
+              <div class="column">
                 <span>${buckets.length}</span>
                 <span>Buckets</span>
               </div>
-              <div class="box">
+              <div class="column">
                 <span>${posts.length}</span>
                 <span>Posts</span>
               </div>
