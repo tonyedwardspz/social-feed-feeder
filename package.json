@@ -43,6 +43,7 @@
     "gulp-sourcemaps": "^1.6.0",
     "gulp-uglify": "^1.4.2",
     "gulp-util": "^3.0.6",
+    "milligram": "^1.2.0",
     "mocha": "^3.1.2",
     "mongodb": "^2.2.11",
     "mongoose": "^4.6.5",

@@ -8,7 +8,7 @@ class CampaignView {
     var campaignHTML = `<h1>Campaign Index<h1>`;
 
     for(let i = 0; i < campaigns.length; i++) {
-      campaignHTML += `<button class='campaign_show' data-id='${campaigns[i].id}'>Campaign ${campaigns[i].name}</button>`;
+      campaignHTML += `<button class='campaign_show' data-id='${campaigns[i].campaignID}'>Campaign ${campaigns[i].name}</button>`;
     }
 
     campaignHTML += `<button id='campaign_new'>New</button>`;
@@ -38,7 +38,9 @@ class CampaignView {
 
   show(campaign) {
     return `<h1>Show Campaign<h1>
-            <p>This is the show campaign view. ID: ${campaign.id}<p>`;
+            <p>This is the show campaign view. ID: ${campaign.campaignID}<p>
+            <p>Name: ${campaign.name}</p>`;
+
   }
 
   edit(campaign) {

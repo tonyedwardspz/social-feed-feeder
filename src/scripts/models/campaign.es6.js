@@ -9,6 +9,24 @@ class Campaign {
     this.userID = userID;
   }
 
+  static getAllCampaigns() {
+    return app.user.campaigns;
+  }
+
+  // Search the users campaigns for the correct object
+  static getByID(id){
+    let thisCampaign = {};
+    app.user.campaigns.forEach(campaign => {
+      if (campaign.campaignID === id) {
+        thisCampaign = campaign;
+      }
+    });
+
+    return thisCampaign;
+  }
+
+  // Create and return a new campaign from a passed form
+  // Used during the creation of object from user input
   static createFromForm(form) {
     return new Campaign(
       form.name.value,
@@ -18,6 +36,8 @@ class Campaign {
     );
   }
 
+  // Converts an array of passed JSON objects into an array of
+  // Campaign objects before returning.
   static extractCampaignData(campaigns){
     var sortedCampaigns = [];
 
