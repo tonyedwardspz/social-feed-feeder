@@ -16,7 +16,7 @@ class CampaignView {
   }
 
   new() {
-    return `<h1>New Campaign<h1>
+    return `<h1>New Campaign</h1>
             <p>This is the new campaign view<p>
             <form name='form_campaign_new'>
             <label for='name'>Campaign Name</label>
@@ -37,14 +37,24 @@ class CampaignView {
   }
 
   show(campaign) {
-    return `<h1>Show Campaign<h1>
-            <p>This is the show campaign view. ID: ${campaign.campaignID}<p>
-            <p>Name: ${campaign.name}</p>`;
+    let date = convertDateToLocale(campaign.expiry);
+    return `<h1>Campaign: ${campaign.name}</h1>
+            <p>${campaign.description}</p>
+            <div class="row">
+              <div class="column">
+                <span>${campaign.dailyPosts}</span>
+                <span>Daily Posts</span>
+              </div>
+              <div class="column">
+                <span>${date}</span>
+                <span>Expiry</span>
+              </div>
+            </div>`;
 
   }
 
   edit(campaign) {
-    return `<h1>Edit Campaign<h1>
+    return `<h1>Edit Campaign</h1>
             <p>This is the edit campaign view<p>`;
   }
 }
