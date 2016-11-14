@@ -14,9 +14,9 @@ class Campaign {
   }
 
   // Search the users campaigns for the correct object
-  static getByID(id){
+  static getByID(id, campaigns){
     let thisCampaign = {};
-    app.user.campaigns.forEach(campaign => {
+    campaigns.forEach(campaign => {
       if (campaign.campaignID === id) {
         thisCampaign = campaign;
       }

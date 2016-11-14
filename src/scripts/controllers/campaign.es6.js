@@ -22,7 +22,7 @@ class CampaignsController extends BaseController {
   show(id) {
     console.log(id);
     // find the campaign by ID
-    var campaign = Campaign.getByID(id);
+    var campaign = Campaign.getByID(id, app.user.campaigns);
     console.log(campaign);
 
     let html = app.campaignView.show(campaign);
