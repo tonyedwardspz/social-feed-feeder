@@ -1,3 +1,7 @@
+require('require-dir')('tests/helpers');
+
+
+// Basic test to enable initial CI
 var assert = require('assert');
 describe('Array', function() {
   describe('#indexOf()', function() {
