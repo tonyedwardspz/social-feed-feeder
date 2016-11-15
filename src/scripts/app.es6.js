@@ -26,7 +26,9 @@ var app;
     dashboardView: new DashboardView(),
     dashboardController: new DashboardController(),
     campaignView: new CampaignView(),
-    campaignController: new CampaignsController()
+    campaignController: new CampaignsController(),
+    bucketView: new BucketView(),
+    bucketController: new BucketController()
   };
 
   app.shell.innerHTML = app.userView.loginScreen();
@@ -44,7 +46,7 @@ var app;
 
 
   app.shell.addEventListener('click', function(e){
-    // e.preventDefault();
+
     if (e.target !== e.currentTarget) {
       if (e.target.id === 'login' ){
         console.log('Login Button Clicked');
@@ -52,12 +54,18 @@ var app;
       } else if (e.target.id === 'campaign_index') {
         app.campaignController.index();
       } else if (e.target.className === 'campaign_show'){
+        e.preventDefault();
         app.campaignController.show(e.target.dataset.id);
       } else if (e.target.id === 'campaign_new') {
         app.campaignController.new();
       } else if (e.target.id === 'campaign_save') {
         e.preventDefault();
         app.campaignController.create();
+      } else if (e.target.id === 'bucket_new') {
+        app.bucketController.new(e.target.dataset.campaignid);
+      } else if (e.target.id === 'bucket_save') {
+        e.preventDefault();
+        app.bucketController.create();
       }
     }
 

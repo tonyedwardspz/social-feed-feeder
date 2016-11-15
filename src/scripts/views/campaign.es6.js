@@ -49,7 +49,12 @@ class CampaignView {
                 <span>${date}</span>
                 <span>Expiry</span>
               </div>
-            </div>`;
+            </div>
+            <div class="row">
+              <h2>Campaign Buckets</h2>
+              <button id="bucket_new" data-campaignid="${campaign.campaignID}">new</button>
+            </div>
+            `;
 
   }
 
