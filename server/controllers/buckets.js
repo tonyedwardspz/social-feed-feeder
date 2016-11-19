@@ -1,6 +1,8 @@
 'use strict';
 
 var BaseController = require('./base');
+var Bucket = require('../models/bucket');
+var MongoBucket = Bucket.getMongooseModel();
 
 class BucketController extends BaseController {
   constructor() {
@@ -32,7 +34,28 @@ class BucketController extends BaseController {
   // POST /buckets
   create(req, res) {
     console.log('[ROUTE] Buckets:POST hit');
-    res.send(JSON.stringify({ a: 'Response from Buckets POST' }));
+
+    let bucket = new MongoBucket({
+      bucketID: req.body.bucketID,
+      campaignID: req.body.campaignID,
+      userID: req.body.userID,
+      name: req.body.name,
+      description: req.body.description,
+      priority: req.body.priority,
+      maxPerDay: req.body.maxPerDay,
+      repeat: Bucket.doesItRepeat(req.body.repeat),
+      frequency: req.body.frequency
+    });
+
+    var result = 'sucess';
+    bucket.save(err => {
+      if (err) {
+        console.log(err);
+        result = `error saving bucket : ${err}`;
+      }
+    });
+
+    res.send(JSON.stringify({ a: result }));
   }
 
   // PATCH/PUT /buckets/:id

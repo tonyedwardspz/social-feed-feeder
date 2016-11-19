@@ -3,7 +3,6 @@
 class UserController extends BaseController {
   constructor() {
     super();
-    console.log('Users Controller');
   }
 
   getAll() {

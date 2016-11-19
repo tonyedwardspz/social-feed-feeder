@@ -1,6 +1,6 @@
 class BaseController {
   constructor() {
-    console.log('Base Controller');
+
   }
 
   updateShell(html) {

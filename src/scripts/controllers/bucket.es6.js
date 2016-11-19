@@ -3,7 +3,6 @@
 class BucketController extends BaseController{
   constructor() {
     super();
-    console.log('From Bucket Controller');
   }
 
   index() {
@@ -11,7 +10,7 @@ class BucketController extends BaseController{
   }
 
   show(id) {
-    console.log('[Bucket] Show');
+    console.log('[Bucket] Show: ' + id);
   }
 
   new(campaignID) {
@@ -20,10 +19,18 @@ class BucketController extends BaseController{
     let html = app.bucketView.new(campaignID);
     this.updateShell(html);
   }
-
+  // TODO: Test this works
   create() {
     console.log('[Bucket] Create');
 
+    document.getElementById('bucket_save').disabled = true;
+
+    let form = document.querySelector('form');
+    let bucket = Bucket.createFromForm(form);
+
+    app.db.publish('/buckets', bucket);
+
+    // window.location = '?campaigns';
   }
 
   update() {

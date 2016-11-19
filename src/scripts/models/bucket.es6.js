@@ -31,4 +31,17 @@ class Bucket {
 
     return sortedBuckets;
   }
+
+  static createFromForm(form) {
+    return new Bucket(
+      randomString(),
+      form.dataset.id,
+      form.name.value,
+      form.description.value,
+      form.priority.value,
+      form.maxPerDay.value,
+      form.repeat.value,
+      form.frequency.value
+    );
+  }
 }

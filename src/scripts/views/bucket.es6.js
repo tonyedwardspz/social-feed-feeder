@@ -13,24 +13,28 @@ class BucketView {
     return `<h1>New Bucket<h1>
             <p>This is the new bucket view<p>
             <form name="form_bucket_new" method="POST" data-id="${campaignID}">
-              <label for="name">Bucket Name</label>
-              <input type="text" name="name" id="name" />
+              <label for="name">Name</label>
+              <input type="text" name="name" id="name" required/>
 
-              <label for="description">Bucket Name</label>
+              <label for="description">Description</label>
               <textarea name='description' id='description'></textarea>
 
               <label for="priority">Priority</label>
-              <input type="text" name="priority" id="priority" />
+              <select name='priority' id='priority' required>
+                <option value="2">High</option>
+                <option value="1">Medium</option>
+                <option value="0">Low</option>
+              </select>
 
               <label for="maxPerDay">Max posts per day</label>
-              <input type="number" name="maxPerDay" id="maxPerDay" min="0" max="5" />
+              <input type="number" name="maxPerDay" id="maxPerDay" min="0" max="5" default="0"/>
 
               <label for="repeat">Repeat?</label>
               <input type="checkbox" name="repeat" id="repeat" checked />
 
               <label for="frequency">Frequency (use per week)</label>
               <input type="number" name="frequency" id="frequency" min="0"
-                     max="7" />
+                     max="7" required/>
 
               <input type="hidden" id="campaignID" value="${campaignID}" />
 

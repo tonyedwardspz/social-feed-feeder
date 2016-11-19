@@ -37,7 +37,7 @@ var app;
   if (getCookie('user_auth') === 'true'){
     console.log('User authenticated');
     if (app.user === null) {
-      app.user = new User();
+      app.user = new User(getCookie('user_id'));
     }
     console.log(app.user);
 

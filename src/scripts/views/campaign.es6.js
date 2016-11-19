@@ -38,7 +38,7 @@ class CampaignView {
 
   show(campaign) {
     let date = convertDateToLocale(campaign.expiry);
-    return `<h1>Campaign: ${campaign.name}</h1>
+    return `<h2>Campaign: ${campaign.name}</h2>
             <p>${campaign.description}</p>
             <div class="row">
               <div class="column">
@@ -51,7 +51,7 @@ class CampaignView {
               </div>
             </div>
             <div class="row">
-              <h2>Campaign Buckets</h2>
+              <h3>Campaign Buckets</h3>
               <button id="bucket_new" data-campaignid="${campaign.campaignID}">new</button>
             </div>
             `;

@@ -30,6 +30,14 @@ class Bucket extends BaseModel{
   getDatabasePromise(userID) {
     return this.getPromise(this.getMongooseModel(), userID, 'buckets');
   }
+
+  doesItRepeat(repeat){
+    if (repeat === 'on'){
+      return true;
+    } else {
+      return false;
+    }
+  }
 }
 
 module.exports = new Bucket();

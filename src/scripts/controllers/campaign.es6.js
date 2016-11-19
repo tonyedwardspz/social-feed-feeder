@@ -5,7 +5,6 @@
 class CampaignsController extends BaseController {
   constructor() {
     super();
-    console.log('From Campaign Controller');
   }
 
   /** Shows a list of campaigns */
