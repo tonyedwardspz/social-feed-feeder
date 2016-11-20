@@ -6,10 +6,10 @@ class Database {
     console.log(`[DB] Constructor`);
   }
 
-  publish(route, object) {
+  publish(route, object, method = 'POST') {
     // Send request to DB
     console.log(`[DB] Publish`);
-    let str = JSON.stringify(object);
+    let str = !object ? JSON.stringify( { a: 'object' } ) : JSON.stringify(object);
 
     let headers = new Headers({
       'Content-Type': 'application/json'
@@ -17,7 +17,7 @@ class Database {
 
     // Send data to the server
     fetch(route, {
-      method:'POST',
+      method: method,
       mode: 'cors',
       headers: headers,
       body: str

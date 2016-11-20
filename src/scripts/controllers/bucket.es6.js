@@ -24,7 +24,7 @@ class BucketController extends BaseController{
     let html = app.bucketView.new(campaignID);
     this.updateShell(html);
   }
-  // TODO: Test this works
+  
   create() {
     console.log('[Bucket] Create');
 

@@ -2,6 +2,8 @@
 
 var BaseController = require('./base');
 var MongoCampaign = require('../models/campaign').getMongooseModel();
+var MongoBucket = require('../models/bucket').getMongooseModel();
+var MongoPost = require('../models/post').getMongooseModel();
 
 class CampaignController extends BaseController {
   constructor() {
@@ -61,7 +63,34 @@ class CampaignController extends BaseController {
   // DELETE /campaigns/:id
   delete(req, res) {
     console.log('[ROUTE] Campaign:DELETE hit');
-    res.send(JSON.stringify({ a: 'Response from Campaigns DELETE' }));
+
+    console.log(req.params.id);
+
+    MongoCampaign.remove({ campaignID: req.params.id }, (err, removed) => {
+      if (err) {
+        console.log(`Error deleting campaign: ${err}`);
+      } else {
+        console.log(`Campaign removed: ${removed}`);
+      }
+    });
+
+    MongoBucket.remove({ campaignID: req.params.id }, (err, removed) => {
+      if (err) {
+        console.log(`Error deleting buckets for campaign: ${err}`);
+      } else {
+        console.log(`Buckets removed: ${removed}`);
+      }
+    });
+
+    MongoPost.remove({ campaignID: req.params.id }, (err, removed) => {
+      if (err) {
+        console.log(`Error deleting posts from buckets for campaign: ${err}`);
+      } else {
+        console.log(`Posts removed: ${removed}`);
+      }
+    });
+
+    // res.send(JSON.stringify({ a: 'Response from Campaigns DELETE' }));
   }
 }
 

@@ -75,7 +75,7 @@ class CampaignsController extends BaseController {
     }
 
     Campaign.removeCampaign(id);
-    // TODO Remove from remote DB
+    app.db.publish(`/campaigns/${id}`, false, 'DELETE');
 
     this.index();
   }
