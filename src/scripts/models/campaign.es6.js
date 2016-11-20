@@ -9,8 +9,28 @@ class Campaign {
     this.userID = userID;
   }
 
+  get id(){
+    return this.campaignID;
+  }
+
+  get buckets() {
+    let buckets = [];
+
+    app.user.buckets.forEach(bucket => {
+      if (bucket.campaignID === this.campaignID) {
+        buckets.push(bucket);
+      }
+    });
+
+    return buckets;
+  }
+
   static getAllCampaigns() {
     return app.user.campaigns;
+  }
+
+  static setCampaigns(campaigns) {
+    app.user.campaigns = campaigns;
   }
 
   // Search the users campaigns for the correct object
@@ -42,7 +62,6 @@ class Campaign {
     var sortedCampaigns = [];
 
     campaigns.forEach(campaign => {
-      console.log(campaign);
       sortedCampaigns.push(new Campaign(
         campaign.name,
         campaign.description,
@@ -54,5 +73,17 @@ class Campaign {
     });
 
     return sortedCampaigns;
+  }
+
+  static removeCampaign(id) {
+    var campaigns = this.getAllCampaigns();
+
+    for (let i = campaigns.length - 1; i >= 0; i--) {
+      if (campaigns[i].id === id) {
+        campaigns.splice(i, 1);
+      }
+    }
+
+    this.setCampaigns(campaigns);
   }
 }

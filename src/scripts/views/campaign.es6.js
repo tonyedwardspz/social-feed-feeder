@@ -38,7 +38,7 @@ class CampaignView {
 
   show(campaign) {
     let date = convertDateToLocale(campaign.expiry);
-    return `<h2>Campaign: ${campaign.name}</h2>
+    return `<h2 id="name">${campaign.name}</h2>
             <p>${campaign.description}</p>
             <div class="row">
               <div class="column">
@@ -51,15 +51,25 @@ class CampaignView {
               </div>
             </div>
             <div class="row">
-              <h3>Campaign Buckets</h3>
-              <button id="bucket_new" data-campaignid="${campaign.campaignID}">new</button>
+              <div class="column">
+                <button id="campaign_edit" data-campaignid="${campaign.campaignID}">Edit Campaign</button>
+                <button id="campaign_delete" data-campaignid="${campaign.campaignID}">Delete Campaign</button>
+                <button id="bucket_new" data-campaignid="${campaign.campaignID}">Add Bucket</button>
+              </div>
             </div>
+            <div class="row">
+              <div class="column">
+                <h3>Campaign Buckets</h3>
+              </div>
+            </div>
+            ${app.bucketView.bucketList(campaign.buckets)}
             `;
 
   }
 
   edit(campaign) {
     return `<h1>Edit Campaign</h1>
-            <p>This is the edit campaign view<p>`;
+            <p>This is the edit campaign view<p>
+            <p>${campaign.name}</p>`;
   }
 }

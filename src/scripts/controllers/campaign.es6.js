@@ -24,6 +24,8 @@ class CampaignsController extends BaseController {
     var campaign = Campaign.getByID(id, app.user.campaigns);
     console.log(campaign);
 
+    let buckets = campaign.buckets;
+
     let html = app.campaignView.show(campaign);
     this.updateShell(html);
   }
@@ -41,10 +43,22 @@ class CampaignsController extends BaseController {
 
     let form = document.querySelector('form');
     let campaign = Campaign.createFromForm(form);
+
+    app.user.campaigns.push(campaign);
     app.db.publish('/campaigns', campaign);
 
-    window.location = '?campaigns';
+    // window.location = '?campaigns';
+    this.show(campaign.campaignID);
     console.log(campaign);
+  }
+
+  /** Displays the edit campaign screen */
+  edit(id) {
+    let campaign = Campaign.getByID(id, Campaign.getAllCampaigns());
+
+    let html = app.campaignView.edit(campaign);
+
+    this.updateShell(html);
   }
 
   /** Updates an existing campaign */
@@ -53,7 +67,16 @@ class CampaignsController extends BaseController {
   }
 
   /** Deletes an existing campaign */
-  delete() {
+  delete(id) {
+    let name = document.getElementById('name').innerHTML;
 
+    if (! confirm(`Delete the "${name}" campaign and all related data?`)) {
+      return;
+    }
+
+    Campaign.removeCampaign(id);
+    // TODO Remove from remote DB
+
+    this.index();
   }
 }
