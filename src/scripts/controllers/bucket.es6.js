@@ -11,6 +11,11 @@ class BucketController extends BaseController{
 
   show(id) {
     console.log('[Bucket] Show: ' + id);
+
+    let bucket = Bucket.findByID(id, Bucket.getAllBuckets());
+    let html = app.bucketView.show(bucket);
+
+    this.updateShell(html);
   }
 
   new(campaignID) {
@@ -28,9 +33,10 @@ class BucketController extends BaseController{
     let form = document.querySelector('form');
     let bucket = Bucket.createFromForm(form);
 
+    app.user.buckets.push(bucket);
     app.db.publish('/buckets', bucket);
 
-    // window.location = '?campaigns';
+    this.show(bucket.bucketID);
   }
 
   update() {

@@ -12,6 +12,10 @@ class Bucket {
     this.userID = userID;
   }
 
+  static getAllBuckets() {
+    return app.user.buckets;
+  }
+
   static extractBucketData(buckets) {
     var sortedBuckets = [];
 
@@ -43,5 +47,17 @@ class Bucket {
       form.repeat.value,
       form.frequency.value
     );
+  }
+
+  // Search the users bucket for a specific item
+  static findByID(id, buckets) {
+    let thisBucket = {};
+    buckets.forEach(bucket => {
+      if (bucket.bucketID === id) {
+        thisBucket = bucket;
+      }
+    });
+
+    return thisBucket;
   }
 }

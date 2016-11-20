@@ -52,4 +52,36 @@ class BucketView {
     return `<h1>Edit Bucket<h1>
             <p>This is the edit bucket view<p>`;
   }
+
+  bucketList(buckets) {
+    let html = '';
+
+    buckets.forEach(bucket => {
+      html += `
+        <div class='row'>
+          <div class='column'>
+            <p><a href="#" class="bucket_show" id="${bucket.bucketID}" >
+               ${bucket.name}</a>
+            <p>
+          </div>
+        </div>
+        <div class='row'>
+          <div class='column'>
+            <p>Repeat: ${bucket.repeat}<p>
+          </div>
+          <div class='column'>
+            <p>Frequency: ${bucket.frequency}<p>
+          </div>
+          <div class='column'>
+            <p>Expiry: ${bucket.expiry}<p>
+          </div>
+          <div class='column'>
+            <p>Priority: ${bucket.priority}<p>
+          </div>
+        </div>
+      `;
+    });
+
+    return html;
+  }
 }
