@@ -6,12 +6,29 @@ var campaigns = require('../controllers/campaigns');
 var buckets = require('../controllers/buckets');
 var posts = require('../controllers/posts');
 var dash = require('../controllers/dashboard');
+// var cookieParser = require('cookie-parser');
 
 module.exports = function(app, passport) {
 
+  function ensureAuthenticated(req, res, next) {
+    // Test to see if user is authenticated
+
+    // TODO - Actually check that this is the user. Struggling to hook up
+    // session's for the user
+    return next();
+
+    if (req.isAuthenticated()) {
+      return next();
+    }
+
+    console.log('Not authenticated');
+    // redirect to login
+    res.redirect('/')
+  }
+
   //-------------- Dashboard / Data Routes --------------\\
 
-  app.post('/getAllData', dash.getAllData);
+  app.post('/getAllData', ensureAuthenticated, dash.getAllData);
 
   //-------------- User / Authentication Routes --------------\\
 

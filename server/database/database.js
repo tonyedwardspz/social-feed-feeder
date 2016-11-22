@@ -5,10 +5,6 @@ class Database {
     this.createConnection();
   }
 
-  get() {
-
-  }
-
   createConnection(){
     mongoose.connect(process.env.MONGODB_URI, function (err) {
       if (err) {
@@ -17,6 +13,8 @@ class Database {
         console.log ('Succeeded connected to DB');
       }
     });
+
+    this.connection = mongoose.connection;
   }
 }
 

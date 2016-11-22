@@ -15,7 +15,7 @@ class DashboardController extends BaseController {
   // after all async calls have been made.
   getAllData(req, res) {
     console.log('[Dashboard] Get all data');
-    console.log(req.body);
+    // console.log(req.body);
 
     // Fetch and store all required promises
     var promises = [];

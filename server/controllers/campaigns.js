@@ -34,6 +34,7 @@ class CampaignController extends BaseController {
 
   // POST /campaigns
   create(req, res) {
+    console.log('[ROUTE] Campaign:POST hit');
 
     let campaign = new MongoCampaign({
       campaignID: req.body.campaignID,
@@ -46,11 +47,12 @@ class CampaignController extends BaseController {
 
     // TODP - Change to success / failure
     campaign.save(function(err) {
-        if (err) { console.log(err); }
+        if (err) {
+          console.log(err);
+        }
         // return done(err, user);
     });
 
-    console.log('[ROUTE] Campaign:POST hit');
     res.send(JSON.stringify({ a: 'Response from Campaigns POST' }));
   }
 
@@ -63,8 +65,6 @@ class CampaignController extends BaseController {
   // DELETE /campaigns/:id
   delete(req, res) {
     console.log('[ROUTE] Campaign:DELETE hit');
-
-    console.log(req.params.id);
 
     MongoCampaign.remove({ campaignID: req.params.id }, (err, removed) => {
       if (err) {

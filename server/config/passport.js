@@ -2,20 +2,17 @@
 
 var BufferAppStrategy = require('passport-bufferapp').Strategy;
 var request = require('request');
-// var mongoose = require('mongoose');
 var User = require('../singletons/user-singleton').getInstance().getMongooseModel();
 
 module.exports = function(passport) {
   passport.serializeUser(function(user, done) {
-      done(null, user.id);
+    done(null, user.id);
   });
 
   passport.deserializeUser(function(id, done) {
-      User.findOne({
-          _id: id
-      }, '-salt -hashed_password', function(err, user) {
-          done(err, user);
-      });
+    User.findById(id, function(err, user) {
+      done(err, user);
+    });
   });
 
   passport.use(new BufferAppStrategy({
@@ -24,10 +21,6 @@ module.exports = function(passport) {
       callbackURL: process.env.BUFFER_REDIRECT_URI
     },
     function(accessToken, refreshToken, profile, done) {
-      // console.log('Buffer function hit:' + accessToken);
-      // console.log('buffer ID: ' + profile.id);
-      // console.log(profile._json.name);
-      // return done();
 
       User.findOne({ 'userID': profile.id }, function(err, user) {
         // console.log('User: ' + user);

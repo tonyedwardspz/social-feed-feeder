@@ -15,10 +15,8 @@ class UserController extends BaseController {
   }
 
   authSuccess(req, res) {
-    // console.log(req.user);
-    // User.setID(req.user.bufferID);
-
     console.log('[User] Auth Success');
+
     res.cookie('user_auth', 'true');
     res.cookie('user_id', req.user.userID);
     res.cookie('user_name', req.user.name);
@@ -28,6 +26,7 @@ class UserController extends BaseController {
 
   authFailure(err, req, res, next) {
     console.log('[User] Auth failure: ' + err);
+    
     res.send(err);
   }
 
