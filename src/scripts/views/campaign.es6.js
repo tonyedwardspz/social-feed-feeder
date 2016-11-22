@@ -5,13 +5,35 @@ class CampaignView {
 
   getIndex(campaigns) {
     console.log('Campaign View: Get index');
-    var campaignHTML = `<h1>Campaign Index<h1>`;
+    var campaignHTML = `<h2>Your Campaigns</h2>`;
 
-    for(let i = 0; i < campaigns.length; i++) {
-      campaignHTML += `<button class='campaign_show' data-id='${campaigns[i].campaignID}'>Campaign ${campaigns[i].name}</button>`;
+    campaignHTML += `<div class="row">
+                       <div class='column'>
+                         <button id='campaign_new'>New Campaign</button>
+                       </div>
+                     </div>
+                     <div class="row">
+                        <div class='column'>
+                          <hr />
+                        </div>
+                     </div>
+                     <div class="row">
+                    `;
+
+    for(let i = 1; i < campaigns.length + 1; i++) {
+      campaignHTML += `<div class="column column-33">
+                         <p>${campaigns[i -1].name}</p>
+                         <p>${campaigns[i -1].description}</p>
+                         <button class='campaign_show' data-id='${campaigns[i -1].campaignID}'>View Campaign</button>
+                       </div>
+                      `;
+      if (i % 3 === 0) {
+        campaignHTML += `</div><div class="row>"`;
+      }
     }
 
-    campaignHTML += `<button id='campaign_new'>New</button>`;
+    campaignHTML += `<hr /></div></div>`;
+
     return campaignHTML;
   }
 
@@ -20,7 +42,7 @@ class CampaignView {
             <p>This is the new campaign view<p>
             <form name='form_campaign_new'>
             <label for='name'>Campaign Name</label>
-            <input name='name' id='name'/>
+            <input name='name' id='name' type="text"/>
 
             <label for='description'>Description</label>
             <textarea name='description' id='description'></textarea>

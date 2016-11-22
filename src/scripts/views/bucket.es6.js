@@ -54,32 +54,32 @@ class BucketView {
   }
 
   bucketList(buckets) {
-    let html = '';
+    let html = `<table>
+                  <thead>
+                    <tr>
+                      <th>Name</th>
+                      <th>Repeat</th>
+                      <th>Frequency</th>
+                      <th>Expiry</th>
+                      <th>Priority</th>
+                      <th>Max Per Day</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+               `;
 
     buckets.forEach(bucket => {
-      html += `
-        <div class='row'>
-          <div class='column'>
-            <p><a href="#" class="bucket_show" id="${bucket.bucketID}" >
-               ${bucket.name}</a>
-            <p>
-          </div>
-        </div>
-        <div class='row'>
-          <div class='column'>
-            <p>Repeat: ${bucket.repeat}<p>
-          </div>
-          <div class='column'>
-            <p>Frequency: ${bucket.frequency}<p>
-          </div>
-          <div class='column'>
-            <p>Expiry: ${bucket.expiry}<p>
-          </div>
-          <div class='column'>
-            <p>Priority: ${bucket.priority}<p>
-          </div>
-        </div>
-      `;
+      console.log(bucket);
+      html += `<tr>
+                 <td><a href="#" class="bucket_show" id="${bucket.bucketID}" >
+                   ${bucket.name}</a></td>
+                 <td>${bucket.repeat}</td>
+                 <td>${bucket.frequency}</td>
+                 <td>${bucket.expiry}</td>
+                 <td>${bucket.priority}</td>
+                 <td>${bucket.maxPerDay}</td>
+               </tr>
+             `;
     });
 
     return html;
