@@ -24,7 +24,7 @@ class BucketController extends BaseController{
     let html = app.bucketView.new(campaignID);
     this.updateShell(html);
   }
-  
+
   create() {
     console.log('[Bucket] Create');
 
@@ -39,11 +39,24 @@ class BucketController extends BaseController{
     this.show(bucket.bucketID);
   }
 
+  edit(id) {
+    console.log('[Bucket] Edit');
+  }
+
   update() {
     console.log('[Bucket] Update');
   }
 
-  delete() {
-    console.log('[Bucket] Delete');
+  delete(id, name, campaignID) {
+    console.log('[Bucket] Delete: ', id);
+
+    if (! confirm(`Delete the "${name}" bucket and all related data?`)) {
+      return;
+    }
+
+    Bucket.removeBucket(id);
+    app.db.publish(`/buckets/${id}`, false, 'DELETE');
+
+    app.campaignController.show(campaignID);
   }
 }

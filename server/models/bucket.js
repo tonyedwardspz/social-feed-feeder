@@ -20,6 +20,7 @@ class Bucket extends BaseModel{
       userID: String,
       name: String,
       description: String,
+      expiry: Date,
       priority: Number,
       maxPerDay: Number,
       repeat: Boolean,

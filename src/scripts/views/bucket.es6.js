@@ -26,6 +26,9 @@ class BucketView {
                 <option value="0">Low</option>
               </select>
 
+              <label for='expiry'>Expiry Date</label>
+              <input name='expiry' id='expiry' type='date' />
+
               <label for="maxPerDay">Max posts per day</label>
               <input type="number" name="maxPerDay" id="maxPerDay" min="0" max="5" default="0"/>
 
@@ -71,14 +74,26 @@ class BucketView {
     buckets.forEach(bucket => {
       console.log(bucket);
       html += `<tr>
-                 <td><a href="#" class="bucket_show" id="${bucket.bucketID}" >
+                 <td><a href="#" class="bucket_show" data-id="${bucket.bucketID}" >
                    ${bucket.name}</a></td>
                  <td>${bucket.repeat}</td>
                  <td>${bucket.frequency}</td>
-                 <td>${bucket.expiry}</td>
+                 <td>${convertDateToLocale(bucket.expiry)}</td>
                  <td>${bucket.priority}</td>
                  <td>${bucket.maxPerDay}</td>
                </tr>
+               <tr>
+                 <td colspan="6">
+                   <button class="bucket_edit"
+                           data-id="${bucket.bucketID}">Edit Bucket</button>
+                   <button class="bucket_delete"
+                           data-id="${bucket.bucketID}"
+                           data-name="${bucket.name}"
+                           data-campaignid="${bucket.campaignID}">
+                           Delete Bucket</button>
+                 </td>
+               </tr>
+
              `;
     });
 

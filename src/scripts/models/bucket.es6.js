@@ -1,10 +1,11 @@
 class Bucket {
-  constructor(bucketID, campaignID, name, description, priority, maxPerDay,
-              repeat, frequency, userID = app.user.id) {
+  constructor(bucketID, campaignID, name, description, expiry, priority,
+              maxPerDay, repeat, frequency, userID = app.user.id) {
     this.bucketID = bucketID;
     this.campaignID = campaignID;
     this.name = name;
     this.description = description;
+    this.expiry = expiry;
     this.priority = priority;
     this.maxPerDay = maxPerDay;
     this.repeat = repeat;
@@ -16,6 +17,10 @@ class Bucket {
     return app.user.buckets;
   }
 
+  static setBuckets(buckets) {
+    app.user.buckets = buckets;
+  }
+
   static extractBucketData(buckets) {
     var sortedBuckets = [];
 
@@ -25,6 +30,7 @@ class Bucket {
         bucket.campaignID,
         bucket.name,
         bucket.description,
+        bucket.expiry,
         bucket.priority,
         bucket.maxPerDay,
         bucket.repeat,
@@ -42,6 +48,7 @@ class Bucket {
       form.dataset.id,
       form.name.value,
       form.description.value,
+      form.expiry.value,
       form.priority.value,
       form.maxPerDay.value,
       form.repeat.value,
@@ -59,5 +66,19 @@ class Bucket {
     });
 
     return thisBucket;
+  }
+
+  static removeBucket(id) {
+    console.log('removing bucket');
+    var buckets = this.getAllBuckets();
+
+    for (let i = buckets.length - 1; i >= 0; i--) {
+      if (buckets[i].bucketID === id) {
+        console.log('bucket deleted');
+        buckets.splice(i, 1);
+      }
+    }
+
+    this.setBuckets(buckets);
   }
 }

@@ -41,6 +41,7 @@ class BucketController extends BaseController {
       userID: req.body.userID,
       name: req.body.name,
       description: req.body.description,
+      expiry: req.body.expiry,
       priority: req.body.priority,
       maxPerDay: req.body.maxPerDay,
       repeat: Bucket.doesItRepeat(req.body.repeat),

@@ -77,7 +77,15 @@ var app;
         app.bucketController.create();
       } else if (e.target.className === 'bucket_show') {
         e.preventDefault();
-        app.bucketController.show(e.target.id);
+        app.bucketController.show(e.target.dataset.id);
+      } else if (e.target.className === 'bucket_edit') {
+        e.preventDefault();
+        app.bucketController.edit(e.target.dataset.id);
+      } else if (e.target.className === 'bucket_delete') {
+        e.preventDefault();
+        app.bucketController.delete(e.target.dataset.id,
+                                    e.target.dataset.name,
+                                    e.target.dataset.campaignid);
       }
     }
 
