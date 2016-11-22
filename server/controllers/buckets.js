@@ -3,6 +3,7 @@
 var BaseController = require('./base');
 var Bucket = require('../models/bucket');
 var MongoBucket = Bucket.getMongooseModel();
+var MongoPost = require('../models/post').getMongooseModel();
 
 class BucketController extends BaseController {
   constructor() {
@@ -68,6 +69,23 @@ class BucketController extends BaseController {
   // DELETE /buckets/:id
   delete(req, res) {
     console.log('[ROUTE] Buckets:DELETE hit');
+
+    MongoBucket.remove({ bucketID: req.params.id }, (err, removed) => {
+      if (err) {
+        console.log(`Error deleting bucket ${err}`);
+      } else {
+        console.log(`Buckets removed: ${removed}`);
+      }
+    });
+
+    MongoPost.remove({ bucketID: req.params.id }, (err, removed) => {
+      if (err) {
+        console.log(`Error deleting posts from buckets ${err}`);
+      } else {
+        console.log(`Posts removed: ${removed}`);
+      }
+    });
+
     res.send(JSON.stringify({ a: 'Response from Buckets DELETE' }));
   }
 }
