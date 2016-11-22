@@ -1,5 +1,7 @@
-// Convert passed date string into a locale object if supported, else
-// return constructed version.
+/**
+* Convert passed date string into a locale object if supported, else
+* return constructed version.
+*/
 function convertDateToLocale(date) {
   try {
     return new Date(date).toLocaleDateString('en-GB');
@@ -10,7 +12,9 @@ function convertDateToLocale(date) {
   }
 }
 
-// Convert passed date string into formate required by input type='date'
+/**
+* Convert passed date string into formate required by input type='date'
+*/
 function convertDateForInput(date) {
   try {
     let _date = new Date(date);

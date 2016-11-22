@@ -1,3 +1,4 @@
+/** Class representing a campaigns Views */
 class CampaignView {
   constructor(){
 
@@ -71,6 +72,11 @@ class CampaignView {
     return html;
   }
 
+  /**
+  * Returns HTML for the 'show campaign' screen
+  * @param {Campaign} campaign - Campaign object to generate html for
+  * @return {String} The HTML string for display
+  */
   show(campaign) {
     let date = convertDateToLocale(campaign.expiry);
     return `<h2 id="name">${campaign.name}</h2>

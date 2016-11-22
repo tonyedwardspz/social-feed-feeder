@@ -61,6 +61,7 @@
     "vinyl-source-stream": "^1.1.0"
   },
   "devDependencies": {
+    "gulp-jsdoc3": "^1.0.1",
     "nodemon": "^1.11.0"
   }
 }
