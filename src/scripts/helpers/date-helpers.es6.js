@@ -14,7 +14,7 @@ function convertDateToLocale(date) {
 function convertDateForInput(date) {
   try {
     let _date = new Date(date);
-    let month = ('0' + _date.getMonth()).slice(-2);
+    let month = ('0' + (_date.getMonth() + 1)).slice(-2);
     let day = ('0' + _date.getDate()).slice(-2);
     return `${_date.getFullYear()}-${month}-${day}`;
   } catch (e) {

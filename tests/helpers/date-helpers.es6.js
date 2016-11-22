@@ -10,6 +10,14 @@ describe('Date Helpers', function() {
     it('Returns UK formatted date when passed a string', function() {
       assert.equal('1/12/2017', convertDateToLocale('2017-01-12T08:45:00.000Z'));
     });
-    
+
+  });
+
+  describe('#convertDateForInput(date)', function() {
+
+    it('Returns formatted date for date input when passed a string', function() {
+      assert.equal('2017-01-12', convertDateForInput('2017-01-12T08:45:00.000Z'));
+    });
+
   });
 });
