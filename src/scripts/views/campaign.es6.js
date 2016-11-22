@@ -37,25 +37,38 @@ class CampaignView {
     return campaignHTML;
   }
 
-  new() {
+  new(campaign = new Campaign()) {
     return `<h1>New Campaign</h1>
-            <p>This is the new campaign view<p>
-            <form name='form_campaign_new'>
-            <label for='name'>Campaign Name</label>
-            <input name='name' id='name' type="text"/>
+            <p>Create a new campaign<p>
+            ${this.form()}
+            `;
+  }
 
-            <label for='description'>Description</label>
-            <textarea name='description' id='description'></textarea>
+  form(campaign = new Campaign()) {
+    var exists = campaign.name !== undefined ? true : false;
+    var html = `<form name='form_campaign_new'>
+                <label for='name'>Campaign Name</label>
+                <input name='name' id='name' type="text"
+                       value="${exists ? campaign.name : ''}"
+                       />
 
-            <label for='expiry'>Expiry Date</label>
-            <input name='expiry' id='expiry' type='date' />
+                <label for='description'>Description</label>
+                <textarea name='description'
+                 id='description'>${exists ? campaign.description : ''}</textarea>
 
-            <label for='dailyPosts'>Daily Posts</label>
-            <input name='dailyPosts' id='dailyPosts' type='number' min='0' max='10'/>
+                <label for='expiry'>Expiry Date</label>
+                <input name='expiry' id='expiry' type='date'
+                 value="${exists ? convertDateForInput(campaign.expiry) : ''}"/>
 
-            <button id='campaign_save'>Save</button>
-            <button id='campaign_index'>Cancel</button>
-            </form>`;
+                <label for='dailyPosts'>Daily Posts</label>
+                <input name='dailyPosts' id='dailyPosts' type='number' min='0'
+                       max='10' value='${exists ? campaign.dailyPosts : 1}'/>
+
+                <button id='campaign_save'>Save</button>
+                <button id='campaign_index'>Cancel</button>
+                </form>
+              `;
+    return html;
   }
 
   show(campaign) {
@@ -90,8 +103,8 @@ class CampaignView {
   }
 
   edit(campaign) {
-    return `<h1>Edit Campaign</h1>
-            <p>This is the edit campaign view<p>
-            <p>${campaign.name}</p>`;
+    return `<h2>Edit: ${campaign.name} campaign</h2>
+            <p>Update campaign details<p>
+            ${this.form(campaign)}`;
   }
 }

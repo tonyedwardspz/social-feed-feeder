@@ -5,7 +5,19 @@ function convertDateToLocale(date) {
     return new Date(date).toLocaleDateString('en-GB');
   } catch (e) {
     console.log('Error converting date - Trying backup: ' + e);
-    let dateObj = new Date(date);
-    return `${dateObj.getDate()}/${dateObj.getMonth() + 1}/${dateObj.getFullYear()}`;
+    let _date = new Date(date);
+    return `${_date.getDate()}/${_date.getMonth() + 1}/${_date.getFullYear()}`;
+  }
+}
+
+// Convert passed date string into formate required by input type='date'
+function convertDateForInput(date) {
+  try {
+    let _date = new Date(date);
+    let month = ('0' + _date.getMonth()).slice(-2);
+    let day = ('0' + _date.getDate()).slice(-2);
+    return `${_date.getFullYear()}-${month}-${day}`;
+  } catch (e) {
+    console.log('error converting date for input', e);
   }
 }

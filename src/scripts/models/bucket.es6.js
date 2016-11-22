@@ -6,12 +6,28 @@ class Bucket {
     this.name = name;
     this.description = description;
     this.expiry = expiry;
-    this.priority = priority;
+    this._priority = priority;
     this.maxPerDay = maxPerDay;
     this.repeat = repeat;
     this.frequency = frequency;
     this.userID = userID;
   }
+
+  get priority() {
+    switch (this._priority) {
+      case 0:
+        return 'Low';
+      case 1:
+        return 'Medium';
+      case 2:
+        return 'High';
+    }
+  }
+
+  // This crashes the app for some reason? Made priority sudo-private instead
+  // set priority(priority) {
+  //   this.priority = priority;
+  // }
 
   static getAllBuckets() {
     return app.user.buckets;
