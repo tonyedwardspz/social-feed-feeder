@@ -12,7 +12,7 @@
   "scripts": {
     "start": "node server.js",
     "test": "mocha test",
-    "postinstall": "gulp"
+    "postinstall": "gulp --env=PRODUCTION"
   },
   "author": "tonyedwardspz",
   "license": "MIT",
@@ -36,6 +36,7 @@
     "gulp-concat": "^2.6.0",
     "gulp-env": "^0.2.0",
     "gulp-file": "^0.3.0",
+    "gulp-if": "^2.0.2",
     "gulp-imagemin": "^2.3.0",
     "gulp-minify-css": "^1.2.1",
     "gulp-minify-html": "^1.0.4",
@@ -43,8 +44,9 @@
     "gulp-rename": "^1.2.2",
     "gulp-sass": "^2.0.4",
     "gulp-sourcemaps": "^1.6.0",
+    "gulp-strip-debug": "^1.1.0",
     "gulp-uglify": "^1.4.2",
-    "gulp-util": "^3.0.6",
+    "gulp-util": "^3.0.7",
     "milligram": "^1.2.0",
     "mocha": "^3.1.2",
     "mongodb": "^2.2.11",
