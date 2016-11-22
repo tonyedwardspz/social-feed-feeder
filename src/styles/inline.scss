@@ -28,6 +28,64 @@ main.container {
 
 
 
+
+
+
+@media (max-width: 40.0rem) {
+
+  table,
+  thead,
+  tbody,
+  th,
+  td,
+  tr {
+    display: block;
+	}
+
+  thead tr {
+    left: -9999px;
+    position: absolute;
+    top: -9999px;
+	}
+
+  tr {
+    border: 1px solid #ccc;
+  }
+
+	td {
+		border: none;
+		border-bottom: 1px solid #eee;
+		position: relative;
+		padding-left: 50%;
+	}
+
+  td a {
+    padding-left: 50%;
+  }
+
+	td:before {
+		position: absolute;
+		top: 6px;
+		left: 6px;
+		width: 45%;
+		padding-right: 10px;
+		white-space: nowrap;
+	}
+
+	td:nth-of-type(1):before { content: "Name"; }
+	td:nth-of-type(2):before { content: "Repeat"; }
+	td:nth-of-type(3):before { content: "Frequency"; }
+	td:nth-of-type(4):before { content: "Expiry"; }
+	td:nth-of-type(5):before { content: "Priority"; }
+	td:nth-of-type(6):before { content: "Max Per Day"; }
+}
+
+
+
+
+
+
+
 .loader {
   left: 50%;
   top: 50%;
