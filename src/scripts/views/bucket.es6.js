@@ -4,13 +4,13 @@ class BucketView {
   }
 
   index(buckets) {
-    return `<h1>Bucket Index<h1>
+    return `<h2>Bucket Index</h2>
             <p>This is the bucket index<p>`;
   }
 
   new(campaignID) {
     console.log('CAMPAIGN ID from new Bucket: ' + campaignID);
-    return `<h1>New Bucket<h1>
+    return `<h2>New Bucket</h2>
             <p>This is the new bucket view<p>
             <form name="form_bucket_new" method="POST" data-id="${campaignID}">
               <label for="name">Name</label>
@@ -47,12 +47,12 @@ class BucketView {
   }
 
   show(bucket) {
-    return `<h1>Show Bucket<h1>
+    return `<h2>Show Bucket</h2>
             <p>This is the show bucket view<p>`;
   }
 
   edit(bucket) {
-    return `<h1>Edit Bucket<h1>
+    return `<h2>Edit Bucket</h2>
             <p>This is the edit bucket view<p>`;
   }
 
