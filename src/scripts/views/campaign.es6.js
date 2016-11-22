@@ -4,13 +4,18 @@ class CampaignView {
 
   }
 
+  /**
+  * Returns HTML for the 'campaign index' screen
+  * @param {Array.<Campaign>} campaigns An array of campaign objects
+  * @return {String} The HTML string for display
+  */
   getIndex(campaigns) {
     console.log('Campaign View: Get index');
     var campaignHTML = `<h2>Your Campaigns</h2>`;
 
     campaignHTML += `<div class="row">
                        <div class='column'>
-                         <button id='campaign_new'>New Campaign</button>
+                         <button id='campaign_new'>Add New Campaign</button>
                        </div>
                      </div>
                      <div class="row">
@@ -22,7 +27,7 @@ class CampaignView {
                     `;
 
     for(let i = 1; i < campaigns.length + 1; i++) {
-      campaignHTML += `<div class="column column-33">
+      campaignHTML += `<div class="column">
                          <p>${campaigns[i -1].name}</p>
                          <p>${campaigns[i -1].description}</p>
                          <button class='campaign_show' data-id='${campaigns[i -1].campaignID}'>View Campaign</button>
@@ -38,6 +43,11 @@ class CampaignView {
     return campaignHTML;
   }
 
+  /**
+  * Returns HTML for the 'new campaign' screen
+  * @param {Campaign} [campaign] A campaign object
+  * @return {String} The HTML string for display
+  */
   new(campaign = new Campaign()) {
     return `<h1>New Campaign</h1>
             <p>Create a new campaign<p>
@@ -45,6 +55,12 @@ class CampaignView {
             `;
   }
 
+  /**
+  * Returns HTML for the 'new campaign' screen. If no campaign is passed an
+  * empty object is generated.
+  * @param {Campaign} [campaign] A campaign object
+  * @return {String} The HTML string for display
+  */
   form(campaign = new Campaign()) {
     var exists = campaign.name !== undefined ? true : false;
     var html = `<form name='form_campaign_new'>
@@ -65,7 +81,8 @@ class CampaignView {
                 <input name='dailyPosts' id='dailyPosts' type='number' min='0'
                        max='10' value='${exists ? campaign.dailyPosts : 1}'/>
 
-                <button id='campaign_save'>Save</button>
+                <button id='${!exists ? 'campaign_save' : 'campaign_save_edit'}'
+                        data-id="${campaign.campaignID}">Save</button>
                 <button id='campaign_index'>Cancel</button>
                 </form>
               `;
@@ -74,7 +91,7 @@ class CampaignView {
 
   /**
   * Returns HTML for the 'show campaign' screen
-  * @param {Campaign} campaign - Campaign object to generate html for
+  * @param {Campaign} campaign A Campaign object to generate html for
   * @return {String} The HTML string for display
   */
   show(campaign) {
@@ -108,6 +125,11 @@ class CampaignView {
 
   }
 
+  /**
+  * Returns HTML for the 'edit campaign' screen
+  * @param {Campaign} campaign - A Campaign object to generate html for
+  * @return {String} The HTML string for display
+  */
   edit(campaign) {
     return `<h2>Edit: ${campaign.name} campaign</h2>
             <p>Update campaign details<p>

@@ -68,6 +68,9 @@ var app;
       } else if (e.target.id === 'campaign_delete') {
         e.preventDefault();
         app.campaignController.delete(e.target.dataset.campaignid);
+      } else if (e.target.id === 'campaign_save_edit') {
+        e.preventDefault();
+        app.campaignController.update(e.target.dataset.id);
       }
 
       else if (e.target.id === 'bucket_new') {

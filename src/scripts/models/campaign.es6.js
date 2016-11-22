@@ -25,6 +25,19 @@ class Campaign {
     return buckets;
   }
 
+  updateFromForm(form) {
+    this.name = form.name.value;
+    this.description = form.description.value;
+    this.expiry = form.expiry.value;
+    this.dailyPosts = form.dailyPosts.value;
+
+    app.user.campaigns.forEach(camp => {
+      if (camp.campaignID === this.campaignID) {
+        camp = this;
+      }
+    });
+  }
+
   static getAllCampaigns() {
     return app.user.campaigns;
   }
@@ -44,6 +57,14 @@ class Campaign {
 
     return thisCampaign;
   }
+
+  // static updateCampaign(campaign){
+  //   app.user.campaigns.forEach(camp => {
+  //     if (camp.campaignID === campaign.campaignID) {
+  //       camp = campaign;
+  //     }
+  //   });
+  // }
 
   // Create and return a new campaign from a passed form
   // Used during the creation of object from user input

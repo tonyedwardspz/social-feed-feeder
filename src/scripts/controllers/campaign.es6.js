@@ -62,8 +62,15 @@ class CampaignsController extends BaseController {
   }
 
   /** Updates an existing campaign */
-  update() {
+  update(id) {
+    let campaign = Campaign.getByID(id, Campaign.getAllCampaigns());
+    let form = document.querySelector('form');
 
+    campaign.updateFromForm(form);
+    // Campaign.updateCampaign(campaign);
+    app.db.publish(`/campaigns/${id}`, campaign, 'PUT');
+
+    this.show(id);
   }
 
   /** Deletes an existing campaign */
