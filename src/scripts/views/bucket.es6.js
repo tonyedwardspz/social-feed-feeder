@@ -63,7 +63,8 @@ class BucketView {
                       <th>Frequency</th>
                       <th>Expiry</th>
                       <th>Priority</th>
-                      <th>Max Per Day</th>
+                      <th>Max Daily Posts</th>
+                      <th>Actions</th>
                     </tr>
                   </thead>
                   <tbody>
@@ -74,21 +75,21 @@ class BucketView {
       html += `<tr>
                  <td><a href="#" class="bucket_show" data-id="${bucket.bucketID}" >
                    ${bucket.name}</a></td>
-                 <td>${bucket.repeat}</td>
+                 <td>${bucket.displayRepeat()}</td>
                  <td>${bucket.frequency}</td>
                  <td>${convertDateToLocale(bucket.expiry)}</td>
-                 <td>${bucket.priority}</td>
+                 <td>${bucket.displayPriority()}</td>
                  <td>${bucket.maxPerDay}</td>
-               </tr>
-               <tr>
-                 <td colspan="6">
-                   <button class="bucket_edit"
-                           data-id="${bucket.bucketID}">Edit Bucket</button>
-                   <button class="bucket_delete"
-                           data-id="${bucket.bucketID}"
-                           data-name="${bucket.name}"
-                           data-campaignid="${bucket.campaignID}">
-                           Delete Bucket</button>
+                 <td>
+                   <a href="#" class="bucket_edit" data-id="${bucket.bucketID}">
+                     <img src="/images/pencil.svg" alt="edit bucket" class="icon"/>
+                   </a>
+                   <a href="#" class="bucket_delete"
+                      data-id="${bucket.bucketID}" data-name="${bucket.name}"
+                      data-campaignid="${bucket.campaignID}">
+                      <img src="/images/x.svg" alt="Delete bucket"
+                           class="icon"/>
+                   </a>
                  </td>
                </tr>
 

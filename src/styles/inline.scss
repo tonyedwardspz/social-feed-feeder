@@ -26,8 +26,19 @@ main.container {
   margin-top: 6rem;
 }
 
-.breadcrumb {
+.breadcrumb,
+#breadcrumb {
   text-decoration: underline;
+}
+
+.icon {
+  padding: 7px 5px 0 5px;
+  pointer-events: none;
+}
+
+td a.bucket_edit,
+td a.bucket_delete {
+  display: inline-block;
 }
 
 
@@ -64,6 +75,11 @@ main.container {
     padding-left: 50%;
   }
 
+  td a.bucket_edit,
+  td a.bucket_delete {
+    padding-left: 0;
+  }
+
 	td:before {
 		position: absolute;
 		top: 6px;
@@ -79,8 +95,8 @@ main.container {
 	td:nth-of-type(4):before { content: "Expiry"; }
 	td:nth-of-type(5):before { content: "Priority"; }
 	td:nth-of-type(6):before { content: "Max Per Day"; }
+	td:nth-of-type(7):before { content: "Actions"; }
 }
-
 
 
 

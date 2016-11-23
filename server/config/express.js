@@ -12,6 +12,7 @@ module.exports = function(app, passport, root){
   app.use('/public', express.static(root + '/public'));
   app.use('/scripts', express.static(root + '/public/scripts'));
   app.use('/styles', express.static(root + '/public/styles'));
+  app.use('/images', express.static(root + '/public/images'));
 
   // Set various body parsers
   app.use(bodyParser.urlencoded({ extended: false }));

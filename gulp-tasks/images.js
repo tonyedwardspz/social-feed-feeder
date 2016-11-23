@@ -15,5 +15,5 @@ gulp.task('images', function() {
       interlaced: true,
       svgoPlugins: [{removeViewBox: false}],
     }))
-    .pipe(gulp.dest('./public'));
+    .pipe(gulp.dest('./public/images'));
 });
