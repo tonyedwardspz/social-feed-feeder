@@ -1,9 +1,9 @@
 'use strict';
 
-var cookieParser = require('cookie-parser');
-var express = require('express');
-var bodyParser = require('body-parser');
-var session = require('express-session');
+let cookieParser = require('cookie-parser');
+let express = require('express');
+let bodyParser = require('body-parser');
+let session = require('express-session');
 // var MongoStore = require('connect-mongo')(session);
 
 module.exports = function(app, passport, root){

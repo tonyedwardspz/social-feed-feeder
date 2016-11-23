@@ -1,3 +1,5 @@
+'use strict';
+
 class Bucket {
   constructor(bucketID, campaignID, name, description, expiry, priority,
               maxPerDay, repeat, frequency, userID = app.user.id) {

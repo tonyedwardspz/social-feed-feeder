@@ -1,10 +1,11 @@
+'use strict';
+
 class BucketView {
   constructor(){
 
   }
 
   new(campaignID) {
-    console.log('CAMPAIGN ID from new Bucket: ' + campaignID);
     return `${getBreadcrumbs('bucket_new', [campaignID])}
             <h2>New Bucket</h2>
             <p>This is the new bucket view<p>
@@ -71,7 +72,6 @@ class BucketView {
                `;
 
     buckets.forEach(bucket => {
-      console.log(bucket);
       html += `<tr>
                  <td><a href="#" class="bucket_show" data-id="${bucket.bucketID}" >
                    ${bucket.name}</a></td>

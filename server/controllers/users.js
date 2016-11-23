@@ -1,6 +1,6 @@
 'use strict';
 
-var BaseController = require('./base');
+let BaseController = require('./base');
 // var User = require('../singletons/user-singleton').getInstance();
 // var UserMM = User.getMongooseModel();
 
@@ -26,7 +26,7 @@ class UserController extends BaseController {
 
   authFailure(err, req, res, next) {
     console.log('[User] Auth failure: ' + err);
-    
+
     res.send(err);
   }
 

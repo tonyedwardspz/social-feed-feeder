@@ -1,7 +1,7 @@
 'use strict';
 
-var mongoose = require('mongoose');
-var BaseModel = require('./base');
+let mongoose = require('mongoose');
+let BaseModel = require('./base');
 
 class Bucket extends BaseModel{
   constructor() {

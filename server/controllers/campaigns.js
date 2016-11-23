@@ -1,9 +1,9 @@
 'use strict';
 
-var BaseController = require('./base');
-var MongoCampaign = require('../models/campaign').getMongooseModel();
-var MongoBucket = require('../models/bucket').getMongooseModel();
-var MongoPost = require('../models/post').getMongooseModel();
+let BaseController = require('./base');
+let MongoCampaign = require('../models/campaign').getMongooseModel();
+let MongoBucket = require('../models/bucket').getMongooseModel();
+let MongoPost = require('../models/post').getMongooseModel();
 
 class CampaignController extends BaseController {
   constructor() {

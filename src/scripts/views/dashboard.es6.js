@@ -1,3 +1,5 @@
+'use strict';
+
 class DashboardView {
   constructor() {
 

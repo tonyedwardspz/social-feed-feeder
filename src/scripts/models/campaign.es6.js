@@ -1,3 +1,5 @@
+'use strict';
+
 class Campaign {
   constructor(name, description, expiry, dailyPosts, userID = app.user.id,
               campaignID = randomString()) {

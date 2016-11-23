@@ -1,4 +1,6 @@
-var mongoose = require ('mongoose');
+'use strict';
+
+let mongoose = require('mongoose');
 
 class Database {
   constructor() {

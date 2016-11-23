@@ -1,9 +1,9 @@
 'use strict';
 
-var BaseController = require('./base');
-var Campaign = require('../models/campaign');
-var User = require('../singletons/user-singleton').getInstance();
-var Bucket = require('../models/bucket');
+let BaseController = require('./base');
+let Campaign = require('../models/campaign');
+let User = require('../singletons/user-singleton').getInstance();
+let Bucket = require('../models/bucket');
 let Post = require('../models/post');
 
 class DashboardController extends BaseController {
@@ -18,7 +18,7 @@ class DashboardController extends BaseController {
     // console.log(req.body);
 
     // Fetch and store all required promises
-    var promises = [];
+    let promises = [];
     promises.push(Campaign.getDatabasePromise(req.body.id));
     promises.push(User.getDatabasePromise(req.body.id));
     promises.push(Bucket.getDatabasePromise(req.body.id));

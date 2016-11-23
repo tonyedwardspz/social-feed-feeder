@@ -1,4 +1,4 @@
-'user strict';
+'use strict';
 
 function clearDOM() {
   app.shell.innerHTML = '';
@@ -26,7 +26,7 @@ var app;
     dashboardView: new DashboardView(),
     dashboardController: new DashboardController(),
     campaignView: new CampaignView(),
-    campaignController: new CampaignsController(),
+    campaignController: new CampaignController(),
     bucketView: new BucketView(),
     bucketController: new BucketController()
   };

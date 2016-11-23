@@ -1,3 +1,5 @@
+'use strict';
+
 /**
 * Convert passed date string into a locale object if supported, else
 * return constructed version.

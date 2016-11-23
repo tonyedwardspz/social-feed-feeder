@@ -1,5 +1,3 @@
-/* globals Campaign, BaseController, User, Post, Bucket */
-/* exported DashboardController */
 'use strict';
 
 class DashboardController extends BaseController {

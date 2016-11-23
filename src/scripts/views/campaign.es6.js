@@ -1,3 +1,5 @@
+'use strict';
+
 /** Class representing a campaigns Views */
 class CampaignView {
   constructor(){

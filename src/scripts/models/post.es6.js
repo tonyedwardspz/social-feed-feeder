@@ -1,3 +1,5 @@
+'use strict';
+
 class Post {
   constructor(postID, bucketID, name, description,
               lastPostDate, content, expiry, userID = app.user.id) {

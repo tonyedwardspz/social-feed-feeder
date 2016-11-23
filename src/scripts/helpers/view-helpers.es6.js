@@ -1,3 +1,5 @@
+'use strict';
+
 /**
 * Generates a breadcrumb trail for the current view
 * @param {String} view The current view being generated

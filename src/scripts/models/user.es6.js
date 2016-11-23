@@ -1,5 +1,4 @@
-/* globals User, getCookie */
-/* exported User */
+'use strict';
 
 class User {
   constructor(id) {

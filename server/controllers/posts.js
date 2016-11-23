@@ -1,6 +1,6 @@
 'use strict';
 
-var BaseController = require('./base');
+let BaseController = require('./base');
 
 class PostController extends BaseController {
   constructor() {

@@ -1,4 +1,6 @@
-var user = require('../models/user');
+'use strict';
+
+let user = require('../models/user');
 
 class UserSingleton {
   constructor() {

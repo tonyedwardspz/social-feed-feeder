@@ -1,6 +1,6 @@
 'use strict';
 
-var mongoose = require('mongoose');
+let mongoose = require('mongoose');
 let BaseModel = require('./base');
 
 class Post extends BaseModel{

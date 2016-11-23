@@ -1,9 +1,9 @@
 'use strict';
 
-var BaseController = require('./base');
-var Bucket = require('../models/bucket');
-var MongoBucket = Bucket.getMongooseModel();
-var MongoPost = require('../models/post').getMongooseModel();
+let BaseController = require('./base');
+let Bucket = require('../models/bucket');
+let MongoBucket = Bucket.getMongooseModel();
+let MongoPost = require('../models/post').getMongooseModel();
 
 class BucketController extends BaseController {
   constructor() {

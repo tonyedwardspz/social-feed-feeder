@@ -1,0 +1,42 @@
+{
+  "strict": "global",
+  "esversion": 6,
+  "quotmark": "single",
+  "undef": true,
+  "curly": true,
+  "eqeqeq": true,
+  "browser": true,
+  "devel": true,
+  "node": true,
+
+  "globals": {
+    "app": true,
+    "clearDOM": true,
+    "randomString": true,
+    "getBreadcrumbs": true,
+    "convertDateToLocale": true,
+    "convertDateForInput": true,
+
+    "require": true,
+    "module": true,
+
+    "Campaign": true,
+    "Bucket": true,
+    "Post": true,
+    "User": true,
+    "Database": true,
+
+    "BaseController" : true,
+    "CampaignController": true,
+    "BucketController": true,
+    "PostController": true,
+    "UserController": true,
+    "DashboardController": true,
+
+    "CampaignView": true,
+    "BucketView": true,
+    "PostView": true,
+    "UserView": true,
+    "DashboardView": true
+  }
+}

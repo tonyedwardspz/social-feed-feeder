@@ -1,8 +1,6 @@
-/* globals Campaign, BaseController */
- /*exported CampaignsController */
 'use strict';
 
-class CampaignsController extends BaseController {
+class CampaignController extends BaseController {
   constructor() {
     super();
   }
@@ -19,14 +17,10 @@ class CampaignsController extends BaseController {
 
   /** Shows an individual campaign */
   show(id) {
-    console.log(id);
-    // find the campaign by ID
+    // Find the requested campaign
     var campaign = Campaign.getByID(id, app.user.campaigns);
-    console.log(campaign);
-
-    let buckets = campaign.buckets;
-
     let html = app.campaignView.show(campaign);
+
     this.updateShell(html);
   }
 
@@ -38,7 +32,7 @@ class CampaignsController extends BaseController {
 
   /** Creates and saves a new campaign */
   create() {
-    // disable the save button to prevent duplicate submissions
+    // Disable the save button to prevent duplicate submissions
     document.getElementById('campaign_save').disabled = true;
 
     let form = document.querySelector('form');
@@ -47,7 +41,6 @@ class CampaignsController extends BaseController {
     app.user.campaigns.push(campaign);
     app.db.publish('/campaigns', campaign);
 
-    // window.location = '?campaigns';
     this.show(campaign.campaignID);
     console.log(campaign);
   }
@@ -55,7 +48,6 @@ class CampaignsController extends BaseController {
   /** Displays the edit campaign screen */
   edit(id) {
     let campaign = Campaign.getByID(id, Campaign.getAllCampaigns());
-
     let html = app.campaignView.edit(campaign);
 
     this.updateShell(html);

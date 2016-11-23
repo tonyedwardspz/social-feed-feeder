@@ -23,7 +23,7 @@ module.exports = function(app, passport) {
 
     console.log('Not authenticated');
     // redirect to login
-    res.redirect('/')
+    res.redirect('/');
   }
 
   //-------------- Dashboard / Data Routes --------------\\
