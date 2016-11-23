@@ -25,7 +25,7 @@ let getBreadcrumbs = (view, ids = null) => {
 
   if (view.includes('bucket')){
     breadcrumb += `&nbsp;&raquo;&nbsp;
-                   <a href="#" class="campaign_show breadcrumb"
+                   <a href="#" class="campaign_show" id="breadcrumb"
                    data-id="${ids[0]}">Campaign</a>`;
   }
 

@@ -6,15 +6,15 @@ class Bucket {
     this.name = name;
     this.description = description;
     this.expiry = expiry;
-    this._priority = priority;
+    this.priority = priority;
     this.maxPerDay = maxPerDay;
     this.repeat = repeat;
     this.frequency = frequency;
     this.userID = userID;
   }
 
-  get priority() {
-    switch (this._priority) {
+  displayPriority() {
+    switch (this.priority) {
       case 0:
         return 'Low';
       case 1:
@@ -22,6 +22,10 @@ class Bucket {
       case 2:
         return 'High';
     }
+  }
+
+  displayRepeat() {
+    return this.repeat ? 'Yes' : 'No';
   }
 
   // This crashes the app for some reason? Made priority sudo-private instead

@@ -67,7 +67,6 @@ class CampaignsController extends BaseController {
     let form = document.querySelector('form');
 
     campaign.updateFromForm(form);
-    // Campaign.updateCampaign(campaign);
     app.db.publish(`/campaigns/${id}`, campaign, 'PUT');
 
     this.show(id);
