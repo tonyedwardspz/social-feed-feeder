@@ -44,9 +44,37 @@ class BucketView {
   }
 
   show(bucket) {
+    let date = convertDateToLocale(bucket.expiry);
     return `${getBreadcrumbs('bucket_show', [bucket.campaignID, bucket.bucketID])}
-            <h2>Show Bucket</h2>
-            <p>This is the show bucket view<p>`;
+            <h2 id="name">${bucket.name}</h2>
+            <p>${bucket.description}</p>
+            <div class="row">
+              <div class="column">
+                <span>${bucket.maxPerDay}</span>
+                <span>Daily Posts</span>
+              </div>
+              <div class="column">
+                <span>${date}</span>
+                <span>Expiry</span>
+              </div>
+            </div>
+            <div class="row">
+              <div class="column">
+                <button id="bucket_edit" data-bucketid="${bucket.bucketID}">
+                  Edit Bucket</button>
+                <button id="bucket_delete" data-bucketid="${bucket.bucketID}">
+                  Delete Bucket</button>
+                <button id="post_new" data-bucketid="${bucket.bucketID}
+                  data-campaignid="${bucket.campaignID}"">Add New Post</button>
+              </div>
+            </div>
+            <div class="row">
+              <div class="column">
+                <h3>Posts</h3>
+              </div>
+            </div>
+            ${app.postView.postList(bucket.posts)}
+            `;
   }
 
   edit(bucket) {

@@ -28,7 +28,9 @@ var app;
     campaignView: new CampaignView(),
     campaignController: new CampaignController(),
     bucketView: new BucketView(),
-    bucketController: new BucketController()
+    bucketController: new BucketController(),
+    postView: new PostView(),
+    postController: new PostController()
   };
 
   app.shell.innerHTML = app.userView.loginScreen();

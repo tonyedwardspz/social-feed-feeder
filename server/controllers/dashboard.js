@@ -11,11 +11,8 @@ class DashboardController extends BaseController {
     super('dashboard controller');
   }
 
-  // TODO - Convert to promise to allow us to construct data
-  // after all async calls have been made.
   getAllData(req, res) {
     console.log('[Dashboard] Get all data');
-    // console.log(req.body);
 
     // Fetch and store all required promises
     let promises = [];
@@ -26,16 +23,11 @@ class DashboardController extends BaseController {
 
     // Run all promises and process when all return data or error
     Promise.all(promises).then(function() {
-      console.log('All DATA PROMISES RESOLVED');
-      // returned data is in arguments[n]
-      console.log(arguments[0]);
-      for (let i = 0; i < arguments[0].length; i++) {
-        console.log(arguments[0][i]);
-      }
+      console.log('[Dashboard] All database promises resolved');
+      // returned data is in arguments[n
 
       res.send(JSON.stringify(arguments[0]));
     }, function(err) {
-      // error occurred
       console.log('ERROR: ' + err);
     });
   }

@@ -30,6 +30,18 @@ class Bucket {
     return this.repeat ? 'Yes' : 'No';
   }
 
+  get posts(){
+    let posts = [];
+
+    app.user.posts.forEach(post => {
+      if (post.bucketID === this.bucketID) {
+        posts.push(post);
+      }
+    });
+
+    return posts;
+  }
+
   // This crashes the app for some reason? Made priority sudo-private instead
   // set priority(priority) {
   //   this.priority = priority;

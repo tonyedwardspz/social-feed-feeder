@@ -19,9 +19,9 @@ class Post extends BaseModel{
       bucketID: String,
       userID: String,
       name: String,
-      description: String,
+      message: String,
       lastPostDate: Date,
-      content: String,
+      attachment: String,
       expiry: Date
     });
   }
