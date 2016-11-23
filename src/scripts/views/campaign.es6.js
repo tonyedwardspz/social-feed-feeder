@@ -11,7 +11,8 @@ class CampaignView {
   */
   getIndex(campaigns) {
     console.log('Campaign View: Get index');
-    var campaignHTML = `<h2>Your Campaigns</h2>`;
+    var campaignHTML = `${getBreadcrumbs('campaign_index')}
+                        <h2>Your Campaigns</h2>`;
 
     campaignHTML += `<div class="row">
                        <div class='column'>
@@ -49,7 +50,8 @@ class CampaignView {
   * @return {String} The HTML string for display
   */
   new(campaign = new Campaign()) {
-    return `<h1>New Campaign</h1>
+    return `${getBreadcrumbs('campaign_new')}
+            <h1>New Campaign</h1>
             <p>Create a new campaign<p>
             ${this.form()}
             `;
@@ -81,9 +83,11 @@ class CampaignView {
                 <input name='dailyPosts' id='dailyPosts' type='number' min='0'
                        max='10' value='${exists ? campaign.dailyPosts : 1}'/>
 
-                <button id='${!exists ? 'campaign_save' : 'campaign_save_edit'}'
+                <button id="${!exists ? 'campaign_save' : 'campaign_save_edit'}"
                         data-id="${campaign.campaignID}">Save</button>
-                <button id='campaign_index'>Cancel</button>
+                <button id="${!exists ? 'campaign_index' : ''}"
+                        class="${exists ? 'campaign_show' : ''}"
+                        data-id="${campaign.campaignID}">Cancel</button>
                 </form>
               `;
     return html;
@@ -96,7 +100,8 @@ class CampaignView {
   */
   show(campaign) {
     let date = convertDateToLocale(campaign.expiry);
-    return `<h2 id="name">${campaign.name}</h2>
+    return `${getBreadcrumbs('campaign_show')}
+            <h2 id="name">${campaign.name}</h2>
             <p>${campaign.description}</p>
             <div class="row">
               <div class="column">
@@ -131,7 +136,8 @@ class CampaignView {
   * @return {String} The HTML string for display
   */
   edit(campaign) {
-    return `<h2>Edit: ${campaign.name} campaign</h2>
+    return `${getBreadcrumbs('campaign_edit')}
+            <h2>Edit: ${campaign.name} campaign</h2>
             <p>Update campaign details<p>
             ${this.form(campaign)}`;
   }

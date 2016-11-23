@@ -3,14 +3,10 @@ class BucketView {
 
   }
 
-  index(buckets) {
-    return `<h2>Bucket Index</h2>
-            <p>This is the bucket index<p>`;
-  }
-
   new(campaignID) {
     console.log('CAMPAIGN ID from new Bucket: ' + campaignID);
-    return `<h2>New Bucket</h2>
+    return `${getBreadcrumbs('bucket_new', [campaignID])}
+            <h2>New Bucket</h2>
             <p>This is the new bucket view<p>
             <form name="form_bucket_new" method="POST" data-id="${campaignID}">
               <label for="name">Name</label>
@@ -47,12 +43,14 @@ class BucketView {
   }
 
   show(bucket) {
-    return `<h2>Show Bucket</h2>
+    return `${getBreadcrumbs('bucket_show', [bucket.campaignID, bucket.bucketID])}
+            <h2>Show Bucket</h2>
             <p>This is the show bucket view<p>`;
   }
 
   edit(bucket) {
-    return `<h2>Edit Bucket</h2>
+    return `${getBreadcrumbs('bucket_edit', [bucket.campaignID, bucket.bucketID])}
+            <h2>Edit Bucket</h2>
             <p>This is the edit bucket view<p>`;
   }
 

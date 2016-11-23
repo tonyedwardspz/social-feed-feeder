@@ -5,10 +5,6 @@ class BucketController extends BaseController{
     super();
   }
 
-  index() {
-    console.log('[Bucket] Index');
-  }
-
   show(id) {
     console.log('[Bucket] Show: ' + id);
 

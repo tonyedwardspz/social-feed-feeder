@@ -5,7 +5,8 @@ class DashboardView {
 
   getDashboard(campaigns, buckets, posts){
     console.log('get dashboard');
-    return `<h2>Dashboard View</h2>
+    return `${getBreadcrumbs('dashboard', null)}
+            <h2>Dashboard View</h2>
             <p>This is the main dashboard view<p>
             <div class="row">
               <div class="column">
