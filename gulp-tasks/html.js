@@ -1,6 +1,8 @@
-var gulp = require('gulp');
-var minifyHtml = require('gulp-minify-html');
-var runSequence = require('run-sequence');
+'use strict';
+
+let gulp = require('gulp');
+let minifyHtml = require('gulp-minify-html');
+let runSequence = require('run-sequence');
 
 gulp.task('html:watch', function() {
   gulp.watch('./src/*.html', function(){

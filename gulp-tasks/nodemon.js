@@ -1,6 +1,8 @@
-var gulp = require('gulp');
-var nodemon = require('gulp-nodemon');
-var env = require('gulp-env');
+'use strict';
+
+let gulp = require('gulp');
+let nodemon = require('gulp-nodemon');
+let env = require('gulp-env');
 
 gulp.task('nodemon', function() {
   env({

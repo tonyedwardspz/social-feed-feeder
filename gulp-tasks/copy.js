@@ -1,6 +1,8 @@
-var gulp = require('gulp');
-var runSequence = require('run-sequence');
-var del = require('del');
+'use strict';
+
+let gulp = require('gulp');
+let runSequence = require('run-sequence');
+let del = require('del');
 
 gulp.task('copy:root', function() {
   del(['./public/*.{json,txt,ico}'], {dot: true});

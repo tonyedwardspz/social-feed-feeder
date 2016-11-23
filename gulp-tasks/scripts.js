@@ -1,19 +1,21 @@
-var gulp = require('gulp');
-var del = require('del');
-var runSequence = require('run-sequence');
-var babel = require('gulp-babel');
-var uglify = require('gulp-uglify');
-var concat = require('gulp-concat');
-var gulpif = require('gulp-if');
-var stripDebug = require('gulp-strip-debug');
-var gutil = require('gulp-util');
+'use strict';
+
+let gulp = require('gulp');
+let del = require('del');
+let runSequence = require('run-sequence');
+let babel = require('gulp-babel');
+let uglify = require('gulp-uglify');
+let concat = require('gulp-concat');
+let gulpif = require('gulp-if');
+let stripDebug = require('gulp-strip-debug');
+let gutil = require('gulp-util');
 
 gulp.task('scripts:watch', function() {
   gulp.watch('./src/scripts/**/*.js', ['scripts']);
   gulp.watch(['./.eslintrc', './.eslintignore'], ['scripts']);
 });
 
-var env = gutil.env.env === 'PRODUCTION' ? true : false;
+let env = gutil.env.env === 'PRODUCTION' ? true : false;
 
 gulp.task('scripts:es6', function() {
   return gulp.src(['./node_modules/babel-polyfill/dist/polyfill.min.js',

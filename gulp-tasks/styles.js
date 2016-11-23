@@ -1,13 +1,15 @@
-var gulp = require('gulp');
-var del = require('del');
-var runSequence = require('run-sequence');
-var minifyCSS = require('gulp-minify-css');
-var autoprefixer = require('gulp-autoprefixer');
-var sass = require('gulp-sass');
-// var sourcemaps = require('gulp-sourcemaps');
-var fs = require('fs');
-var file = require('gulp-file');
-var concat = require('gulp-concat');
+'use strict';
+
+let gulp = require('gulp');
+let del = require('del');
+let runSequence = require('run-sequence');
+let minifyCSS = require('gulp-minify-css');
+let autoprefixer = require('gulp-autoprefixer');
+let sass = require('gulp-sass');
+// let sourcemaps = require('gulp-sourcemaps');
+let fs = require('fs');
+let file = require('gulp-file');
+let concat = require('gulp-concat');
 
 gulp.task('styles:watch', function() {
   gulp.watch('./src/styles/*.scss', ['styles']);
@@ -36,7 +38,7 @@ gulp.task('styles:sass', function() {
 
 gulp.task('styles:inline', function(){
     let indexContents = fs.readFileSync('./src/index.html', 'utf8').replace(/INLINE-CSS/g, function() {
-    var style = fs.readFileSync('./public/styles/inline.css', 'utf8');
+    let style = fs.readFileSync('./public/styles/inline.css', 'utf8');
     return '<style>\n' + style + '\n</style>';
   });
   del('./public/index.html', {dot: false});

@@ -1,6 +1,8 @@
-var gulp = require('gulp');
-var del = require('del');
-var imagemin = require('gulp-imagemin');
+'use strict';
+
+let gulp = require('gulp');
+let del = require('del');
+let imagemin = require('gulp-imagemin');
 
 gulp.task('images:watch', function() {
   gulp.watch('./src/images/**/*.{png,jpg,jpeg,gif,svg}', ['images']);

@@ -20,6 +20,9 @@
     "require": true,
     "module": true,
 
+    "describe": true,
+    "it": true,
+
     "Campaign": true,
     "Bucket": true,
     "Post": true,
