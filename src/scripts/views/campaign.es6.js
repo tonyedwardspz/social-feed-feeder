@@ -51,7 +51,7 @@ class CampaignView {
   * @param {Campaign} [campaign] A campaign object
   * @return {String} The HTML string for display
   */
-  new(campaign = new Campaign()) {
+  new() {
     return `${getBreadcrumbs('campaign_new')}
             <h1>New Campaign</h1>
             <p>Create a new campaign<p>

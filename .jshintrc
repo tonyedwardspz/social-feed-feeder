@@ -16,6 +16,7 @@
     "getBreadcrumbs": true,
     "convertDateToLocale": true,
     "convertDateForInput": true,
+    "addRoutes": true,
 
     "require": true,
     "module": true,
