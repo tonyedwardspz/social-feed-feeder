@@ -28,6 +28,7 @@ class BucketController extends BaseController{
 
     let form = document.querySelector('form');
     let bucket = Bucket.createFromForm(form);
+    console.log(bucket);
 
     app.user.buckets.push(bucket);
     app.db.publish('/buckets', bucket);
@@ -37,10 +38,23 @@ class BucketController extends BaseController{
 
   edit(id) {
     console.log('[Bucket] Edit');
+
+    let bucket = Bucket.findByID(id, Bucket.getAllBuckets());
+    let html = app.bucketView.edit(bucket);
+
+    this.updateShell(html);
   }
 
-  update() {
+  update(id) {
     console.log('[Bucket] Update');
+
+    let bucket = Bucket.findByID(id, Bucket.getAllBuckets());
+    let form = document.querySelector('form');
+
+    bucket.updateFromForm(form);
+    app.db.publish(`/buckets/${id}`, bucket, 'PUT');
+
+    this.show(bucket.bucketID);
   }
 
   delete(id, name, campaignID) {

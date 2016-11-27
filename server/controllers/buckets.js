@@ -63,7 +63,26 @@ class BucketController extends BaseController {
   // PATCH/PUT /buckets/:id
   update(req, res) {
     console.log('[ROUTE] Buckets:PUT hit');
-    res.send(JSON.stringify({ a: 'Response from Buckets PUT' }));
+
+    MongoBucket.update({ bucketID: req.params.id }, {$set: {
+      bucketID: req.body.bucketID,
+      campaignID: req.body.campaignID,
+      userID: req.body.userID,
+      name: req.body.name,
+      description: req.body.description,
+      expiry: req.body.expiry,
+      priority: req.body.priority,
+      maxPerDay: req.body.maxPerDay,
+      repeat: Bucket.doesItRepeat(req.body.repeat),
+      frequency: req.body.frequency
+    }}, (err, updated) => {
+      if (err) {
+        console.log(`Error deleting campaign: ${err}`);
+      } else {
+        console.log(`Campaign removed: ${updated}`);
+        res.send(JSON.stringify({ a: 'Bucket Updated Succesfully' }));
+      }
+    });
   }
 
   // DELETE /buckets/:id

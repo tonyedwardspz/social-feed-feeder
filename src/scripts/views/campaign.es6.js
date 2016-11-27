@@ -13,7 +13,7 @@ class CampaignView {
   */
   getIndex(campaigns) {
     console.log('Campaign View: Get index');
-    var campaignHTML = `${getBreadcrumbs('campaign_index')}
+    let campaignHTML = `${getBreadcrumbs('campaign_index')}
                         <h2>Your Campaigns</h2>`;
 
     campaignHTML += `<div class="row">
@@ -66,8 +66,8 @@ class CampaignView {
   * @return {String} The HTML string for display
   */
   form(campaign = new Campaign()) {
-    var exists = campaign.name !== undefined ? true : false;
-    var html = `<form name='form_campaign_new'>
+    let exists = campaign.name !== undefined ? true : false;
+    let html = `<form name='form_campaign_new'>
                 <label for='name'>Campaign Name</label>
                 <input name='name' id='name' type="text"
                        value="${exists ? campaign.name : ''}"

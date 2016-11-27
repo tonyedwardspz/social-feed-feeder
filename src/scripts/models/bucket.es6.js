@@ -16,13 +16,15 @@ class Bucket {
   }
 
   displayPriority() {
-    switch (this.priority) {
+    switch (parseInt(this.priority)) {
       case 0:
         return 'Low';
       case 1:
         return 'Medium';
       case 2:
         return 'High';
+      default:
+        return 'Drekly';
     }
   }
 
@@ -42,10 +44,21 @@ class Bucket {
     return posts;
   }
 
-  // This crashes the app for some reason? Made priority sudo-private instead
-  // set priority(priority) {
-  //   this.priority = priority;
-  // }
+  updateFromForm(form) {
+    this.name = form.name.value;
+    this.description = form.description.value;
+    this.expiry = form.expiry.value;
+    this.priority = form.priority.value;
+    this.maxPerDay = form.maxPerDay.value;
+    this.repeat = form.repeat.value;
+    this.frequency = form.frequency.value;
+
+    app.user.buckets.forEach(buck => {
+      if (buck.bucketID === this.bucketID) {
+        buck = this;
+      }
+    });
+  }
 
   static getAllBuckets() {
     return app.user.buckets;
@@ -79,7 +92,7 @@ class Bucket {
   static createFromForm(form) {
     return new Bucket(
       randomString(),
-      form.dataset.id,
+      form.campaignID.value,
       form.name.value,
       form.description.value,
       form.expiry.value,

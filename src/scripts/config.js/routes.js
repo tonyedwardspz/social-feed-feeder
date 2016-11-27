@@ -48,6 +48,8 @@ let addRoutes = () => {
         app.bucketController.delete(e.target.dataset.id,
                                     e.target.dataset.name,
                                     e.target.dataset.campaignid);
+      } else if (e.target.id === 'bucket_save_edit') {
+        app.bucketController.update(e.target.dataset.id);
       }
 
       else if (e.target.id === 'post_new') {

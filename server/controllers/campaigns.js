@@ -70,10 +70,9 @@ class CampaignController extends BaseController {
         console.log(`Error deleting campaign: ${err}`);
       } else {
         console.log(`Campaign removed: ${updated}`);
+        res.send(JSON.stringify({ a: 'Campaign Updated Succesfully' }));
       }
     });
-
-    res.send(JSON.stringify({ a: 'Response from Campaigns PUT' }));
   }
 
   // DELETE /campaigns/:id
