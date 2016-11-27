@@ -34,6 +34,11 @@ class PostController extends BaseController {
 
   edit(id) {
     console.log(`[Post] Edit: ${id}`);
+
+    let post = Post.findByID(id, Post.getAllPosts());
+    let html = app.postView.edit(post);
+
+    this.updateShell(html);
   }
 
   update() {

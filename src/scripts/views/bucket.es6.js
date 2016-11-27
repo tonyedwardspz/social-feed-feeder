@@ -120,7 +120,7 @@ class BucketView {
               <input type="hidden" id="campaignID" value="${campaignID}" />
 
               <button id='${!exists ? 'bucket_save' : 'bucket_save_edit'}'
-                      data-id="${!exists ? campaignID :bucket.bucketID}">Save</button>
+                      data-id="${!exists ? campaignID : bucket.bucketID}">Save</button>
               <button id="${!exists ? 'campaign_index' : ''}"
                       class="${!exists ? 'campaign_show' : ''}"
                       data-id="${campaignID}">Cancel</button>

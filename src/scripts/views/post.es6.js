@@ -14,28 +14,8 @@ class PostView {
     return `${getBreadcrumbs('post_new', parents)}
             <h2>New Bucket</h2>
             <p>Add a new post to the current bucket<p>
-            <form name="form_post_new" method="POST" data-bucketid="${parents[0]}">
-
-              <label for="name">Name</label>
-              <input type="text" name="name" id="name" required/>
-
-              <label for="message">Message</label>
-              <textarea name='message' id='message'></textarea>
-
-              <label for='expiry'>Expiry Date</label>
-              <input name='expiry' id='expiry' type='date' />
-
-              <label for="attachment">Attachment</label>
-              <input type="file" name="attachment" id="attachment"/>
-
-              <input type="hidden" name="bucketID" id="bucketID"
-                     value="${parents[0]}" />
-              <input type="hidden" name="campaignID" id="campaignID"
-                     value="${parents[1]}" />
-
-              <button id='post_save'>Save</button>
-              <button class='bucket_show' data-id="${parents[0]}">Cancel</button>
-            </form>`;
+            ${this.form(parents[0], parents[1])}
+            `;
   }
 
   show(post) {
@@ -45,18 +25,40 @@ class PostView {
 
   edit(post) {
     return `<h2>Edit Post</h2>
-            <p>This is the edit post view<p>`;
+            <p>This is the edit post view<p>
+            ${this.form(post.bucketID, post.campaignID, post)}`;
+  }
+
+  form(bucketID, campaignID, post = new Post()) {
+    let exists = post.message !== undefined ? true : false;
+    return `<form name="form_post_new" method="POST" data-bucketid="${bucketID}">
+
+              <label for="message">Message</label>
+              <textarea name='message' id='message'
+              >${exists ? post.message : ''}</textarea>
+
+              <label for="attachment">Attachment</label>
+              <input type="file" name="attachment" id="attachment"/>
+
+              <input type="hidden" name="bucketID" id="bucketID"
+                     value="${bucketID}" />
+              <input type="hidden" name="campaignID" id="campaignID"
+                     value="${campaignID}" />
+
+              <button id="${!exists ? 'post_save' : 'post_save_edit'}"
+                      data-id="${!exists ? bucketID : post.postID}">
+                      Save</button>
+              <button class='bucket_show' data-id="${bucketID}">Cancel</button>
+            </form>`;
   }
 
   postList(posts) {
     let html = `<table>
                   <thead>
                     <tr>
-                      <th>Name</th>
                       <th>Message</th>
                       <th>Last Posted</th>
                       <th>Attachment</th>
-                      <th>Expires</th>
                       <th>Actions</th>
                     </tr>
                   </thead>
@@ -66,11 +68,9 @@ class PostView {
     posts.forEach(post => {
       html += `<tr>
                  <td><a href="#" class="post_show" data-id="${post.postID}" >
-                   ${post.name}</a></td>
-                 <td>${post.message}</td>
+                   ${post.message}</td>
                  <td>${post.getDisplayLastPost()}</td>
                  <td>${post.attachment ? 'Yes' : 'No'}</td>
-                 <td>${post.getDisplayExpiry()}</td>
                  <td>
                    <a href="#" class="post_edit" data-id="${post.postID}">
                      <img src="/images/pencil.svg" alt="edit post" class="icon"/>

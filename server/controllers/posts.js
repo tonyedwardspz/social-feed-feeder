@@ -38,9 +38,7 @@ class PostController extends BaseController {
       postID: req.body.postID,
       bucketID: req.body.bucketID,
       userID: req.body.userID,
-      name: req.body.name,
-      mesage: req.body.mesage,
-      expiry: req.body.expiry,
+      message: req.body.message,
       lastPostDate: req.body.lastPostDate,
       attachment: req.body.attachment
     });

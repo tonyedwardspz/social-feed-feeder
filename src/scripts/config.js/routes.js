@@ -72,6 +72,8 @@ let addRoutes = () => {
         app.postController.delete(e.target.dataset.id,
                                   e.target.dataset.name,
                                   e.target.dataset.bucketid);
+      } else if (e.target.id === 'post_save_edit') {
+        app.postController.update(e.target.dataset.id);
       }
     }
   });

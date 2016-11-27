@@ -1,15 +1,13 @@
 'use strict';
 
 class Post {
-  constructor(postID, bucketID, name, message,
-              lastPostDate, attachment, expiry, userID = app.user.id) {
+  constructor(postID, bucketID, message,
+              lastPostDate, attachment, userID = app.user.id) {
     this.postID = postID;
     this.bucketID = bucketID;
-    this.name = name;
     this.message = message;
     this.lastPostDate = lastPostDate;
     this.attachment = attachment;
-    this.expiry = expiry;
     this.userID =userID;
   }
 
@@ -17,8 +15,15 @@ class Post {
     return convertDateToLocale(this.lastPostDate);
   }
 
-  getDisplayExpiry() {
-    return convertDateToLocale(this.expiry);
+  static findByID(id, posts) {
+    let thisPost = {};
+    posts.forEach(post => {
+      if (post.postID === id) {
+        thisPost = post;
+      }
+    });
+
+    return thisPost;
   }
 
   static setPosts(posts) {
@@ -34,11 +39,9 @@ class Post {
     return new Post (
       randomString(),
       form.bucketID.value,
-      form.name.value,
       form.message.value,
       getDateOneYearAgo(),
-      form.attachment.value,
-      form.expiry.value
+      form.attachment.value
     );
   }
 
@@ -51,11 +54,9 @@ class Post {
       sortedPosts.push(new Post(
         post.postID,
         post.bucketID,
-        post.name,
         post.message,
         post.lastPostDate,
         post.attachment,
-        post.expiry,
         post.userID
       ));
     });
