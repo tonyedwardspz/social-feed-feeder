@@ -1,12 +1,20 @@
 'use strict';
 
+/** Class representing the dashboard view */
 class DashboardView {
   constructor() {
 
   }
 
+  /**
+  * Returns HTML for the main dashboard screen
+  * @param {Array.<Campaign>} campaigns An array of campaign objects
+  * @param {Array.<Bucket>} campaigns An array of bucket objects
+  * @param {Array.<Posts>} campaigns An array of post objects
+  * @return {String} The HTML string for display
+  */
   getDashboard(campaigns, buckets, posts){
-    console.log('get dashboard');
+    console.log('[Dashboard] Get');
     return `${getBreadcrumbs('dashboard', null)}
             <h2>Dashboard View</h2>
             <p>This is the main dashboard view<p>

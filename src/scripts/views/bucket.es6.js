@@ -1,10 +1,17 @@
 'use strict';
 
+/** Class representing a bucket's views */
 class BucketView {
   constructor(){
 
   }
 
+  /**
+  * Returns HTML for the 'new bucekt' screen
+  * @param {String} campaignID A id string for the campaign whos buckets are to
+  * be displayed.
+  * @return {String} The HTML string for display
+  */
   new(campaignID) {
     return `${getBreadcrumbs('bucket_new', [campaignID])}
             <h2>New Bucket</h2>
@@ -12,6 +19,11 @@ class BucketView {
             ${this.form(campaignID)}`;
   }
 
+  /**
+  * Returns HTML for the 'show bucket' screen.
+  * @param {Bucket} [bucket] The bucket object to display
+  * @return {String} The HTML string for display
+  */
   show(bucket) {
     let date = convertDateToLocale(bucket.expiry);
     return `${getBreadcrumbs('bucket_show', [bucket.campaignID, bucket.bucketID])}
@@ -46,6 +58,11 @@ class BucketView {
             `;
   }
 
+  /**
+  * Returns HTML for the 'edit bucket' screen
+  * @param {Bucket} bucket - A Bucket object to generate html for
+  * @return {String} The HTML string for display
+  */
   edit(bucket) {
     return `${getBreadcrumbs('bucket_edit', [bucket.campaignID, bucket.bucketID])}
             <h2>Edit Bucket</h2>
@@ -53,6 +70,12 @@ class BucketView {
             ${this.form(bucket.campaignID, bucket)}`;
   }
 
+  /**
+  * Returns HTML for the 'new bucket' screen. If no bucket is passed an
+  * empty object is generated.
+  * @param {Bucket} [bucket] A bucket object
+  * @return {String} The HTML string for display
+  */
   form(campaignID, bucket = new Bucket()) {
     let exists = bucket.name !== undefined ? true : false;
     let checked = bucket.repeat === true ? true : false;
@@ -104,6 +127,11 @@ class BucketView {
             </form>`;
   }
 
+  /**
+  * Returns HTML for the table of buckets
+  * @param {Array.<Bucket>} buckets An array of bucket objects
+  * @return {String} The HTML string for display
+  */
   bucketList(buckets) {
     let html = `<table>
                   <thead>

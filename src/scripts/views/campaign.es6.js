@@ -1,6 +1,6 @@
 'use strict';
 
-/** Class representing a campaigns Views */
+/** Class representing a campaign's views */
 class CampaignView {
   constructor(){
 
@@ -29,6 +29,7 @@ class CampaignView {
                      <div class="row">
                     `;
 
+    // dont start at zero to avoid modulus division funnyness
     for(let i = 1; i < campaigns.length + 1; i++) {
       campaignHTML += `<div class="column">
                          <p>${campaigns[i -1].name}</p>
@@ -48,7 +49,6 @@ class CampaignView {
 
   /**
   * Returns HTML for the 'new campaign' screen
-  * @param {Campaign} [campaign] A campaign object
   * @return {String} The HTML string for display
   */
   new() {
