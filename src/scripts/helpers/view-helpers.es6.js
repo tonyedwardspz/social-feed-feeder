@@ -47,6 +47,8 @@ let getBreadcrumbs = (view, ids = null) => {
 
   if (view === 'post_edit') {
     breadcrumb += `&nbsp;&raquo;&nbsp;Edit Post`;
+  } else if (view === 'post_new') {
+    breadcrumb += `&nbsp;&raquo;&nbsp;New Post`;
   }
 
   return breadcrumb;
