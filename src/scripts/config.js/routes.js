@@ -10,6 +10,7 @@ let addRoutes = () => {
         e.target.id !== 'expiry'
       ) {
       e.preventDefault();
+      
       if (e.target.id === 'login' ){
         console.log('Login Button Clicked');
         window.location = 'user/auth';

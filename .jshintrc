@@ -18,6 +18,7 @@
     "convertDateForInput": true,
     "addRoutes": true,
     "getDateOneYearAgo": true,
+    "twttr": true,
 
     "require": true,
     "module": true,
