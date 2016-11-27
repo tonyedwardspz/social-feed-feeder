@@ -5,11 +5,6 @@ class PostView {
 
   }
 
-  index(posts) {
-    return `<h2>Post Index</h2>
-            <p>This is the index of posts<p>`;
-  }
-
   new(parents) {
     return `${getBreadcrumbs('post_new', parents)}
             <h2>New Bucket</h2>
@@ -18,13 +13,9 @@ class PostView {
             `;
   }
 
-  show(post) {
-    return `<h2>Show Post</h2>
-            <p>This is the show post view<p>`;
-  }
-
   edit(post) {
-    return `<h2>Edit Post</h2>
+    return `${getBreadcrumbs('post_edit', [post.campaignID, post.bucketID, post.postID])}
+            <h2>Edit Post</h2>
             <p>This is the edit post view<p>
             ${this.form(post.bucketID, post.campaignID, post)}`;
   }

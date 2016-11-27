@@ -25,7 +25,7 @@ let getBreadcrumbs = (view, ids = null) => {
     breadcrumb += `&nbsp;&raquo;&nbsp;New Campaign`;
   }
 
-  if (view.includes('bucket')){
+  if (view.includes('bucket') || view.includes('post')){
     breadcrumb += `&nbsp;&raquo;&nbsp;
                    <a href="#" class="campaign_show" id="breadcrumb"
                    data-id="${ids[0]}">Campaign</a>`;
@@ -37,6 +37,16 @@ let getBreadcrumbs = (view, ids = null) => {
     breadcrumb += `&nbsp;&raquo;&nbsp;Edit Bucket`;
   } else if (view === 'bucket_new') {
     breadcrumb += `&nbsp;&raquo;&nbsp;New Bucket`;
+  }
+
+  if (view.includes('post')){
+    breadcrumb += `&nbsp;&raquo;&nbsp;
+                   <a href="#" class="bucket_show" id="breadcrumb"
+                   data-id="${ids[1]}">Bucket</a>`;
+  }
+
+  if (view === 'post_edit') {
+    breadcrumb += `&nbsp;&raquo;&nbsp;Edit Post`;
   }
 
   return breadcrumb;
