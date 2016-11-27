@@ -8,7 +8,8 @@ let addRoutes = () => {
     if (e.target !== e.currentTarget &&
         e.target.id !== 'attachment' &&
         e.target.id !== 'expiry' &&
-        !e.target.className.includes('tweet-url')
+        !e.target.className.includes('tweet-url') &&
+        e.target.id !== 'repeat'
       ) {
       e.preventDefault();
 

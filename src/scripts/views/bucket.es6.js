@@ -43,8 +43,8 @@ class BucketView {
               <div class="column">
                 <button class="bucket_edit" data-id="${bucket.bucketID}">
                   Edit Bucket</button>
-                <button class="bucket_delete" data-id="${bucket.bucketID}">
-                  Delete Bucket</button>
+                <button class="bucket_delete" data-id="${bucket.bucketID}"
+                  data-campaignid="${bucket.campaignID}">Delete Bucket</button>
                 <button id="post_new" data-id="${bucket.bucketID}"
                   data-campaignid="${bucket.campaignID}">Add New Post</button>
               </div>
