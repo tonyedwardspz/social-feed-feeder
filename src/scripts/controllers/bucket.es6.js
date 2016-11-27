@@ -28,7 +28,6 @@ class BucketController extends BaseController{
 
     let form = document.querySelector('form');
     let bucket = Bucket.createFromForm(form);
-    console.log(bucket);
 
     app.user.buckets.push(bucket);
     app.db.publish('/buckets', bucket);

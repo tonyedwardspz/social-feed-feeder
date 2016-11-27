@@ -27,3 +27,10 @@ function convertDateForInput(date) {
     console.log('error converting date for input', e);
   }
 }
+
+/**
+* Returns a date one year ago from passed date or today
+*/
+let getDateOneYearAgo = (date = new Date()) => {
+  return date.setFullYear(date.getFullYear() - 1);
+};

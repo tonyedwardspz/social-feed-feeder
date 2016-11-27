@@ -28,8 +28,10 @@ class PostView {
               <label for="attachment">Attachment</label>
               <input type="file" name="attachment" id="attachment"/>
 
-              <input type="hidden" id="bucketID" value="${parents[0]}" />
-              <input type="hidden" id="campaignID" value="${parents[1]}" />
+              <input type="hidden" name="bucketID" id="bucketID"
+                     value="${parents[0]}" />
+              <input type="hidden" name="campaignID" id="campaignID"
+                     value="${parents[1]}" />
 
               <button id='post_save'>Save</button>
               <button class='bucket_show' data-id="${parents[0]}">Cancel</button>

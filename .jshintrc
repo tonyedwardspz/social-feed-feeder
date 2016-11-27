@@ -17,6 +17,7 @@
     "convertDateToLocale": true,
     "convertDateForInput": true,
     "addRoutes": true,
+    "getDateOneYearAgo": true,
 
     "require": true,
     "module": true,

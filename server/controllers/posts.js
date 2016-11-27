@@ -1,6 +1,7 @@
 'use strict';
 
 let BaseController = require('./base');
+let MongoPost = require('../models/post').getMongooseModel();
 
 class PostController extends BaseController {
   constructor() {
@@ -32,7 +33,27 @@ class PostController extends BaseController {
   // POST /posts
   create(req, res) {
     console.log('[ROUTE] Posts:POST hit');
-    res.send(JSON.stringify({ a: 'Response from Posts POST' }));
+
+    let bucket = new MongoPost({
+      postID: req.body.postID,
+      bucketID: req.body.bucketID,
+      userID: req.body.userID,
+      name: req.body.name,
+      mesage: req.body.mesage,
+      expiry: req.body.expiry,
+      lastPostDate: req.body.lastPostDate,
+      attachment: req.body.attachment
+    });
+
+    var result = 'sucess';
+    bucket.save(err => {
+      if (err) {
+        console.log(err);
+        result = `error saving bucket : ${err}`;
+      }
+    });
+
+    res.send(JSON.stringify({ a: result }));
   }
 
   // PATCH/PUT /posts/:id

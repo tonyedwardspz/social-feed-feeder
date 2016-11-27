@@ -4,9 +4,11 @@ let addRoutes = () => {
   app.shell.addEventListener('click', function(e){
 
     // let any clicks bubble up to the apps shell to allow dynamic changing of
-    // content.... unless it is a post's file picker as we want the default to
-    // happen.
-    if (e.target !== e.currentTarget && e.target.id !== 'attachment') {
+    // content.... except in a few edge cases
+    if (e.target !== e.currentTarget &&
+        e.target.id !== 'attachment' &&
+        e.target.id !== 'expiry'
+      ) {
       e.preventDefault();
       if (e.target.id === 'login' ){
         console.log('Login Button Clicked');
@@ -14,11 +16,13 @@ let addRoutes = () => {
       }
 
 
+      // DASHBOARD
       else if (e.target.id === 'dashboard') {
         app.dashboardController.index(app.user);
       }
 
 
+      // CAMPAIGNS
       else if (e.target.id === 'campaign_index') {
         app.campaignController.index();
       } else if (e.target.className === 'campaign_show'){
@@ -36,6 +40,7 @@ let addRoutes = () => {
       }
 
 
+      // BUCKETS
       else if (e.target.id === 'bucket_new') {
         app.bucketController.new(e.target.dataset.campaignid);
       } else if (e.target.id === 'bucket_save') {
@@ -52,8 +57,10 @@ let addRoutes = () => {
         app.bucketController.update(e.target.dataset.id);
       }
 
+
+      // POSTS
       else if (e.target.id === 'post_new') {
-        app.postController.new(e.target.dataset.bucketid,
+        app.postController.new(e.target.dataset.id,
                                e.target.dataset.campaignid);
       } else if (e.target.id === 'post_save') {
         app.postController.create();

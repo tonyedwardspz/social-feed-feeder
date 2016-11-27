@@ -4,7 +4,7 @@ class Post {
   constructor(postID, bucketID, name, message,
               lastPostDate, attachment, expiry, userID = app.user.id) {
     this.postID = postID;
-    this.BucketID = bucketID;
+    this.bucketID = bucketID;
     this.name = name;
     this.message = message;
     this.lastPostDate = lastPostDate;
@@ -19,6 +19,19 @@ class Post {
 
   getDisplayExpiry() {
     return convertDateToLocale(this.expiry);
+  }
+
+  static createFromForm(form) {
+
+    return new Post (
+      randomString(),
+      form.bucketID.value,
+      form.name.value,
+      form.message.value,
+      getDateOneYearAgo(),
+      form.attachment.value,
+      form.expiry.value
+    );
   }
 
   // Sort post data returned from the server as an array of JSON objects. return

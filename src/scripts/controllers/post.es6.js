@@ -14,19 +14,22 @@ class PostController extends BaseController {
 
     let html = app.postView.new([bucketID, campaignID]);
     this.updateShell(html);
-
-    // add event listener to file input as its been dynamically added to document
-    // var placeholder = document.getElementById('attachment_input');
-    //
-    // var fileInput = document.createElement('input');
-    // fileInput.setAttribute('type', 'file');
-    //
-    // placeholder.appendChild(fileInput);
-
   }
 
   create() {
     console.log('[Post Controller] Create');
+
+    document.getElementById('post_save').disabled = true;
+
+    let form = document.querySelector('form');
+    let post = Post.createFromForm(form);
+
+    app.user.posts.push(post);
+    app.db.publish('/posts', post);
+
+    console.log('posts bucket id: ' + post.bucketID);
+
+    app.bucketController.show(post.bucketID);
   }
 
   edit(id) {
