@@ -1,4 +1,6 @@
-var gulp = require('gulp'),
+'use strict';
+
+let gulp = require('gulp'),
     runSequence = require('run-sequence');
 
 // Get tasks from gulp-tasks directory
@@ -8,7 +10,7 @@ let allTasks = ['styles', 'scripts', 'copy', 'html', 'images'];
 gulp.task('default', function(cb) {
   runSequence(
     'clean',
-    'bump',
+    // 'bump',
     allTasks,
     cb);
 });
