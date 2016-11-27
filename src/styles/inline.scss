@@ -1,6 +1,11 @@
+$off-white: #f4f5f6;
+$light-grey: #d1d1d1;
+$grey: #ccc;
+
+
 header {
-  background: #f4f5f6;
-  border-bottom: .1rem solid #d1d1d1;
+  background: $off-white;
+  border-bottom: .1rem solid $light-grey;
   display: block;
   height: 5.2rem;
   left: 0;
@@ -22,28 +27,29 @@ body textarea {
 }
 
 
-main.container {
+.container {
   margin-top: 6rem;
 }
 
-.breadcrumb,
-#breadcrumb {
+.breadcrumb {
   text-decoration: underline;
 }
 
 .icon {
-  padding: 7px 5px 0 5px;
+  padding: 7px 5px 0;
   pointer-events: none;
 }
 
 td a.bucket_edit,
-td a.bucket_delete {
+td a.bucket_delete,
+td a.post_edit,
+td a.post_delete {
   display: inline-block;
 }
 
 .char-count {
-  text-align: right;
   margin-top: -1.5rem;
+  text-align: right;
 }
 
 td.table-message {
@@ -70,14 +76,14 @@ td.table-message {
 	}
 
   tr {
-    border: 1px solid #ccc;
+    border: 1px solid $grey;
   }
 
 	td {
-		border: none;
-		border-bottom: 1px solid #eee;
-		position: relative;
+		border: 0;
+		border-bottom: 1px solid $off-white;
 		padding-left: 50%;
+    position: relative;
 	}
 
   td a {
@@ -89,20 +95,20 @@ td.table-message {
     padding-left: 0;
   }
 
-	td:before {
-		position: absolute;
-		top: 6px;
+	td::before {
 		left: 6px;
-		width: 45%;
+    position: absolute;
+		top: 6px;
 		padding-right: 10px;
 		white-space: nowrap;
+    width: 45%;
 	}
 
-	td:nth-of-type(1):before { content: "Name"; }
-	td:nth-of-type(2):before { content: "Repeat"; }
-	td:nth-of-type(3):before { content: "Frequency"; }
-	td:nth-of-type(4):before { content: "Expiry"; }
-	td:nth-of-type(5):before { content: "Priority"; }
-	td:nth-of-type(6):before { content: "Max Per Day"; }
-	td:nth-of-type(7):before { content: "Actions"; }
+  td:nth-of-type(1)::before { content: 'Name'; }
+  td:nth-of-type(2)::before { content: 'Repeat'; }
+  td:nth-of-type(3)::before { content: 'Frequency'; }
+  td:nth-of-type(4)::before { content: 'Expiry'; }
+  td:nth-of-type(5)::before { content: 'Priority'; }
+  td:nth-of-type(6)::before { content: 'Max Per Day'; }
+  td:nth-of-type(7)::before { content: 'Actions'; }
 }
