@@ -27,8 +27,6 @@ class PostController extends BaseController {
     app.user.posts.push(post);
     app.db.publish('/posts', post);
 
-    console.log('posts bucket id: ' + post.bucketID);
-
     app.bucketController.show(post.bucketID);
   }
 
@@ -39,10 +37,21 @@ class PostController extends BaseController {
     let html = app.postView.edit(post);
 
     this.updateShell(html);
+    updateCharCount(post.message);
   }
 
-  update() {
+  update(id) {
     console.log(`[Post] Update`);
+
+    document.getElementById('post_save_edit').disabled = true;
+
+    let post = Post.findByID(id, Post.getAllPosts());
+    let form = document.querySelector('form');
+
+    post.updateFromForm(form);
+    app.db.publish(`/posts/${id}`, post, 'PUT');
+
+    app.bucketController.show(post.bucketID);
   }
 
   delete(id, name, bucketID) {

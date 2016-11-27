@@ -48,4 +48,7 @@ var app;
   // Routes
   addRoutes();
 
+  // Settup twitter message listener
+  registerTwiiterInputDetection();
+
 })();

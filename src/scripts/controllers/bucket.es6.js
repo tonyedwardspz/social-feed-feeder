@@ -12,6 +12,10 @@ class BucketController extends BaseController{
     let html = app.bucketView.show(bucket);
 
     this.updateShell(html);
+
+    document.querySelectorAll('.table-message').forEach( entry => {
+      linkTweets(entry);
+    });
   }
 
   new(campaignID) {

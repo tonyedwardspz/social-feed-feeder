@@ -36,6 +36,7 @@ class PostView {
               <label for="message">Message</label>
               <textarea name='message' id='message'
               >${exists ? post.message : ''}</textarea>
+              <p class="char-count">Characters Remaing: <span id="tweet-char-remaining">140</span></p>
 
               <label for="attachment">Attachment</label>
               <input type="file" name="attachment" id="attachment"/>
@@ -67,8 +68,7 @@ class PostView {
 
     posts.forEach(post => {
       html += `<tr>
-                 <td><a href="#" class="post_show" data-id="${post.postID}" >
-                   ${post.message}</td>
+                 <td class="table-message">${post.message}</td>
                  <td>${post.getDisplayLastPost()}</td>
                  <td>${post.attachment ? 'Yes' : 'No'}</td>
                  <td>

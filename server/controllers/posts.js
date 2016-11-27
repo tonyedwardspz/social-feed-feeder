@@ -57,7 +57,19 @@ class PostController extends BaseController {
   // PATCH/PUT /posts/:id
   update(req, res) {
     console.log('[ROUTE] Posts:PUT hit');
-    res.send(JSON.stringify({ a: 'Response from Posts PUT' }));
+
+    MongoPost.update({ postID: req.params.id }, {$set: {
+      message: req.body.message,
+      lastPostDate: req.body.lastPostDate,
+      attachment: req.body.attachment
+    }}, (err, updated) => {
+      if (err) {
+        console.log(`Error deleting campaign: ${err}`);
+      } else {
+        console.log(`Campaign removed: ${updated}`);
+        res.send(JSON.stringify({ a: 'Post Updated Succesfully' }));
+      }
+    });  
   }
 
   // DELETE /posts/:id

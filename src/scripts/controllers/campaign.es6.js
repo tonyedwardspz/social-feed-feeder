@@ -17,6 +17,8 @@ class CampaignController extends BaseController {
 
   /** Shows an individual campaign */
   show(id) {
+    console.log('[Camapign Controller] Show: ' + id);
+
     // Find the requested campaign
     var campaign = Campaign.getByID(id, app.user.campaigns);
     let html = app.campaignView.show(campaign);
