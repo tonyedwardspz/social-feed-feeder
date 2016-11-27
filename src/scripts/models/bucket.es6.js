@@ -117,7 +117,7 @@ class Bucket {
 
   static removeBucket(id) {
     console.log('removing bucket');
-    var buckets = this.getAllBuckets();
+    let buckets = this.getAllBuckets();
 
     for (let i = buckets.length - 1; i >= 0; i--) {
       if (buckets[i].bucketID === id) {

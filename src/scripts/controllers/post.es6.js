@@ -6,18 +6,18 @@ class PostController extends BaseController {
   }
 
   show(id) {
-    console.log(`[Post Controller] Show: ${id}`);
+    console.log(`[Post] Show: ${id}`);
   }
 
   new(bucketID, campaignID) {
-    console.log(`[Post Controller] New for bucket: ${bucketID}`);
+    console.log(`[Post] New for bucket: ${bucketID}`);
 
     let html = app.postView.new([bucketID, campaignID]);
     this.updateShell(html);
   }
 
   create() {
-    console.log('[Post Controller] Create');
+    console.log('[Post] Create');
 
     document.getElementById('post_save').disabled = true;
 
@@ -33,14 +33,23 @@ class PostController extends BaseController {
   }
 
   edit(id) {
-    console.log(`[Post Controller] Edit: ${id}`);
+    console.log(`[Post] Edit: ${id}`);
   }
 
   update() {
-    console.log(`[Post Controller] Update`);
+    console.log(`[Post] Update`);
   }
 
   delete(id, name, bucketID) {
-    console.log(`[Post Controller] Delete: ${id}`);
+    console.log(`[Post] Delete: ${id}`);
+
+    if (! confirm(`Are you sure you wish to delete this post?`)) {
+      return;
+    }
+
+    Post.removePost(id);
+    app.db.publish(`/posts/${id}`, false, 'DELETE');
+
+    app.bucketController.show(bucketID);
   }
 }

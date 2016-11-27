@@ -71,7 +71,7 @@ let addRoutes = () => {
       } else if (e.target.className === 'post_delete') {
         app.postController.delete(e.target.dataset.id,
                                   e.target.dataset.name,
-                                  e.target.dataset.campaignid);
+                                  e.target.dataset.bucketid);
       }
     }
   });

@@ -65,7 +65,15 @@ class PostController extends BaseController {
   // DELETE /posts/:id
   delete(req, res) {
     console.log('[ROUTE] Posts:DELETE hit');
-    res.send(JSON.stringify({ a: 'Response from Posts DELETE' }));
+
+    MongoPost.remove({ postID: req.params.id }, (err, removed) => {
+      if (err) {
+        console.log(`Error deleting post ${err}`);
+      } else {
+        console.log(`Post removed: ${removed}`);
+      }
+      res.send(JSON.stringify({ a: `${err ? err : removed}` }));
+    });
   }
 }
 

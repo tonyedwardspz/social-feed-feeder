@@ -21,6 +21,14 @@ class Post {
     return convertDateToLocale(this.expiry);
   }
 
+  static setPosts(posts) {
+    app.user.posts = posts;
+  }
+
+  static getAllPosts() {
+    return app.user.posts;
+  }
+
   static createFromForm(form) {
 
     return new Post (
@@ -53,5 +61,19 @@ class Post {
     });
 
     return sortedPosts;
+  }
+
+  static removePost(id) {
+    console.log('Removeing Post');
+    let posts = this.getAllPosts();
+
+    for (let i = posts.length -1; i >= 0; i--) {
+      if (posts[i].postID === id){
+        console.log('post removed');
+        posts.splice(i, 1);
+      }
+    }
+
+    this.setPosts(posts);
   }
 }
