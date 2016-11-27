@@ -45,6 +45,19 @@ class Post {
     );
   }
 
+  updateFromForm(form) {
+    this.message = form.message.value;
+
+    // TODO: Handle changes to the attachment
+
+    app.user.posts.forEach(post => {
+      if (post.postID === this.postID) {
+        post = this;
+      }
+    });
+
+  }
+
   // Sort post data returned from the server as an array of JSON objects. return
   // an array of Post objects
   static extractPostData(posts) {

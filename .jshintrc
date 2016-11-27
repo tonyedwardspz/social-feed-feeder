@@ -19,6 +19,8 @@
     "addRoutes": true,
     "getDateOneYearAgo": true,
     "twttr": true,
+    "updateCharCount": true,
+    "linkTweets": true,
 
     "require": true,
     "module": true,

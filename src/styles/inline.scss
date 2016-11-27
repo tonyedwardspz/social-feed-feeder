@@ -41,6 +41,15 @@ td a.bucket_delete {
   display: inline-block;
 }
 
+.char-count {
+  text-align: right;
+  margin-top: -1.5rem;
+}
+
+td.table-message {
+  width: 100%;
+}
+
 
 
 @media (max-width: 40.0rem) {

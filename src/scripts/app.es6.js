@@ -48,8 +48,7 @@ var app;
   // Routes
   addRoutes();
 
-  // twitter-text
-  let tweet = `this is a tweet aimed at @tonyedwardspz`;
-  console.log(`Tweet remaining length: ${140 - twttr.txt.getTweetLength(tweet)}`);
+  // Settup twitter message listener
+  registerTwiiterInputDetection();
 
 })();

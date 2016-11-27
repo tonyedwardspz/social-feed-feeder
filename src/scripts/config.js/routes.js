@@ -7,10 +7,11 @@ let addRoutes = () => {
     // content.... except in a few edge cases
     if (e.target !== e.currentTarget &&
         e.target.id !== 'attachment' &&
-        e.target.id !== 'expiry'
+        e.target.id !== 'expiry' &&
+        !e.target.className.includes('tweet-url')
       ) {
       e.preventDefault();
-      
+
       if (e.target.id === 'login' ){
         console.log('Login Button Clicked');
         window.location = 'user/auth';
