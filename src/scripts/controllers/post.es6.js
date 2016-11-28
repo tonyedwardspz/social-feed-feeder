@@ -5,14 +5,14 @@ class PostController extends BaseController {
     super();
   }
 
-  new(bucketID, campaignID, updateHistory = true) {
+  new(bucketID, updateHistory = true) {
     console.log(`[Post] New for bucket: ${bucketID}`);
 
-    let html = app.postView.new([campaignID, bucketID]);
+    let bucket = Bucket.getByID(bucketID, app.user.buckets);
+    let html = app.postView.new([bucket.campaignID, bucketID]);
+
     this.updateShell(html);
-    if (updateHistory) {
-      this.updateHistory('post_new');
-    }
+    this.updateHistory('post_new', updateHistory);
   }
 
   create() {
