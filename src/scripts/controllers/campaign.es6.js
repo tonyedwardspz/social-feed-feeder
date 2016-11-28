@@ -9,7 +9,6 @@ class CampaignController extends BaseController {
   index() {
     // Generate the HTML, passing in an array of campaign objects
     let campaigns = Campaign.getAllCampaigns();
-
     let html = app.campaignView.getIndex(campaigns);
 
     this.updateShell(html);
@@ -34,17 +33,21 @@ class CampaignController extends BaseController {
 
   /** Creates and saves a new campaign */
   create() {
-    // Disable the save button to prevent duplicate submissions
-    document.getElementById('campaign_save').disabled = true;
-
     let form = document.querySelector('form');
-    let campaign = Campaign.createFromForm(form);
 
-    app.user.campaigns.push(campaign);
-    app.db.publish('/campaigns', campaign);
+    // validate
+    this.validateFormData(form, () => {
+      // Disable the save button to prevent duplicate submissions
+      document.getElementById('campaign_save').disabled = true;
 
-    this.show(campaign.campaignID);
-    console.log(campaign);
+      let campaign = Campaign.createFromForm(form);
+
+      app.user.campaigns.push(campaign);
+      app.db.publish('/campaigns', campaign);
+
+      this.show(campaign.campaignID);
+      console.log(campaign);
+    });
   }
 
   /** Displays the edit campaign screen */

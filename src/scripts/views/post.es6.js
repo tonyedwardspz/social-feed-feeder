@@ -25,7 +25,7 @@ class PostView {
     return `<form name="form_post_new" method="POST" data-bucketid="${bucketID}">
 
               <label for="message">Message</label>
-              <textarea name='message' id='message'
+              <textarea name='message' id='message' required
               >${exists ? post.message : ''}</textarea>
               <p class="char-count">Characters Remaing: <span id="tweet-char-remaining">140</span></p>
 

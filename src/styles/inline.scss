@@ -57,7 +57,12 @@ td.table-message {
   width: 100%;
 }
 
+input.invalid,
+textarea.invalid {
+  border: 2px solid red;
+}
 
+// .invalid::after { content: 'Validation failed'; }
 
 @media (max-width: 40.0rem) {
 

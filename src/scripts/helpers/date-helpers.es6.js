@@ -29,8 +29,35 @@ function convertDateForInput(date) {
 }
 
 /**
+* Returns todays date in the correct format for date input min
+*/
+let defaultDateInputMin = () => {
+  let _date = new Date();
+  let month = ('0' + (_date.getMonth() + 1)).slice(-2);
+  let day = ('0' + _date.getDate()).slice(-2);
+  return `${_date.getFullYear()}-${month}-${day}`;
+};
+
+/**
+* Returns a date in five years in the correct format for date input max
+*/
+let defaultDateInputMax = () => {
+  let _date = new Date();
+  let month = ('0' + (_date.getMonth() + 1)).slice(-2);
+  let day = ('0' + _date.getDate()).slice(-2);
+  return `${(_date.getFullYear() + 5)}-${month}-${day}`;
+};
+
+/**
 * Returns a date one year ago from passed date or today
 */
 let getDateOneYearAgo = (date = new Date()) => {
   return date.setFullYear(date.getFullYear() - 1);
+};
+
+/**
+* Returns a date string for the begining of the Unix epoch
+*/
+let getDefaultDate = () => {
+  return '1970-01-01T00:00:00Z';
 };

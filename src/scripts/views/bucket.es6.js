@@ -102,7 +102,8 @@ class BucketView {
 
               <label for='expiry'>Expiry Date</label>
               <input name='expiry' id='expiry' type='date'
-                value="${exists ? convertDateForInput(bucket.expiry) : ''}"/>
+                value="${exists ? convertDateForInput(bucket.expiry) : ''}"
+                min="${defaultDateInputMin()}" max="${defaultDateInputMax()}"/>
 
               <label for="maxPerDay">Max posts per day</label>
               <input type="number" name="maxPerDay" id="maxPerDay" min="0"

@@ -40,7 +40,7 @@ class Post {
       randomString(),
       form.bucketID.value,
       form.message.value,
-      getDateOneYearAgo(),
+      getDefaultDate(),
       form.attachment.value
     );
   }

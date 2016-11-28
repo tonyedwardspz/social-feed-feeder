@@ -24,6 +24,8 @@ class PostController extends BaseController {
     let form = document.querySelector('form');
     let post = Post.createFromForm(form);
 
+    console.log(post);
+
     app.user.posts.push(post);
     app.db.publish('/posts', post);
 

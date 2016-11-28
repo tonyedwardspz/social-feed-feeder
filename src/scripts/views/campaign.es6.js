@@ -74,7 +74,7 @@ class CampaignView {
                        />
 
                 <label for='description'>Description</label>
-                <textarea name='description'
+                <textarea name='description' required
                  id='description'>${exists ? campaign.description : ''}</textarea>
 
                 <label for='expiry'>Expiry Date</label>
