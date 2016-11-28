@@ -27,4 +27,22 @@ class BaseController {
     console.log('Form validated');
     cb();
   }
+
+  updateHistory(view, id = null) {
+    console.log('[History] update for view: ' + view);
+
+    let controller = view.split('_')[0];
+    let action = view.split('_')[1];
+
+    console.log(controller);
+    console.log(action);
+
+    let state = {
+      id: id,
+      controller: controller,
+      action: action
+    };
+
+    history.pushState(state, 'Random Page', view);
+  }
 }

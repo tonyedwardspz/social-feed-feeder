@@ -5,9 +5,8 @@ class DashboardController extends BaseController {
     super();
   }
 
-  index(user) {
-
-    app.db.retrieve('/getAllData', user, data => {
+  index() {
+    app.db.retrieve('/getAllData', app.user, data => {
       console.log('[DASH]: Fetch all data');
 
       for(let i = 0; i < data.length; i++){
@@ -26,13 +25,7 @@ class DashboardController extends BaseController {
                                                 app.user.buckets,
                                                 app.user.posts);
       this.updateShell(html);
-
-      // this.processData(data, function(){
-      //   var html = app.dashboardView.getDashboard(app.user.campaigns,
-      //                                             app.user.buckets,
-      //                                             app.user.posts);
-      //   this.updateShell(html);
-      // });
+      this.updateHistory('dashboard_index');
     });
   }
 

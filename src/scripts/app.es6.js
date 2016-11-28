@@ -51,4 +51,7 @@ var app;
   // Settup twitter message listener
   registerTwiiterInputDetection();
 
+  // Setup popstate listener for user using the back/forward button
+  setupPopStateListener();
+
 })();

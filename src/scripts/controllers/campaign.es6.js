@@ -6,16 +6,21 @@ class CampaignController extends BaseController {
   }
 
   /** Shows a list of campaigns */
-  index() {
+  index(updateHistory = true) {
     // Generate the HTML, passing in an array of campaign objects
     let campaigns = Campaign.getAllCampaigns();
     let html = app.campaignView.getIndex(campaigns);
 
     this.updateShell(html);
+    console.log('update history? ' + updateHistory);
+    if (updateHistory) {
+      this.updateHistory('campaign_index');
+    }
+
   }
 
   /** Shows an individual campaign */
-  show(id) {
+  show(id, updateHistory = true) {
     console.log('[Camapign Controller] Show: ' + id);
 
     // Find the requested campaign
@@ -23,12 +28,18 @@ class CampaignController extends BaseController {
     let html = app.campaignView.show(campaign);
 
     this.updateShell(html);
+    if (updateHistory) {
+      this.updateHistory('campaign_show', id);
+    }
   }
 
   /** Shows the new campaign screen */
-  new() {
+  new(updateHistory = true) {
     let html = app.campaignView.new();
     this.updateShell(html);
+    if (updateHistory) {
+      this.updateHistory('campaign_new');
+    }
   }
 
   /** Creates and saves a new campaign */
@@ -51,11 +62,14 @@ class CampaignController extends BaseController {
   }
 
   /** Displays the edit campaign screen */
-  edit(id) {
+  edit(id, updateHistory = true) {
     let campaign = Campaign.getByID(id, Campaign.getAllCampaigns());
     let html = app.campaignView.edit(campaign);
 
     this.updateShell(html);
+    if (updateHistory) {
+      this.updateHistory('campaign_edit', id);
+    }
   }
 
   /** Updates an existing campaign */

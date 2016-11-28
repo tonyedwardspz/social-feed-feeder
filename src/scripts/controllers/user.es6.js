@@ -14,16 +14,4 @@ class UserController extends BaseController {
   auth(){
     return true;
   }
-
-  authCallback() {
-
-  }
-
-  createNew() {
-
-  }
-
-  delete() {
-
-  }
 }
