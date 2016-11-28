@@ -1,17 +1,5 @@
 'use strict';
 
-function clearDOM() {
-  app.shell.innerHTML = '';
-}
-
-function getCookie(name) {
-  var value = '; ' + document.cookie;
-  var parts = value.split('; ' + name + '=');
-  if (parts.length === 2) {
-    return parts.pop().split(';').shift();
-  }
-}
-
 var app;
 
 (function(){
@@ -33,17 +21,8 @@ var app;
     postController: new PostController()
   };
 
-  // Direct user flow when landing on page
-  if (getCookie('user_auth') === 'true'){
-    console.log('User authenticated');
-    if (app.user === null) {
-      app.user = new User(getCookie('user_id'));
-      app.dashboardController.index(app.user);
-    }
-  } else {
-    console.log('User not authenticated');
-    app.shell.innerHTML = app.userView.loginScreen();
-  }
+  // Authenticate and direct user flow when landing on page
+  app.userController.checkAuthentication();
 
   // Routes
   addRoutes();
@@ -51,7 +30,6 @@ var app;
   // Settup twitter message listener
   registerTwiiterInputDetection();
 
-  // Setup popstate listener for user using the back/forward
-  // button via the History API
+  // Setup popstate listener for user using the back/forward button
   setupPopStateListener();
 })();

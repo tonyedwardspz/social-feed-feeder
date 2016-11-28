@@ -5,8 +5,12 @@ class BaseController {
 
   }
 
+  clearDOM() {
+    app.shell.innerHTML = '';
+  }
+
   updateShell(html) {
-    clearDOM();
+    this.clearDOM();
     app.shell.innerHTML = html;
   }
 
@@ -30,15 +34,19 @@ class BaseController {
 
   updateHistory(view, updateHistory = true, id = null) {
     if (updateHistory) {
-    console.log('[History] update for view: ' + view);
+      try{
+        console.log('[History] update for view: ' + view);
 
-    let state = {
-      id: id,
-      controller: view.split('_')[0],
-      action: view.split('_')[1]
-    };
+        let state = {
+          id: id,
+          controller: view.split('_')[0],
+          action: view.split('_')[1]
+        };
 
-    history.pushState(state, 'Random Page', view);
-  }
+        history.pushState(state, 'Random Page', view);
+      } catch (error) {
+        console.warn('There was an error updating the browsers history', error);
+      }
+    }
   }
 }
