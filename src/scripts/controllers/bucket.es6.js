@@ -12,9 +12,7 @@ class BucketController extends BaseController{
     let html = app.bucketView.show(bucket);
 
     this.updateShell(html);
-    if (updateHistory) {
-      this.updateHistory('bucket_show', id);
-    }
+    this.updateHistory('bucket_show', updateHistory, id);
 
     document.querySelectorAll('.table-message').forEach( entry => {
       linkTweets(entry);
@@ -26,9 +24,7 @@ class BucketController extends BaseController{
 
     let html = app.bucketView.new(campaignID);
     this.updateShell(html);
-    if (updateHistory) {
-      this.updateHistory('bucket_new');
-    }
+    this.updateHistory('bucket_new', updateHistory);
   }
 
   create() {
@@ -55,10 +51,7 @@ class BucketController extends BaseController{
     let html = app.bucketView.edit(bucket);
 
     this.updateShell(html);
-
-    if (updateHistory) {
-      this.updateHistory('bucket_edit', id);
-    }
+    this.updateHistory('bucket_edit', updateHistory, id);
   }
 
   update(id) {

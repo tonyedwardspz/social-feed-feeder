@@ -28,21 +28,17 @@ class BaseController {
     cb();
   }
 
-  updateHistory(view, id = null) {
+  updateHistory(view, updateHistory = true, id = null) {
+    if (updateHistory) {
     console.log('[History] update for view: ' + view);
-
-    let controller = view.split('_')[0];
-    let action = view.split('_')[1];
-
-    console.log(controller);
-    console.log(action);
 
     let state = {
       id: id,
-      controller: controller,
-      action: action
+      controller: view.split('_')[0],
+      action: view.split('_')[1]
     };
 
     history.pushState(state, 'Random Page', view);
+  }
   }
 }

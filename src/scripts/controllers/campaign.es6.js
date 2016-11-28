@@ -12,10 +12,7 @@ class CampaignController extends BaseController {
     let html = app.campaignView.getIndex(campaigns);
 
     this.updateShell(html);
-    console.log('update history? ' + updateHistory);
-    if (updateHistory) {
-      this.updateHistory('campaign_index');
-    }
+    this.updateHistory('campaign_index', updateHistory);
 
   }
 
@@ -28,18 +25,15 @@ class CampaignController extends BaseController {
     let html = app.campaignView.show(campaign);
 
     this.updateShell(html);
-    if (updateHistory) {
-      this.updateHistory('campaign_show', id);
-    }
+    this.updateHistory('campaign_show', updateHistory, id);
   }
 
   /** Shows the new campaign screen */
   new(updateHistory = true) {
     let html = app.campaignView.new();
+
     this.updateShell(html);
-    if (updateHistory) {
-      this.updateHistory('campaign_new');
-    }
+    this.updateHistory('campaign_new', updateHistory);
   }
 
   /** Creates and saves a new campaign */
@@ -67,9 +61,7 @@ class CampaignController extends BaseController {
     let html = app.campaignView.edit(campaign);
 
     this.updateShell(html);
-    if (updateHistory) {
-      this.updateHistory('campaign_edit', id);
-    }
+    this.updateHistory('campaign_edit', updateHistory, id);
   }
 
   /** Updates an existing campaign */

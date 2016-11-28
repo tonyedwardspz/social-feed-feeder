@@ -38,9 +38,8 @@ class PostController extends BaseController {
     let html = app.postView.edit(post);
 
     this.updateShell(html);
-    if (updateHistory) {
-      this.updateHistory('post_edit', id);
-    }
+
+    this.updateHistory('post_edit', updateHistory, id);
     updateCharCount(post.message);
   }
 
