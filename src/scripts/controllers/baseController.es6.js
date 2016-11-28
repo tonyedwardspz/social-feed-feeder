@@ -18,6 +18,11 @@ class BaseController {
       highlightErrors(emptyInputs, form);
       return;
     }
+    if (!isDateAfterToday(form.expiry.value)) {
+      highlightErrors([form.expiry], form);
+      return;
+    }
+
     cb();
   }
 }

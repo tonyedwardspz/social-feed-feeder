@@ -61,3 +61,10 @@ let getDateOneYearAgo = (date = new Date()) => {
 let getDefaultDate = () => {
   return '1970-01-01T00:00:00Z';
 };
+
+/**
+* Returns true/false if passed date is prior to today
+*/
+let isDateAfterToday = (date) => {
+  return (new Date(date) >= new Date().setHours(0,0,0,0)) ? true : false;
+};

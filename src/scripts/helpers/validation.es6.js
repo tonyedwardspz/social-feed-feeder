@@ -1,5 +1,8 @@
 'use strict';
 
+// TODO: Time allowing.... come back and improve this or replace with validation
+// library
+
 let inputsHaveValues = (elements) => {
   let emptyInputs = [];
   console.log(elements);
@@ -16,8 +19,9 @@ let inputsHaveValues = (elements) => {
   return emptyInputs;
 };
 
-// This is really dirty code!
-let highlightErrors = (elements, form) => {
+// This is really dirty code! Makes me feel naughty and slightly ashamed....
+// TODO: Come back and improve.
+let highlightErrors = (elements, form, extraClass = null) => {
   let isError = false;
   for (let i = 0; i < form.elements.length; i++) {
     for (let j = 0; j < elements.length; j++) {
@@ -34,9 +38,11 @@ let highlightErrors = (elements, form) => {
           });
         }
         if (domElement.type === 'date') {
+          domElement.classList.add('before-today');
           app.shell.addEventListener('click', e => {
             if (e.target.id === domElement.id) {
               domElement.classList.remove('invalid');
+              domElement.classList.remove('before-today');
             }
           });
         }

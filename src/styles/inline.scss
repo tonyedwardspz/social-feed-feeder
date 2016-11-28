@@ -62,7 +62,9 @@ textarea.invalid {
   border: 2px solid red;
 }
 
-// .invalid::after { content: 'Validation failed'; }
+input.before-today::after {
+  content: 'Date too early';
+}
 
 @media (max-width: 40.0rem) {
 

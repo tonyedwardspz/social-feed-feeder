@@ -24,6 +24,8 @@
     "linkTweets": true,
     "getCharCount": true,
     "inputsHaveValues": true,
+    "highlightErrors": true,
+    "isDateAfterToday": true,
 
     "require": true,
     "module": true,
