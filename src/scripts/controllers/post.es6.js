@@ -19,17 +19,17 @@ class PostController extends BaseController {
   create() {
     console.log('[Post] Create');
 
-    document.getElementById('post_save').disabled = true;
-
     let form = document.querySelector('form');
-    let post = Post.createFromForm(form);
 
-    console.log(post);
+    this.validateFormData(form, () => {
+      document.getElementById('post_save').disabled = true;
+      let post = Post.createFromForm(form);
 
-    app.user.posts.push(post);
-    app.db.publish('/posts', post);
+      app.user.posts.push(post);
+      app.db.publish('/posts', post);
 
-    app.bucketController.show(post.bucketID);
+      app.bucketController.show(post.bucketID);
+    });
   }
 
   edit(id) {
@@ -44,16 +44,18 @@ class PostController extends BaseController {
 
   update(id) {
     console.log(`[Post] Update`);
-
-    document.getElementById('post_save_edit').disabled = true;
-
-    let post = Post.findByID(id, Post.getAllPosts());
     let form = document.querySelector('form');
 
-    post.updateFromForm(form);
-    app.db.publish(`/posts/${id}`, post, 'PUT');
+    this.validateFormData(form, () => {
+      document.getElementById('post_save_edit').disabled = true;
 
-    app.bucketController.show(post.bucketID);
+      let post = Post.findByID(id, Post.getAllPosts());
+
+      post.updateFromForm(form);
+      app.db.publish(`/posts/${id}`, post, 'PUT');
+
+      app.bucketController.show(post.bucketID);
+    });
   }
 
   delete(id, name, bucketID) {

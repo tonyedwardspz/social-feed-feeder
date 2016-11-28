@@ -14,15 +14,17 @@ class BaseController {
   validateFormData(form, cb) {
     let emptyInputs = inputsHaveValues(form.elements);
     if (emptyInputs.length >= 1) {
-      // alert('Empty Inputs');
       highlightErrors(emptyInputs, form);
       return;
     }
-    if (!isDateAfterToday(form.expiry.value)) {
-      highlightErrors([form.expiry], form);
-      return;
+    if (form.expiry){
+      if (!isDateAfterToday(form.expiry.value)) {
+        highlightErrors([form.expiry], form);
+        return;
+      }
     }
 
+    console.log('Form validated');
     cb();
   }
 }

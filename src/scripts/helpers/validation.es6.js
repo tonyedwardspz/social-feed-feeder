@@ -5,12 +5,12 @@
 
 let inputsHaveValues = (elements) => {
   let emptyInputs = [];
-  console.log(elements);
 
   for (let i = 0; i < elements.length; i++) {
     let input = elements[i];
-    if (input.type !== 'submit') {
+    if (input.type !== 'submit' && input.type !== 'file') {
       if (input.value.length <= 0) {
+        console.warn('Empty Input: ', input);
         emptyInputs.push(input);
       }
     }
@@ -27,10 +27,10 @@ let highlightErrors = (elements, form, extraClass = null) => {
     for (let j = 0; j < elements.length; j++) {
       if (form.elements[i] === elements[j]) {
         let domElement = document.getElementById(elements[j].name);
-        domElement.classList.add('invalid');
         if (domElement.type === 'text' ||
             domElement.type === 'textarea' ||
             domElement.type === 'date') {
+          domElement.classList.add('invalid');
           app.shell.addEventListener('keyup', e => {
             if (e.target.id === domElement.id && e.target.value.length > 0) {
               domElement.classList.remove('invalid');

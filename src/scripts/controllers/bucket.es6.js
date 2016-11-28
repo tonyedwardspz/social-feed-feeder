@@ -28,15 +28,18 @@ class BucketController extends BaseController{
   create() {
     console.log('[Bucket] Create');
 
-    document.getElementById('bucket_save').disabled = true;
-
     let form = document.querySelector('form');
-    let bucket = Bucket.createFromForm(form);
 
-    app.user.buckets.push(bucket);
-    app.db.publish('/buckets', bucket);
+    this.validateFormData(form, () => {
+      document.getElementById('bucket_save').disabled = true;
 
-    this.show(bucket.bucketID);
+      let bucket = Bucket.createFromForm(form);
+
+      app.user.buckets.push(bucket);
+      app.db.publish('/buckets', bucket);
+
+      this.show(bucket.bucketID);
+    });
   }
 
   edit(id) {
@@ -51,13 +54,16 @@ class BucketController extends BaseController{
   update(id) {
     console.log('[Bucket] Update');
 
-    let bucket = Bucket.findByID(id, Bucket.getAllBuckets());
     let form = document.querySelector('form');
 
-    bucket.updateFromForm(form);
-    app.db.publish(`/buckets/${id}`, bucket, 'PUT');
+    this.validateFormData(form, () => {
+      let bucket = Bucket.findByID(id, Bucket.getAllBuckets());
 
-    this.show(bucket.bucketID);
+      bucket.updateFromForm(form);
+      app.db.publish(`/buckets/${id}`, bucket, 'PUT');
+
+      this.show(bucket.bucketID);
+    });
   }
 
   delete(id, name, campaignID) {

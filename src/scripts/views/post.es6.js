@@ -7,7 +7,7 @@ class PostView {
 
   new(parents) {
     return `${getBreadcrumbs('post_new', parents)}
-            <h2>New Bucket</h2>
+            <h2>New Post</h2>
             <p>Add a new post to the current bucket<p>
             ${this.form(parents[0], parents[1])}
             `;
