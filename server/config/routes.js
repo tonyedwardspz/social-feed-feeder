@@ -110,7 +110,8 @@ module.exports = function(app, passport) {
    });
 
    // Catch all Route to the main dash (MUST BE LAST ROUTE)
-   app.get('/', function(req, res){
+   app.get('*', function(req, res){
+     console.log('[Route] Catch All: ' + req.path);
      console.log('[SERVER.GET] Catch all hit');
      res.sendFile(path.resolve(__dirname, '../../public/index.html'));
    });

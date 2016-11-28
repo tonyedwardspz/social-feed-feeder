@@ -5,24 +5,26 @@ class BucketController extends BaseController{
     super();
   }
 
-  show(id) {
+  show(id, updateHistory = true) {
     console.log('[Bucket] Show: ' + id);
 
     let bucket = Bucket.findByID(id, Bucket.getAllBuckets());
     let html = app.bucketView.show(bucket);
 
     this.updateShell(html);
+    this.updateHistory('bucket_show', updateHistory, id);
 
     document.querySelectorAll('.table-message').forEach( entry => {
       linkTweets(entry);
     });
   }
 
-  new(campaignID) {
+  new(campaignID, updateHistory = true) {
     console.log('[Bucket] New');
 
     let html = app.bucketView.new(campaignID);
     this.updateShell(html);
+    this.updateHistory('bucket_new', updateHistory);
   }
 
   create() {
@@ -42,13 +44,14 @@ class BucketController extends BaseController{
     });
   }
 
-  edit(id) {
+  edit(id, updateHistory = true) {
     console.log('[Bucket] Edit');
 
     let bucket = Bucket.findByID(id, Bucket.getAllBuckets());
     let html = app.bucketView.edit(bucket);
 
     this.updateShell(html);
+    this.updateHistory('bucket_edit', updateHistory, id);
   }
 
   update(id) {

@@ -20,7 +20,7 @@ let addRoutes = () => {
 
 
       // DASHBOARD
-      else if (e.target.id === 'dashboard') {
+      else if (e.target.id === 'dashboard_index') {
         app.dashboardController.index(app.user);
       }
 
@@ -63,8 +63,7 @@ let addRoutes = () => {
 
       // POSTS
       else if (e.target.id === 'post_new') {
-        app.postController.new(e.target.dataset.id,
-                               e.target.dataset.campaignid);
+        app.postController.new(e.target.dataset.id);
       } else if (e.target.id === 'post_save') {
         app.postController.create();
       } else if (e.target.className === 'post_show') {

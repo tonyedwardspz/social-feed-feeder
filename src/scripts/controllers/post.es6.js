@@ -5,15 +5,14 @@ class PostController extends BaseController {
     super();
   }
 
-  show(id) {
-    console.log(`[Post] Show: ${id}`);
-  }
-
-  new(bucketID, campaignID) {
+  new(bucketID, updateHistory = true) {
     console.log(`[Post] New for bucket: ${bucketID}`);
 
-    let html = app.postView.new([campaignID, bucketID]);
+    let bucket = Bucket.getByID(bucketID, app.user.buckets);
+    let html = app.postView.new([bucket.campaignID, bucketID]);
+
     this.updateShell(html);
+    this.updateHistory('post_new', updateHistory);
   }
 
   create() {
@@ -32,13 +31,15 @@ class PostController extends BaseController {
     });
   }
 
-  edit(id) {
+  edit(id, updateHistory = true) {
     console.log(`[Post] Edit: ${id}`);
 
     let post = Post.findByID(id, Post.getAllPosts());
     let html = app.postView.edit(post);
 
     this.updateShell(html);
+
+    this.updateHistory('post_edit', updateHistory, id);
     updateCharCount(post.message);
   }
 
