@@ -5,7 +5,7 @@
 * @param {String} view The current view being generated
 * @param {Array.String} [ids] An heirrarchical array of ids leading to
 * current view
-* @return {String} The html sting containing the breadcrumb trail
+* @return {String} The html string containing the breadcrumb trail
 */
 let getBreadcrumbs = (view, ids = null) => {
   let breadcrumb = `<a href="#" id="dashboard" class="breadcrumb">Dashboard</a>`;

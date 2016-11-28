@@ -1,4 +1,4 @@
-require('require-dir')('tests/helpers');
+require('require-dir')('tests/method_tests/helpers');
 
 
 // Basic test to enable initial CI
@@ -10,5 +10,5 @@ describe('Sanity', function() {
       assert.equal(-1, [1,2,3].indexOf(4));
     });
   });
-  
+
 });

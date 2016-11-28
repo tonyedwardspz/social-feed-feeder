@@ -21,12 +21,15 @@
     "twttr": true,
     "updateCharCount": true,
     "linkTweets": true,
+    "getCharCount": true,
 
     "require": true,
     "module": true,
+    "$": true,
 
     "describe": true,
     "it": true,
+    "QUnit": true,
 
     "Campaign": true,
     "Bucket": true,

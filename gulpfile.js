@@ -18,3 +18,11 @@ gulp.task('default', function(cb) {
 gulp.task('dev', function() {
   return runSequence('clean', allTasks, 'watch', 'nodemon');
 });
+
+gulp.task('tests', function(cb) {
+  runSequence(
+    'clean',
+    allTasks,
+    'test:qunit',
+    cb);
+});
