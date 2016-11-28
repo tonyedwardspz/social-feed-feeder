@@ -12,7 +12,6 @@ class CampaignView {
   * @return {String} The HTML string for display
   */
   getIndex(campaigns) {
-    console.log('Campaign View: Get index');
     let campaignHTML = `${getBreadcrumbs('campaign_index')}
                         <h2>Your Campaigns</h2>`;
 

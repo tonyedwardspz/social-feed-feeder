@@ -17,17 +17,18 @@ class PostView {
     return `${getBreadcrumbs('post_edit', [post.campaignID, post.bucketID, post.postID])}
             <h2>Edit Post</h2>
             <p>This is the edit post view<p>
-            ${this.form(post.bucketID, post.campaignID, post)}`;
+            ${this.form(post.campaignID, post.bucketID, post)}`;
   }
 
-  form(bucketID, campaignID, post = new Post()) {
+  form(campaignID, bucketID, post = new Post()) {
     let exists = post.message !== undefined ? true : false;
     return `<form name="form_post_new" method="POST" data-bucketid="${bucketID}">
 
               <label for="message">Message</label>
               <textarea name='message' id='message' required
               >${exists ? post.message : ''}</textarea>
-              <p class="char-count">Characters Remaing: <span id="tweet-char-remaining">140</span></p>
+              <p class="char-count">Characters Remaing:
+                <span id="tweet-char-remaining">140</span></p>
 
               <label for="attachment">Attachment</label>
               <input type="file" name="attachment" id="attachment"/>

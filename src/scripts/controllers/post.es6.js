@@ -12,7 +12,7 @@ class PostController extends BaseController {
   new(bucketID, campaignID) {
     console.log(`[Post] New for bucket: ${bucketID}`);
 
-    let html = app.postView.new([bucketID, campaignID]);
+    let html = app.postView.new([campaignID, bucketID]);
     this.updateShell(html);
   }
 
