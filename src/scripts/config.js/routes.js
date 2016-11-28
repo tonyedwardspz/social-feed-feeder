@@ -20,7 +20,7 @@ let addRoutes = () => {
 
 
       // DASHBOARD
-      else if (e.target.id === 'dashboard') {
+      else if (e.target.id === 'dashboard_index') {
         app.dashboardController.index(app.user);
       }
 

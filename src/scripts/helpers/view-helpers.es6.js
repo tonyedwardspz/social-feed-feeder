@@ -8,7 +8,7 @@
 * @return {String} The html string containing the breadcrumb trail
 */
 let getBreadcrumbs = (view, ids = null) => {
-  let breadcrumb = `<a href="#" id="dashboard" class="breadcrumb">Dashboard</a>`;
+  let breadcrumb = `<a href="#" id="dashboard_index" class="breadcrumb">Dashboard</a>`;
 
   if (view === 'campaign_index') {
     breadcrumb += `&nbsp;&raquo;&nbsp;Campaigns`;
