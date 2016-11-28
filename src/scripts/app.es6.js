@@ -7,7 +7,6 @@ var app;
   app = {
     user: null,
     shell: document.querySelector('main'),
-    spinner: document.querySelector('.loader'),
     db : new Database(),
     userView: new UserView(),
     userController: new UserController(),
