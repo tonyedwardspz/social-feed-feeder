@@ -31,10 +31,12 @@
     "registerTwiiterInputDetection": true,
     "setupPopStateListener": true,
     "loadContent": true,
+    "getCookie": true,
 
     "require": true,
     "module": true,
     "$": true,
+    "Headers": true,
 
     "describe": true,
     "it": true,
