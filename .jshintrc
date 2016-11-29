@@ -32,6 +32,7 @@
     "setupPopStateListener": true,
     "loadContent": true,
     "getCookie": true,
+    "updateBrowserHistory": true,
 
     "require": true,
     "module": true,
