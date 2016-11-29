@@ -60,16 +60,16 @@ regenerated.
 ### Other tasks
 There are a couple other tasks you may wish to run:
 
-- *Tests*
+#### Tests
 
-    To run the projects tests use the command `npm test`. This will execute some
-    good 'ol assertion tests followed by QUnit integration tests, which require the
-    building of the project.
+To run the projects tests use the command `npm test`. This will execute some
+good 'ol assertion tests followed by QUnit integration tests, which require the
+building of the project.
 
-- *Documentation*
+#### Documentation
 
-    To generate the project's documentation, run the common `gulp doc`. The documentation
-    can be found in the `./doc/gen` folder, with `index.html` as the starting point.
+To generate the project's documentation, run the common `gulp doc`. The documentation
+can be found in the `./doc/gen` folder, with `index.html` as the starting point.
 
 ## Deployment
 The project uses a TravisCI to run tests, deploying code to a heroku dyno if passing.
