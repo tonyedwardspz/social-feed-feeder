@@ -1,10 +1,13 @@
 'use strict';
 
+/**
+* Adds an event listener on the app shell listening for cetain events, directing
+* traffic to the appropriate contoller. Allowing events to bubble up to the
+* app shell allows us to only set these once, instead of on each view update.
+*/
 let addRoutes = () => {
   app.shell.addEventListener('click', function(e){
 
-    // let any clicks bubble up to the apps shell to allow dynamic changing of
-    // content.... except in a few edge cases
     if (e.target !== e.currentTarget &&
         e.target.id !== 'attachment' &&
         e.target.id !== 'expiry' &&
@@ -13,17 +16,16 @@ let addRoutes = () => {
       ) {
       e.preventDefault();
 
+      // Login
       if (e.target.id === 'login' ){
         console.log('Login Button Clicked');
         window.location = 'user/auth';
       }
 
-
       // DASHBOARD
       else if (e.target.id === 'dashboard_index') {
         app.dashboardController.index(app.user);
       }
-
 
       // CAMPAIGNS
       else if (e.target.id === 'campaign_index') {
@@ -42,7 +44,6 @@ let addRoutes = () => {
         app.campaignController.update(e.target.dataset.id);
       }
 
-
       // BUCKETS
       else if (e.target.id === 'bucket_new') {
         app.bucketController.new(e.target.dataset.campaignid);
@@ -59,7 +60,6 @@ let addRoutes = () => {
       } else if (e.target.id === 'bucket_save_edit') {
         app.bucketController.update(e.target.dataset.id);
       }
-
 
       // POSTS
       else if (e.target.id === 'post_new') {

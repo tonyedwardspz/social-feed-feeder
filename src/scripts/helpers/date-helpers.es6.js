@@ -1,8 +1,9 @@
 'use strict';
 
 /**
-* Convert passed date string into a locale object if supported, else
-* return constructed version.
+* Gets a UK formatted date for display to user
+* @param {String} date The full unix date string to convert
+* @return {String} Formatted date string - dd/mm/yyyy
 */
 function convertDateToLocale(date) {
   try {
@@ -15,7 +16,9 @@ function convertDateToLocale(date) {
 }
 
 /**
-* Convert passed date string into formate required by input type='date'
+* Convert passed date string into the format required by input type='date'
+* @param {String} date The full unix date string to convert
+* @return {String} Formatted date string
 */
 function convertDateForInput(date) {
   try {
@@ -29,7 +32,8 @@ function convertDateForInput(date) {
 }
 
 /**
-* Returns todays date in the correct format for date input min
+* Returns todays date in the correct format for date input (min)
+* @return {String} Formatted date string
 */
 let defaultDateInputMin = () => {
   let _date = new Date();
@@ -39,7 +43,8 @@ let defaultDateInputMin = () => {
 };
 
 /**
-* Returns a date in five years in the correct format for date input max
+* Get a date in five years time in the correct format for date input (max)
+* @return {String} Formatted date string
 */
 let defaultDateInputMax = () => {
   let _date = new Date();
@@ -49,21 +54,17 @@ let defaultDateInputMax = () => {
 };
 
 /**
-* Returns a date one year ago from passed date or today
-*/
-let getDateOneYearAgo = (date = new Date()) => {
-  return date.setFullYear(date.getFullYear() - 1);
-};
-
-/**
-* Returns a date string for the begining of the Unix epoch
+* Gets default date to be used when creating posts (which have yet to be shared)
+* @return {String} A date string for the begining of the unix epocj
 */
 let getDefaultDate = () => {
   return '1970-01-01T00:00:00Z';
 };
 
 /**
-* Returns true/false if passed date is prior to today
+* Checks to see if the passed date is prior to today
+* @param {String} date The date which needs to be checked
+* @return {Boolean} Whether the date is after today or not
 */
 let isDateAfterToday = (date) => {
   return (new Date(date) >= new Date().setHours(0,0,0,0)) ? true : false;

@@ -1,10 +1,12 @@
 'use strict';
 
+/** A class to control dashboard actions */
 class DashboardController extends BaseController {
   constructor() {
     super();
   }
 
+  /** Fetches all user data, extracts it and displays the dashboard view. */
   index() {
     app.db.retrieve('/getAllData', app.user, data => {
       console.log('[DASH]: Fetch all data');
@@ -27,21 +29,5 @@ class DashboardController extends BaseController {
       this.updateShell(html);
       this.updateHistory('dashboard_index');
     });
-  }
-
-  processData(data, cb) {
-    console.log('Processing Data: ', data);
-    for(let i = 0; i < data.length; i++){
-      if (data.campaigns) {
-        app.user.campaigns = Campaign.extractCampaignData(data.campaigns);
-      } else if (data.user) {
-        User.extractUserData(data.user);
-      } else if (data.posts) {
-        app.user.posts = Post.extractPostData(data.posts);
-      } else if (data.buckets) {
-        app.user.buckets = Bucket.extractBucketData(data.buckets);
-      }
-    }
-    cb();
   }
 }

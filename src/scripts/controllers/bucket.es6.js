@@ -1,10 +1,16 @@
 'use strict';
 
+/** A class to control bucket actions */
 class BucketController extends BaseController{
   constructor() {
     super();
   }
 
+  /**
+  * Displays an individual bucket
+  * @param {String} id The id of the bucket to show
+  * @param {Boolean} [updateHistory=true] Whether to update the history object
+  */
   show(id, updateHistory = true) {
     console.log('[Bucket] Show: ' + id);
 
@@ -19,14 +25,22 @@ class BucketController extends BaseController{
     });
   }
 
+  /**
+  * Displays the new bucket form
+  * @param {Boolean} [updateHistory=true] Whether to update the history object
+  */
   new(campaignID, updateHistory = true) {
-    console.log('[Bucket] New');
+    console.log('[Bucket] New for campaign: ' + campaignID);
 
     let html = app.bucketView.new(campaignID);
     this.updateShell(html);
     this.updateHistory('bucket_new', updateHistory);
   }
 
+  /**
+  * Creates a new bucket, saving it both locally and remotley after validation.
+  * Called from the new bucket view
+  */
   create() {
     console.log('[Bucket] Create');
 
@@ -44,8 +58,13 @@ class BucketController extends BaseController{
     });
   }
 
+  /**
+  * Displays the edit bucket view
+  * @param {String} id The id of the bucket to edit
+  * @param {Boolean} [updateHistory=true] Whether to update the history object
+  */
   edit(id, updateHistory = true) {
-    console.log('[Bucket] Edit');
+    console.log('[Bucket] Edit: ' + id);
 
     let bucket = Bucket.findByID(id, Bucket.getAllBuckets());
     let html = app.bucketView.edit(bucket);
@@ -54,8 +73,13 @@ class BucketController extends BaseController{
     this.updateHistory('bucket_edit', updateHistory, id);
   }
 
+  /**
+  * Updates a bucket, saving it locally and remotely.
+  * Called from the edit view
+  * @param {String} id The id of the bucket to be deleted
+  */
   update(id) {
-    console.log('[Bucket] Update');
+    console.log('[Bucket] Update: ' + id);
 
     let form = document.querySelector('form');
 
@@ -69,6 +93,10 @@ class BucketController extends BaseController{
     });
   }
 
+  /**
+  * Deletes a bucket both locally and remotely after user confirmation.
+  * @param {String} id The id of the bucket to be deleted
+  */
   delete(id, name, campaignID) {
     console.log('[Bucket] Delete: ', id);
 

@@ -1,22 +1,31 @@
 'use strict';
 
+/** A class to control campaign actions */
 class CampaignController extends BaseController {
   constructor() {
     super();
   }
 
-  /** Shows a list of campaigns */
+  /**
+  * Displays the users campaigns
+  * @param {Boolean} [updateHistory=true] Whether to update the history object
+  */
   index(updateHistory = true) {
+    console.log('[Camapign Controller] Index');
+
     // Generate the HTML, passing in an array of campaign objects
     let campaigns = Campaign.getAllCampaigns();
     let html = app.campaignView.getIndex(campaigns);
 
     this.updateShell(html);
     this.updateHistory('campaign_index', updateHistory);
-
   }
 
-  /** Shows an individual campaign */
+  /**
+  * Displays an individual camapign
+  * @param {String} id The id of the campaign to show
+  * @param {Boolean} [updateHistory=true] Whether to update the history object
+  */
   show(id, updateHistory = true) {
     console.log('[Camapign Controller] Show: ' + id);
 
@@ -28,21 +37,28 @@ class CampaignController extends BaseController {
     this.updateHistory('campaign_show', updateHistory, id);
   }
 
-  /** Shows the new campaign screen */
+  /**
+  * Displays the new campaign form
+  * @param {Boolean} [updateHistory=true] Whether to update the history object
+  */
   new(updateHistory = true) {
+    console.log('[Camapign Controller] New');
     let html = app.campaignView.new();
 
     this.updateShell(html);
     this.updateHistory('campaign_new', updateHistory);
   }
 
-  /** Creates and saves a new campaign */
+  /**
+  * Creates a new campaign, saving it both locally and remotley after validation.
+  * Called from the new campaign view
+  */
   create() {
+    console.log('[Camapign Controller] Create');
+
     let form = document.querySelector('form');
 
-    // validate
     this.validateFormData(form, () => {
-      // Disable the save button to prevent duplicate submissions
       document.getElementById('campaign_save').disabled = true;
 
       let campaign = Campaign.createFromForm(form);
@@ -51,12 +67,16 @@ class CampaignController extends BaseController {
       app.db.publish('/campaigns', campaign);
 
       this.show(campaign.campaignID);
-      console.log(campaign);
     });
   }
 
-  /** Displays the edit campaign screen */
+  /**
+  * Displays the edit camapign view
+  * @param {String} id The id of the campaign to edit
+  * @param {Boolean} [updateHistory=true] Whether to update the history object
+  */
   edit(id, updateHistory = true) {
+    console.log('[Camapign Controller] Edit: ' + id);
     let campaign = Campaign.getByID(id, Campaign.getAllCampaigns());
     let html = app.campaignView.edit(campaign);
 
@@ -64,8 +84,14 @@ class CampaignController extends BaseController {
     this.updateHistory('campaign_edit', updateHistory, id);
   }
 
-  /** Updates an existing campaign */
+  /**
+  * Updates a campaign, saving it locally and remotely.
+  * Called from the edit view
+  * @param {String} id The id of the campaign to be deleted
+  */
   update(id) {
+    console.log('[Camapign Controller] Update: ' + id);
+
     let form = document.querySelector('form');
 
     this.validateFormData(form, () => {
@@ -78,8 +104,13 @@ class CampaignController extends BaseController {
     });
   }
 
-  /** Deletes an existing campaign */
+  /**
+  * Deletes a campaign both locally and remotely after user confirmation.
+  * @param {String} id The id of the campaign to be deleted
+  */
   delete(id) {
+    console.log('[Camapign Controller] Delete: ' + id);
+
     let name = document.getElementById('name').innerHTML;
 
     if (! confirm(`Delete the "${name}" campaign and all related data?`)) {

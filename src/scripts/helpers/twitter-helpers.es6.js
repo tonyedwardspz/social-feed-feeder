@@ -7,11 +7,9 @@
 let registerTwiiterInputDetection = () => {
 
   app.shell.addEventListener('keyup', e => {
-
     if (e.target.id === 'message') {
       updateCharCount(e.target.value);
     }
-
   });
 };
 

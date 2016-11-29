@@ -33,3 +33,18 @@ let loadContent = (state) => {
                   error);
   }
 };
+
+/**
+* Updates the browser's history
+* @param {String} view '_' deliminated string of controller/action
+* @param {String} id The id object relating to the contoller/action
+*/
+let updateBrowserHistory = (view, id) => {
+  let state = {
+    id: id,
+    controller: view.split('_')[0],
+    action: view.split('_')[1]
+  };
+
+  history.pushState(state, 'Random Page', view);
+};
