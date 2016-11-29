@@ -33,15 +33,22 @@ class PostView {
               <label for="attachment">Attachment</label>
               <input type="file" name="attachment" id="attachment"/>
 
+              <div class="image-preview-wrapper">
+                <img id="image-preview" class="preview"
+                     src="public/images/placeholder-image.jpg"/>
+              </div>
+
               <input type="hidden" name="bucketID" id="bucketID"
                      value="${bucketID}" />
               <input type="hidden" name="campaignID" id="campaignID"
                      value="${campaignID}" />
-
-              <button id="${!exists ? 'post_save' : 'post_save_edit'}"
-                      data-id="${!exists ? bucketID : post.postID}">
-                      Save</button>
-              <button class='bucket_show' data-id="${bucketID}">Cancel</button>
+              <div class="button-wrapper">
+                <button id="${!exists ? 'post_save' : 'post_save_edit'}"
+                        data-id="${!exists ? bucketID : post.postID}">
+                        Save</button>
+                <button class='bucket_show' data-id="${bucketID}">
+                        Cancel</button>
+              </div>
             </form>`;
   }
 

@@ -66,6 +66,25 @@ input.before-today::after {
   content: 'Date too early';
 }
 
+.button-wrapper {
+  margin-top: 6rem;
+}
+
+.image-preview-wrapper {
+  float: right;
+  margin-top: -3rem;
+  max-width: 300px;
+}
+
+@media (max-width: 40.0rem) {
+  .image-preview-wrapper {
+    float: none;
+    margin-top: 0;
+    max-width: auto;
+    text-align: center;
+  }
+}
+
 @media (max-width: 40.0rem) {
 
   table,

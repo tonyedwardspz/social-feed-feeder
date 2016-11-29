@@ -13,7 +13,7 @@ class PostController extends BaseController {
   new(bucketID, updateHistory = true) {
     console.log(`[Post] New for bucket: ${bucketID}`);
 
-    let bucket = Bucket.getByID(bucketID, app.user.buckets);
+    let bucket = Bucket.findByID(bucketID, app.user.buckets);
     let html = app.postView.new([bucket.campaignID, bucketID]);
 
     this.updateShell(html);
@@ -32,6 +32,8 @@ class PostController extends BaseController {
     this.validateFormData(form, () => {
       document.getElementById('post_save').disabled = true;
       let post = Post.createFromForm(form);
+
+      let image = post.extractImage(form);
 
       app.user.posts.push(post);
       app.db.publish('/posts', post);
