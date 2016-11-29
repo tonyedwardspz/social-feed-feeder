@@ -89,5 +89,4 @@ Stanford University:
     - [Twitter](https://twitter.com/tonyedwardspz)
 
 ## License
-This project is licensed under the MIT License. Feel free to use in whichever way you wish..... however, if you're thinking of submitting
-chunks of my code as part of a Plymouth Uni assignment... it's not suggested.
+There is not license until I hand this in :(
