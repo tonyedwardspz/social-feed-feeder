@@ -26,7 +26,7 @@ class BaseController {
   * function if validation fails
   * @callback cb
   * @param {String} form HTML object represnting the currently used form
-  * @return
+  * @return if errors found to prevent further execution
   */
   validateFormData(form, cb) {
     let emptyInputs = inputsHaveValues(form.elements);
