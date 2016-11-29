@@ -11,7 +11,7 @@
   "repository": "https://gihub.com/tonyedwardspz/social-feed-feeder",
   "scripts": {
     "start": "node server.js",
-    "test": "mocha test",
+    "test": "mocha test && gulp tests",
     "postinstall": "gulp --env=PRODUCTION"
   },
   "author": "tonyedwardspz",
