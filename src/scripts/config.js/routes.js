@@ -6,7 +6,7 @@
 * app shell allows us to only set these once, instead of on each view update.
 */
 let addRoutes = () => {
-  app.shell.addEventListener('click', function(e){
+  app.shell.addEventListener('click', e => {
 
     if (e.target !== e.currentTarget &&
         e.target.id !== 'attachment' &&

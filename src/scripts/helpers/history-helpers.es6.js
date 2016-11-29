@@ -6,8 +6,7 @@
 */
 let setupPopStateListener = () => {
   console.log('[History] Setup pop state listener');
-  window.onpopstate = function(event) {
-    console.info(`location: ${document.location}, state:`, event.state);
+  window.onpopstate = event => {
     loadContent(event.state);
   };
 };

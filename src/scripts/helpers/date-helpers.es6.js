@@ -5,31 +5,31 @@
 * @param {String} date The full unix date string to convert
 * @return {String} Formatted date string - dd/mm/yyyy
 */
-function convertDateToLocale(date) {
+let convertDateToLocale = (date) => {
   try {
     return new Date(date).toLocaleDateString('en-GB');
   } catch (e) {
-    console.log('Error converting date - Trying backup: ' + e);
+    console.warn('Error converting date - Trying backup: ' + e);
     let _date = new Date(date);
     return `${_date.getDate()}/${_date.getMonth() + 1}/${_date.getFullYear()}`;
   }
-}
+};
 
 /**
 * Convert passed date string into the format required by input type='date'
 * @param {String} date The full unix date string to convert
 * @return {String} Formatted date string
 */
-function convertDateForInput(date) {
+let convertDateForInput = (date) => {
   try {
     let _date = new Date(date);
     let month = ('0' + (_date.getMonth() + 1)).slice(-2);
     let day = ('0' + _date.getDate()).slice(-2);
     return `${_date.getFullYear()}-${month}-${day}`;
   } catch (e) {
-    console.log('error converting date for input', e);
+    console.warn('error converting date for input', e);
   }
-}
+};
 
 /**
 * Returns todays date in the correct format for date input (min)
