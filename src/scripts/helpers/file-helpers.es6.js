@@ -13,11 +13,18 @@ let setupAttachmentChangeListener = () => {
 };
 
 let displayImagePreview = (file) => {
-  var reader = new FileReader();
+  try {
+    var reader = new FileReader();
 
-  reader.onload = (e) => {
-    document.getElementById('image-preview').src = e.target.result;
-  };
+    reader.onload = (e) => {
+      document.getElementById('image-preview').src = e.target.result;
+    };
 
-  reader.readAsDataURL(file);
+    reader.readAsDataURL(file);
+  } catch (error) {
+    console.log('There was an issue displaying the preview image', error);
+    document.getElementById('image-preview').src =
+      'placeholder-image-not-available.jpg';
+  }
+
 };

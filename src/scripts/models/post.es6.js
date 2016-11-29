@@ -15,13 +15,6 @@ class Post {
     return convertDateToLocale(this.lastPostDate);
   }
 
-  static extractImage(form) {
-    if (form.attachment.files) {
-      console.log('Post has file', form.attachment.files[0]);
-      displayImagePreview(form.attachment.files[0]);
-    }
-  }
-
   static findByID(id, posts) {
     let thisPost = {};
     posts.forEach(post => {
