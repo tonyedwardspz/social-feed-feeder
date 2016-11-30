@@ -15,6 +15,14 @@ class Post {
     return convertDateToLocale(this.lastPostDate);
   }
 
+  getAttachmentString() {
+    if (this.attachment !== undefined) {
+      return `public/images/uploads/${this.attachment}`;
+    } else {
+      return 'public/images/placeholder-image.jpg';
+    }
+  }
+
   static findByID(id, posts) {
     let thisPost = {};
     posts.forEach(post => {
