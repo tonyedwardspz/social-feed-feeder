@@ -31,12 +31,19 @@ class PostController extends BaseController {
 
     this.validateFormData(form, () => {
       document.getElementById('post_save').disabled = true;
+
       let post = Post.createFromForm(form);
 
-      let image = post.extractImage(form);
+      if (form.attachment.files[0]){
+        console.log('has attachment');
+        // readImageFile(form.attachment.files[0], (image) => {
+          app.db.publishWithImage('/posts/image', post, form.attachment.files[0]);
+        // });
+      } else {
+        app.db.publish('/posts', post);
+      }
 
       app.user.posts.push(post);
-      app.db.publish('/posts', post);
 
       app.bucketController.show(post.bucketID);
     });

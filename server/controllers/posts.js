@@ -2,10 +2,15 @@
 
 let BaseController = require('./base');
 let MongoPost = require('../models/post').getMongooseModel();
+var path = require('path');
+var formidable = require('formidable');
+var fs = require('fs');
 
 class PostController extends BaseController {
-  constructor() {
+  constructor(dir) {
     super('post controller');
+
+    this.dir = dir;
   }
 
   // GET /posts
@@ -33,6 +38,10 @@ class PostController extends BaseController {
   // POST /posts
   create(req, res) {
     console.log('[ROUTE] Posts:POST hit');
+
+    if (req.body.image){
+      console.log('IMAGE IN BODY');
+    }
 
     let bucket = new MongoPost({
       postID: req.body.postID,
@@ -69,7 +78,33 @@ class PostController extends BaseController {
         console.log(`Campaign removed: ${updated}`);
         res.send(JSON.stringify({ a: 'Post Updated Succesfully' }));
       }
-    });  
+    });
+  }
+
+  image(req, res) {
+    console.log('[Post] image upload hit', JSON.stringify(req.body));
+
+    let form = new formidable.IncomingForm();
+    form.multiples = true;
+    form.uploadDir = path.join(_root , `/public/images/uploads`);
+
+    form.on('file', function(field, file) {
+      fs.rename(file.path, path.join(form.uploadDir, file.name.replace(' ','_')));
+    });
+
+    form.on('error', function(err) {
+      console.log('An error has occured: \n' + err);
+    });
+
+    // once all the files have been uploaded, send a response to the client
+    form.on('end', function() {
+      res.end('success');
+    });
+
+    // parse the incoming request containing the form data
+    form.parse(req);
+
+    res.send(JSON.stringify({ result: 'success' }));
   }
 
   // DELETE /posts/:id

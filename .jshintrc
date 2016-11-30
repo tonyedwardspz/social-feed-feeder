@@ -33,6 +33,7 @@
     "loadContent": true,
     "getCookie": true,
     "updateBrowserHistory": true,
+    "readImageFile": true,
 
     "require": true,
     "module": true,

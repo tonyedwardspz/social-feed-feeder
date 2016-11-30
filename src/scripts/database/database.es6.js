@@ -20,7 +20,7 @@ class Database {
     console.log(`[DB] Publish`);
 
     // Parse the object we wish to publish
-    let str = !object ? JSON.stringify( { a: 'object' } ) : JSON.stringify(object);
+    let data = !object ? JSON.stringify( { a: 'object' } ) : JSON.stringify(object);
 
     let headers = new Headers({
       'Content-Type': 'application/json'
@@ -31,13 +31,32 @@ class Database {
       method: method,
       mode: 'cors',
       headers: headers,
-      body: str
+      body: data
     })
     .then(response => {
       console.log(`[DB] Published Succesfully: ${response}`);
     })
     .catch(error => {
       console.log(`[DB] Error Publishing: ${error}`);
+    });
+  }
+
+  publishWithImage(route, object, image) {
+
+    let data = new FormData();
+    data.append('image', image, image.name);
+    data.append('post', object);
+
+    fetch(route, {
+      method: 'POST',
+      mode: 'cors',
+      body: data
+    })
+    .then(response => {
+      console.log(`[DB] Post with image published succesfully: ${response}`);
+    })
+    .catch(error => {
+      console.log(`[DB] Error Publishing post with image: ${error}`);
     });
   }
 
@@ -64,7 +83,7 @@ class Database {
       headers: headers,
       body: str
     }).then(response => {
-      console.log('[STATUS]', response);
+      // console.log('[STATUS]', response);
       if (response.status !== 200) {
         console.log('Looks like there was a problem. Status Code: ' +
           response.status);
@@ -80,5 +99,9 @@ class Database {
     .catch(err => {
       console.log('Fetch Error :-S', err);
     });
+  }
+
+  createFormData(){
+
   }
 }

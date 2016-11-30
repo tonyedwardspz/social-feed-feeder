@@ -4,7 +4,7 @@ let cookieParser = require('cookie-parser');
 let express = require('express');
 let bodyParser = require('body-parser');
 let session = require('express-session');
-// var MongoStore = require('connect-mongo')(session);
+var formidable = require('formidable');
 
 module.exports = function(app, passport, root){
 
@@ -15,8 +15,8 @@ module.exports = function(app, passport, root){
   app.use('/images', express.static(root + '/public/images'));
 
   // Set various body parsers
-  app.use(bodyParser.urlencoded({ extended: false }));
-  app.use(bodyParser.json());
+  app.use(bodyParser.urlencoded({ extended: true }));
+  app.use(bodyParser.json({limit: '2mb'}));
 
   // MMMMM..... cookies
   app.use(cookieParser());
@@ -27,6 +27,9 @@ module.exports = function(app, passport, root){
     resave: false,
     saveUninitialized: true
   }));
+
+  // make the directory accessable
+  global._root = root;
 
   app.use(passport.initialize());
   app.use(passport.session());
