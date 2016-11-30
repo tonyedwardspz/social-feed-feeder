@@ -41,14 +41,14 @@ class Database {
     });
   }
 
-  publishWithImage(route, object, image) {
+  publishWithImage(route, object, method, image) {
 
     let data = new FormData();
     data.append('image', image, object.attachment);
     data.append('post', JSON.stringify(object));
 
     fetch(route, {
-      method: 'POST',
+      method: method,
       mode: 'cors',
       body: data
     })

@@ -86,7 +86,7 @@ module.exports = function(app, passport) {
 
    //-------------- Post Routes --------------\\
 
-   // GET: finds all posts
+   // GET: finds all post
    app.get('/posts', posts.index);
 
    // POST: creates a new posts
@@ -101,7 +101,11 @@ module.exports = function(app, passport) {
    // DELETE: deletes posts by id
    app.delete('/posts/:id', posts.delete);
 
-   app.post('/posts/image', posts.image);
+   // POST: creates a new post with image
+   app.post('/posts/image', posts.createImage);
+
+   // PUT: update posts with an image by id
+   app.put('/posts/:id/image', posts.updateImage);
 
 
    //-------------- Misc Routes --------------\\

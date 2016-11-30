@@ -8,10 +8,8 @@ var fs = require('fs');
 var util = require('util');
 
 class PostController extends BaseController {
-  constructor(dir) {
+  constructor() {
     super('post controller');
-
-    this.dir = dir;
   }
 
   // GET /posts
@@ -82,7 +80,8 @@ class PostController extends BaseController {
     });
   }
 
-  image(req, res) {
+  // POST /posts/image
+  createImage(req, res) {
     console.log('[Post] image upload hit');
 
     let form = new formidable.IncomingForm();
@@ -97,16 +96,10 @@ class PostController extends BaseController {
       console.log('An error has occured: \n' + err);
     });
 
-    // once all the files have been uploaded, send a response to the client
-    // form.on('end', function() {
-    //   res.end('success');
-    // });
-
     // parse the incoming request containing the form data
     let post = {};
     form.parse(req, function(err, fields, files) {
       post = JSON.parse(fields.post);
-      console.log(post.message);
 
       let newPost = new MongoPost({
         postID: post.postID,
@@ -126,23 +119,43 @@ class PostController extends BaseController {
       });
 
       res.send(JSON.stringify({ a: result }));
+    });
+  }
 
-      // MongoPost.update({ postID: post.postID }, {$set: {
-      //   message: post.message,
-      //   lastPostDate: post.lastPostDate,
-      //   attachment: post.attachment
-      // }}, (err, updated) => {
-      //   if (err) {
-      //     console.log(`Error saving post: ${err}`);
-      //   } else {
-      //     console.log(`Post Updated: ${updated}`);
-      //     res.send(JSON.stringify({ a: 'Post Updated Succesfully' }));
-      //   }
-      // });
+  // PATCH/PUT /posts/:id/image
+  updateImage(req, res){
+    console.log('[Post] image update hit');
 
+    let form = new formidable.IncomingForm();
+    form.multiples = true;
+    form.uploadDir = path.join(_root , `/public/images/uploads`);
+
+    form.on('file', function(field, file) {
+      fs.rename(file.path, path.join(form.uploadDir, file.name));
     });
 
-    // res.send(JSON.stringify({ result: 'success' }));
+    form.on('error', function(err) {
+      console.log('An error has occured: \n' + err);
+    });
+
+    // parse the incoming request containing the form data
+    let post = {};
+    form.parse(req, function(err, fields, files) {
+      post = JSON.parse(fields.post);
+
+      MongoPost.update({ postID: post.postID }, {$set: {
+        message: post.message,
+        lastPostDate: post.lastPostDate,
+        attachment: post.attachment
+      }}, (err, updated) => {
+        if (err) {
+          console.log(`Error saving post: ${err}`);
+        } else {
+          console.log(`Post Updated: ${updated}`);
+          res.send(JSON.stringify({ a: 'Post Updated Succesfully' }));
+        }
+      });
+    });
   }
 
   // DELETE /posts/:id

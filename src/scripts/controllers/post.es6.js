@@ -37,7 +37,7 @@ class PostController extends BaseController {
 
       if (form.attachment.files[0]){
         console.log('has attachment');
-        app.db.publishWithImage('/posts/image', post, form.attachment.files[0]);
+        app.db.publishWithImage('/posts/image', post, 'POST', form.attachment.files[0]);
       } else {
         app.db.publish('/posts', post);
       }
@@ -78,8 +78,13 @@ class PostController extends BaseController {
 
       let post = Post.findByID(id, Post.getAllPosts());
 
+      if (form.attachment.files[0]){
+        console.log('has attachment');
+        app.db.publishWithImage(`/posts/${id}/image`, post, 'PUT', form.attachment.files[0]);
+      } else {
+        app.db.publish(`/posts/${id}`, post, 'PUT');
+      }
       post.updateFromForm(form);
-      app.db.publish(`/posts/${id}`, post, 'PUT');
 
       app.bucketController.show(post.bucketID);
     });
