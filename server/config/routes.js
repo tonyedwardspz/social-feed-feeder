@@ -1,11 +1,11 @@
 'use strict';
 
-var path = require('path');
-var users = require('../controllers/users');
-var campaigns = require('../controllers/campaigns');
-var buckets = require('../controllers/buckets');
-var posts = require('../controllers/posts');
-var dash = require('../controllers/dashboard');
+let path = require('path');
+let users = require('../controllers/users');
+let campaigns = require('../controllers/campaigns');
+let buckets = require('../controllers/buckets');
+let posts = require('../controllers/posts');
+let dash = require('../controllers/dashboard');
 // var cookieParser = require('cookie-parser');
 
 module.exports = function(app, passport) {
@@ -50,14 +50,8 @@ module.exports = function(app, passport) {
 
   //-------------- Campaign Routes --------------\\
 
-  // GET: finds all campaigns
-  app.get('/campaigns', campaigns.index);
-
   // POST: creates a new campaign
   app.post('/campaigns', campaigns.create);
-
-  // GET: find campaign by id
-  app.get('/campaigns/:id', campaigns.show);
 
   // PUT: update campaign by id
   app.put('/campaigns/:id', campaigns.update);
