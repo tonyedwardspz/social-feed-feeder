@@ -16,7 +16,7 @@ class Post {
   }
 
   getAttachmentString() {
-    if (this.attachment !== undefined) {
+    if (this.attachment) {
       return `public/images/uploads/${this.attachment}`;
     } else {
       return 'public/images/placeholder-image.jpg';
@@ -55,8 +55,6 @@ class Post {
 
   updateFromForm(form) {
     this.message = form.message.value;
-
-    // TODO: Handle changes to the attachment
 
     app.user.posts.forEach(post => {
       if (post.postID === this.postID) {

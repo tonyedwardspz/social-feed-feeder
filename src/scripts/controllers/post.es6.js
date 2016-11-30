@@ -33,10 +33,9 @@ class PostController extends BaseController {
       document.getElementById('post_save').disabled = true;
 
       let post = Post.createFromForm(form);
-      post.attachment = getRandomFileName(form.attachment.files[0].name);
 
       if (form.attachment.files[0]){
-        console.log('has attachment');
+        post.attachment = getRandomFileName(form.attachment.files[0].name);
         app.db.publishWithImage('/posts/image', post, 'POST', form.attachment.files[0]);
       } else {
         app.db.publish('/posts', post);
@@ -77,14 +76,15 @@ class PostController extends BaseController {
       document.getElementById('post_save_edit').disabled = true;
 
       let post = Post.findByID(id, Post.getAllPosts());
+      post.updateFromForm(form);
 
       if (form.attachment.files[0]){
-        console.log('has attachment');
-        app.db.publishWithImage(`/posts/${id}/image`, post, 'PUT', form.attachment.files[0]);
+        post.attachment = getRandomFileName(form.attachment.files[0].name);
+        app.db.publishWithImage(`/posts/${id}/image`, post, 'PUT',
+            form.attachment.files[0]);
       } else {
         app.db.publish(`/posts/${id}`, post, 'PUT');
       }
-      post.updateFromForm(form);
 
       app.bucketController.show(post.bucketID);
     });

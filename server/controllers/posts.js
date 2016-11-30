@@ -2,6 +2,7 @@
 
 let BaseController = require('./base');
 let MongoPost = require('../models/post').getMongooseModel();
+let Post = require('../models/post');
 var path = require('path');
 var formidable = require('formidable');
 var fs = require('fs');
@@ -38,46 +39,14 @@ class PostController extends BaseController {
   create(req, res) {
     console.log('[ROUTE] Posts:POST hit');
 
-    if (req.body.image){
-      console.log('IMAGE IN BODY');
-    }
-
-    let post = new MongoPost({
-      postID: req.body.postID,
-      bucketID: req.body.bucketID,
-      userID: req.body.userID,
-      message: req.body.message,
-      lastPostDate: req.body.lastPostDate,
-      attachment: req.body.attachment
-    });
-
-    var result = 'sucess';
-    post.save(err => {
-      if (err) {
-        console.log(err);
-        result = `error saving post : ${err}`;
-      }
-    });
-
-    res.send(JSON.stringify({ a: result }));
+    Post.saveNewPost(req, res, req.body);
   }
 
   // PATCH/PUT /posts/:id
   update(req, res) {
     console.log('[ROUTE] Posts:PUT hit');
 
-    MongoPost.update({ postID: req.params.id }, {$set: {
-      message: req.body.message,
-      lastPostDate: req.body.lastPostDate,
-      attachment: req.body.attachment
-    }}, (err, updated) => {
-      if (err) {
-        console.log(`Error updating post: ${err}`);
-      } else {
-        console.log(`Post Updated: ${updated}`);
-        res.send(JSON.stringify({ a: 'Post Updated Succesfully' }));
-      }
-    });
+    Post.updatePost(req, res, req.body);
   }
 
   // POST /posts/image
@@ -97,28 +66,8 @@ class PostController extends BaseController {
     });
 
     // parse the incoming request containing the form data
-    let post = {};
     form.parse(req, function(err, fields, files) {
-      post = JSON.parse(fields.post);
-
-      let newPost = new MongoPost({
-        postID: post.postID,
-        bucketID: post.bucketID,
-        userID: post.userID,
-        message: post.message,
-        lastPostDate: post.lastPostDate,
-        attachment: post.attachment
-      });
-
-      var result = 'sucess';
-      newPost.save(err => {
-        if (err) {
-          console.log(err);
-          result = `error saving post : ${err}`;
-        }
-      });
-
-      res.send(JSON.stringify({ a: result }));
+      Post.saveNewPost(req, res, JSON.parse(fields.post));
     });
   }
 
@@ -130,31 +79,18 @@ class PostController extends BaseController {
     form.multiples = true;
     form.uploadDir = path.join(_root , `/public/images/uploads`);
 
+    // save the attached image to '/public/images/uploads'
     form.on('file', function(field, file) {
-      fs.rename(file.path, path.join(form.uploadDir, file.name));
+      fs.rename(file.path, path.join(form.uploadDir, file.name.split(' ').join('_')));
     });
 
     form.on('error', function(err) {
       console.log('An error has occured: \n' + err);
     });
 
-    // parse the incoming request containing the form data
-    let post = {};
+    // parse the incoming request containing the form data and save
     form.parse(req, function(err, fields, files) {
-      post = JSON.parse(fields.post);
-
-      MongoPost.update({ postID: post.postID }, {$set: {
-        message: post.message,
-        lastPostDate: post.lastPostDate,
-        attachment: post.attachment
-      }}, (err, updated) => {
-        if (err) {
-          console.log(`Error saving post: ${err}`);
-        } else {
-          console.log(`Post Updated: ${updated}`);
-          res.send(JSON.stringify({ a: 'Post Updated Succesfully' }));
-        }
-      });
+      Post.updatePost(req, res, JSON.parse(fields.post));
     });
   }
 
