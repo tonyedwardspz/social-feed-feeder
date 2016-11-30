@@ -14,3 +14,10 @@ let randomString = (length = 32) => {
   }
   return result;
 };
+
+let getRandomFileName = (fileName) => {
+  let extention = fileName.split('.').pop();
+  let newFileName = `${randomString()}.${extention}`;
+  console.log('New file name: ', newFileName);
+  return newFileName;
+};

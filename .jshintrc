@@ -33,6 +33,9 @@
     "loadContent": true,
     "getCookie": true,
     "updateBrowserHistory": true,
+    "readImageFile": true,
+    "_root": true,
+    "getRandomFileName": true,
 
     "require": true,
     "module": true,

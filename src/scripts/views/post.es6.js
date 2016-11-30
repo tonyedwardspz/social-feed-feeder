@@ -22,6 +22,7 @@ class PostView {
 
   form(campaignID, bucketID, post = new Post()) {
     let exists = post.message !== undefined ? true : false;
+
     return `<form name="form_post_new" method="POST" data-bucketid="${bucketID}">
 
               <label for="message">Message</label>
@@ -31,17 +32,25 @@ class PostView {
                 <span id="tweet-char-remaining">140</span></p>
 
               <label for="attachment">Attachment</label>
-              <input type="file" name="attachment" id="attachment"/>
+              <input type="file" name="attachment" id="attachment"
+                     accept="image/*"/>
+
+              <div class="image-preview-wrapper">
+                <img id="image-preview" class="preview"
+                     src="${post.getAttachmentString()}"/>
+              </div>
 
               <input type="hidden" name="bucketID" id="bucketID"
                      value="${bucketID}" />
               <input type="hidden" name="campaignID" id="campaignID"
                      value="${campaignID}" />
-
-              <button id="${!exists ? 'post_save' : 'post_save_edit'}"
-                      data-id="${!exists ? bucketID : post.postID}">
-                      Save</button>
-              <button class='bucket_show' data-id="${bucketID}">Cancel</button>
+              <div class="button-wrapper">
+                <button id="${!exists ? 'post_save' : 'post_save_edit'}"
+                        data-id="${!exists ? bucketID : post.postID}">
+                        Save</button>
+                <button class='bucket_show' data-id="${bucketID}">
+                        Cancel</button>
+              </div>
             </form>`;
   }
 

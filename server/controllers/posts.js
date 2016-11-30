@@ -2,6 +2,11 @@
 
 let BaseController = require('./base');
 let MongoPost = require('../models/post').getMongooseModel();
+let Post = require('../models/post');
+var path = require('path');
+var formidable = require('formidable');
+var fs = require('fs');
+var util = require('util');
 
 class PostController extends BaseController {
   constructor() {
@@ -34,42 +39,59 @@ class PostController extends BaseController {
   create(req, res) {
     console.log('[ROUTE] Posts:POST hit');
 
-    let bucket = new MongoPost({
-      postID: req.body.postID,
-      bucketID: req.body.bucketID,
-      userID: req.body.userID,
-      message: req.body.message,
-      lastPostDate: req.body.lastPostDate,
-      attachment: req.body.attachment
-    });
-
-    var result = 'sucess';
-    bucket.save(err => {
-      if (err) {
-        console.log(err);
-        result = `error saving bucket : ${err}`;
-      }
-    });
-
-    res.send(JSON.stringify({ a: result }));
+    Post.saveNewPost(req, res, req.body);
   }
 
   // PATCH/PUT /posts/:id
   update(req, res) {
     console.log('[ROUTE] Posts:PUT hit');
 
-    MongoPost.update({ postID: req.params.id }, {$set: {
-      message: req.body.message,
-      lastPostDate: req.body.lastPostDate,
-      attachment: req.body.attachment
-    }}, (err, updated) => {
-      if (err) {
-        console.log(`Error deleting campaign: ${err}`);
-      } else {
-        console.log(`Campaign removed: ${updated}`);
-        res.send(JSON.stringify({ a: 'Post Updated Succesfully' }));
-      }
-    });  
+    Post.updatePost(req, res, req.body);
+  }
+
+  // POST /posts/image
+  createImage(req, res) {
+    console.log('[Post] image upload hit');
+
+    let form = new formidable.IncomingForm();
+    form.multiples = true;
+    form.uploadDir = path.join(_root , `/public/images/uploads`);
+
+    form.on('file', function(field, file) {
+      fs.rename(file.path, path.join(form.uploadDir, file.name.split(' ').join('_')));
+    });
+
+    form.on('error', function(err) {
+      console.log('An error has occured: \n' + err);
+    });
+
+    // parse the incoming request containing the form data
+    form.parse(req, function(err, fields, files) {
+      Post.saveNewPost(req, res, JSON.parse(fields.post));
+    });
+  }
+
+  // PATCH/PUT /posts/:id/image
+  updateImage(req, res){
+    console.log('[Post] image update hit');
+
+    let form = new formidable.IncomingForm();
+    form.multiples = true;
+    form.uploadDir = path.join(_root , `/public/images/uploads`);
+
+    // save the attached image to '/public/images/uploads'
+    form.on('file', function(field, file) {
+      fs.rename(file.path, path.join(form.uploadDir, file.name.split(' ').join('_')));
+    });
+
+    form.on('error', function(err) {
+      console.log('An error has occured: \n' + err);
+    });
+
+    // parse the incoming request containing the form data and save
+    form.parse(req, function(err, fields, files) {
+      Post.updatePost(req, res, JSON.parse(fields.post));
+    });
   }
 
   // DELETE /posts/:id

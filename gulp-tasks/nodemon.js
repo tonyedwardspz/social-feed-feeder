@@ -12,6 +12,7 @@ gulp.task('nodemon', function() {
   });
 
   return nodemon({
-    script: 'server.js'
+    script: 'server.js',
+    ignore: ['./public/', './src', './gulp-tasks', './node_modules', './tests']
   });
 });

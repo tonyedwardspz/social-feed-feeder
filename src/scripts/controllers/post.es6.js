@@ -13,7 +13,7 @@ class PostController extends BaseController {
   new(bucketID, updateHistory = true) {
     console.log(`[Post] New for bucket: ${bucketID}`);
 
-    let bucket = Bucket.getByID(bucketID, app.user.buckets);
+    let bucket = Bucket.findByID(bucketID, app.user.buckets);
     let html = app.postView.new([bucket.campaignID, bucketID]);
 
     this.updateShell(html);
@@ -31,10 +31,17 @@ class PostController extends BaseController {
 
     this.validateFormData(form, () => {
       document.getElementById('post_save').disabled = true;
+
       let post = Post.createFromForm(form);
 
+      if (form.attachment.files[0]){
+        post.attachment = getRandomFileName(form.attachment.files[0].name);
+        app.db.publishWithImage('/posts/image', post, 'POST', form.attachment.files[0]);
+      } else {
+        app.db.publish('/posts', post);
+      }
+
       app.user.posts.push(post);
-      app.db.publish('/posts', post);
 
       app.bucketController.show(post.bucketID);
     });
@@ -69,9 +76,15 @@ class PostController extends BaseController {
       document.getElementById('post_save_edit').disabled = true;
 
       let post = Post.findByID(id, Post.getAllPosts());
-
       post.updateFromForm(form);
-      app.db.publish(`/posts/${id}`, post, 'PUT');
+
+      if (form.attachment.files[0]){
+        post.attachment = getRandomFileName(form.attachment.files[0].name);
+        app.db.publishWithImage(`/posts/${id}/image`, post, 'PUT',
+            form.attachment.files[0]);
+      } else {
+        app.db.publish(`/posts/${id}`, post, 'PUT');
+      }
 
       app.bucketController.show(post.bucketID);
     });

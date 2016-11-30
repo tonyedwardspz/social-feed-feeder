@@ -15,6 +15,14 @@ class Post {
     return convertDateToLocale(this.lastPostDate);
   }
 
+  getAttachmentString() {
+    if (this.attachment) {
+      return `public/images/uploads/${this.attachment}`;
+    } else {
+      return 'public/images/placeholder-image.jpg';
+    }
+  }
+
   static findByID(id, posts) {
     let thisPost = {};
     posts.forEach(post => {
@@ -47,8 +55,6 @@ class Post {
 
   updateFromForm(form) {
     this.message = form.message.value;
-
-    // TODO: Handle changes to the attachment
 
     app.user.posts.forEach(post => {
       if (post.postID === this.postID) {

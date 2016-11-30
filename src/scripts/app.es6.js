@@ -31,4 +31,6 @@ var app;
 
   // Setup popstate listener for user using the back/forward button
   setupPopStateListener();
+
+  setupAttachmentChangeListener();
 })();
