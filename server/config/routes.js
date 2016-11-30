@@ -1,11 +1,11 @@
 'use strict';
 
-var path = require('path');
-var users = require('../controllers/users');
-var campaigns = require('../controllers/campaigns');
-var buckets = require('../controllers/buckets');
-var posts = require('../controllers/posts');
-var dash = require('../controllers/dashboard');
+let path = require('path');
+let users = require('../controllers/users');
+let campaigns = require('../controllers/campaigns');
+let buckets = require('../controllers/buckets');
+let posts = require('../controllers/posts');
+let dash = require('../controllers/dashboard');
 // var cookieParser = require('cookie-parser');
 
 module.exports = function(app, passport) {
@@ -50,14 +50,8 @@ module.exports = function(app, passport) {
 
   //-------------- Campaign Routes --------------\\
 
-  // GET: finds all campaigns
-  app.get('/campaigns', campaigns.index);
-
   // POST: creates a new campaign
   app.post('/campaigns', campaigns.create);
-
-  // GET: find campaign by id
-  app.get('/campaigns/:id', campaigns.show);
 
   // PUT: update campaign by id
   app.put('/campaigns/:id', campaigns.update);
@@ -68,14 +62,8 @@ module.exports = function(app, passport) {
 
    //-------------- Bucket Routes --------------\\
 
-   // GET: finds all buckets
-   app.get('/buckets', buckets.index);
-
    // POST: creates a new buckets
    app.post('/buckets', buckets.create);
-
-   // GET: find buckets by id
-   app.get('/buckets/:id', buckets.show);
 
    // PUT: update buckets by id
    app.put('/buckets/:id', buckets.update);
@@ -86,14 +74,7 @@ module.exports = function(app, passport) {
 
    //-------------- Post Routes --------------\\
 
-   // GET: finds all post
-   app.get('/posts', posts.index);
-
-   // POST: creates a new posts
    app.post('/posts', posts.create);
-
-   // GET: find posts by id
-   app.get('/posts/:id', posts.show);
 
    // PUT: update posts by id
    app.put('/posts/:id', posts.update);
