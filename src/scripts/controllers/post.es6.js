@@ -33,12 +33,11 @@ class PostController extends BaseController {
       document.getElementById('post_save').disabled = true;
 
       let post = Post.createFromForm(form);
+      post.attachment = getRandomFileName(form.attachment.files[0].name);
 
       if (form.attachment.files[0]){
         console.log('has attachment');
-        // readImageFile(form.attachment.files[0], (image) => {
-          app.db.publishWithImage('/posts/image', post, form.attachment.files[0]);
-        // });
+        app.db.publishWithImage('/posts/image', post, form.attachment.files[0]);
       } else {
         app.db.publish('/posts', post);
       }

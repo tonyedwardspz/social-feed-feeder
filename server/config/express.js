@@ -4,7 +4,6 @@ let cookieParser = require('cookie-parser');
 let express = require('express');
 let bodyParser = require('body-parser');
 let session = require('express-session');
-var formidable = require('formidable');
 
 module.exports = function(app, passport, root){
 
@@ -28,7 +27,7 @@ module.exports = function(app, passport, root){
     saveUninitialized: true
   }));
 
-  // make the directory accessable
+  // make the root directory accessable
   global._root = root;
 
   app.use(passport.initialize());

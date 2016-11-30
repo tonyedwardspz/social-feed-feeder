@@ -44,7 +44,7 @@ class Database {
   publishWithImage(route, object, image) {
 
     let data = new FormData();
-    data.append('image', image, image.name);
+    data.append('image', image, object.attachment);
     data.append('post', object);
 
     fetch(route, {
