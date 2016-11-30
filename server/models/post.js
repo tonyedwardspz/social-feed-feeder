@@ -2,9 +2,9 @@
 
 let mongoose = require('mongoose');
 let BaseModel = require('./base');
-var formidable = require('formidable');
-var path = require('path');
-var fs = require('fs');
+let formidable = require('formidable');
+let path = require('path');
+let fs = require('fs');
 
 class Post extends BaseModel{
   constructor() {

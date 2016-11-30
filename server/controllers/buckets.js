@@ -3,7 +3,6 @@
 let BaseController = require('./base');
 let Bucket = require('../models/bucket');
 let MongoBucket = Bucket.getMongooseModel();
-let MongoPost = require('../models/post').getMongooseModel();
 let Post = require('../models/post');
 
 class BucketController extends BaseController {
@@ -28,7 +27,7 @@ class BucketController extends BaseController {
       frequency: req.body.frequency
     });
 
-    var result = 'sucess';
+    let result = 'sucess';
     bucket.save(err => {
       if (err) {
         console.log(err);
