@@ -86,15 +86,6 @@ module.exports = function(app, passport) {
 
    //-------------- Post Routes --------------\\
 
-   // GET: finds all post
-   app.get('/posts', posts.index);
-
-   // POST: creates a new posts
-   app.post('/posts', posts.create);
-
-   // GET: find posts by id
-   app.get('/posts/:id', posts.show);
-
    // PUT: update posts by id
    app.put('/posts/:id', posts.update);
 

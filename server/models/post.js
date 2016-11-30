@@ -2,6 +2,9 @@
 
 let mongoose = require('mongoose');
 let BaseModel = require('./base');
+var formidable = require('formidable');
+var path = require('path');
+var fs = require('fs');
 
 class Post extends BaseModel{
   constructor() {
@@ -63,6 +66,37 @@ class Post extends BaseModel{
         console.log(`Post Updated: ${updated}`);
         res.send(JSON.stringify({ a: 'Post Updated Succesfully' }));
       }
+    });
+  }
+
+  extractImageAndSave(req, res) {
+    let form = new formidable.IncomingForm();
+    form.multiples = true;
+    form.uploadDir = path.join(_root , `/public/images/uploads`);
+
+    // save the attached image to '/public/images/uploads/'
+    form.on('file', function(field, file) {
+      fs.rename(file.path, path.join(form.uploadDir, file.name.split(' ').join('_')));
+    });
+
+    form.on('error', function(err) {
+      console.log('An error has occured: \n' + err);
+    });
+
+    // parse the incoming request containing the form data and save
+    form.parse(req, (err, fields, files) => {
+      this.updatePost(req, res, JSON.parse(fields.post));
+    });
+  }
+
+  delete(req, res) {
+    this.getMongooseModel().remove({ postID: req.params.id }, (err, removed) => {
+      if (err) {
+        console.log(`Error deleting post ${err}`);
+      } else {
+        console.log(`Post removed: ${removed}`);
+      }
+      res.send(JSON.stringify({ a: `${err ? err : removed}` }));
     });
   }
 }
