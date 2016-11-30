@@ -74,6 +74,8 @@ module.exports = function(app, passport) {
 
    //-------------- Post Routes --------------\\
 
+   app.post('/posts', posts.create);
+
    // PUT: update posts by id
    app.put('/posts/:id', posts.update);
 
