@@ -89,7 +89,7 @@ class PostController extends BaseController {
     form.uploadDir = path.join(_root , `/public/images/uploads`);
 
     form.on('file', function(field, file) {
-      fs.rename(file.path, path.join(form.uploadDir, file.name.replace(' ','_')));
+      fs.rename(file.path, path.join(form.uploadDir, file.name.split(' ').join('_')));
     });
 
     form.on('error', function(err) {
