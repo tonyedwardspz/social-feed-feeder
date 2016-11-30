@@ -5,6 +5,7 @@ let MongoPost = require('../models/post').getMongooseModel();
 var path = require('path');
 var formidable = require('formidable');
 var fs = require('fs');
+var util = require('util');
 
 class PostController extends BaseController {
   constructor(dir) {
@@ -43,7 +44,7 @@ class PostController extends BaseController {
       console.log('IMAGE IN BODY');
     }
 
-    let bucket = new MongoPost({
+    let post = new MongoPost({
       postID: req.body.postID,
       bucketID: req.body.bucketID,
       userID: req.body.userID,
@@ -53,10 +54,10 @@ class PostController extends BaseController {
     });
 
     var result = 'sucess';
-    bucket.save(err => {
+    post.save(err => {
       if (err) {
         console.log(err);
-        result = `error saving bucket : ${err}`;
+        result = `error saving post : ${err}`;
       }
     });
 
@@ -73,16 +74,16 @@ class PostController extends BaseController {
       attachment: req.body.attachment
     }}, (err, updated) => {
       if (err) {
-        console.log(`Error deleting campaign: ${err}`);
+        console.log(`Error updating post: ${err}`);
       } else {
-        console.log(`Campaign removed: ${updated}`);
+        console.log(`Post Updated: ${updated}`);
         res.send(JSON.stringify({ a: 'Post Updated Succesfully' }));
       }
     });
   }
 
   image(req, res) {
-    console.log('[Post] image upload hit', JSON.stringify(req.body));
+    console.log('[Post] image upload hit');
 
     let form = new formidable.IncomingForm();
     form.multiples = true;
@@ -97,14 +98,51 @@ class PostController extends BaseController {
     });
 
     // once all the files have been uploaded, send a response to the client
-    form.on('end', function() {
-      res.end('success');
-    });
+    // form.on('end', function() {
+    //   res.end('success');
+    // });
 
     // parse the incoming request containing the form data
-    form.parse(req);
+    let post = {};
+    form.parse(req, function(err, fields, files) {
+      post = JSON.parse(fields.post);
+      console.log(post.message);
 
-    res.send(JSON.stringify({ result: 'success' }));
+      let newPost = new MongoPost({
+        postID: post.postID,
+        bucketID: post.bucketID,
+        userID: post.userID,
+        message: post.message,
+        lastPostDate: post.lastPostDate,
+        attachment: post.attachment
+      });
+
+      var result = 'sucess';
+      newPost.save(err => {
+        if (err) {
+          console.log(err);
+          result = `error saving post : ${err}`;
+        }
+      });
+
+      res.send(JSON.stringify({ a: result }));
+
+      // MongoPost.update({ postID: post.postID }, {$set: {
+      //   message: post.message,
+      //   lastPostDate: post.lastPostDate,
+      //   attachment: post.attachment
+      // }}, (err, updated) => {
+      //   if (err) {
+      //     console.log(`Error saving post: ${err}`);
+      //   } else {
+      //     console.log(`Post Updated: ${updated}`);
+      //     res.send(JSON.stringify({ a: 'Post Updated Succesfully' }));
+      //   }
+      // });
+
+    });
+
+    // res.send(JSON.stringify({ result: 'success' }));
   }
 
   // DELETE /posts/:id

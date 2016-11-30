@@ -45,7 +45,7 @@ class Database {
 
     let data = new FormData();
     data.append('image', image, object.attachment);
-    data.append('post', object);
+    data.append('post', JSON.stringify(object));
 
     fetch(route, {
       method: 'POST',
