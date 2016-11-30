@@ -2,34 +2,12 @@
 
 let BaseController = require('./base');
 let MongoCampaign = require('../models/campaign').getMongooseModel();
-let MongoBucket = require('../models/bucket').getMongooseModel();
-let MongoPost = require('../models/post').getMongooseModel();
+let Bucket = require('../models/bucket');
+let Post = require('../models/post');
 
 class CampaignController extends BaseController {
   constructor() {
     super('campaign controller');
-  }
-
-  // GET /campaigns
-  index(req, res) {
-    console.log('[Controller] Campaign:GET hit');
-    res.send(JSON.stringify({ a: 'Response from Campaigns GET' }));
-  }
-
-  // GET /campaigns/:id
-  show(req, res) {
-    console.log('[ROUTE] Campaign:GET:id hit');
-    res.send(JSON.stringify({ a: 'Response from Campaigns GET:id' }));
-  }
-
-  // GET /campaigns/new
-  new(req, res) {
-
-  }
-
-  // GET /campaigns/:id/edit
-  edit(req, res) {
-
   }
 
   // POST /campaigns
@@ -45,15 +23,16 @@ class CampaignController extends BaseController {
       userID: req.body.userID
     });
 
-    // TODP - Change to success / failure
+    // TODO: Change to success / failure chaining
+    let result = 'sucess';
     campaign.save(function(err) {
-        if (err) {
-          console.log(err);
-        }
-        // return done(err, user);
+      if (err) {
+        console.log(err);
+        result = `error saving campaign : ${err}`;
+      }
     });
 
-    res.send(JSON.stringify({ a: 'Response from Campaigns POST' }));
+    res.send(JSON.stringify({ a: result }));
   }
 
   // PATCH/PUT /campaigns/:id
@@ -78,32 +57,9 @@ class CampaignController extends BaseController {
   // DELETE /campaigns/:id
   delete(req, res) {
     console.log('[ROUTE] Campaign:DELETE hit');
-
-    MongoCampaign.remove({ campaignID: req.params.id }, (err, removed) => {
-      if (err) {
-        console.log(`Error deleting campaign: ${err}`);
-      } else {
-        console.log(`Campaign removed: ${removed}`);
-      }
-    });
-
-    MongoBucket.remove({ campaignID: req.params.id }, (err, removed) => {
-      if (err) {
-        console.log(`Error deleting buckets for campaign: ${err}`);
-      } else {
-        console.log(`Buckets removed: ${removed}`);
-      }
-    });
-
-    MongoPost.remove({ campaignID: req.params.id }, (err, removed) => {
-      if (err) {
-        console.log(`Error deleting posts from buckets for campaign: ${err}`);
-      } else {
-        console.log(`Posts removed: ${removed}`);
-      }
-    });
-
-    // res.send(JSON.stringify({ a: 'Response from Campaigns DELETE' }));
+    Campaign.delete(req, res);
+    Bucket.delete(req, res, 'campaignID');
+    Post.delete(req, res, 'campaignID');
   }
 }
 

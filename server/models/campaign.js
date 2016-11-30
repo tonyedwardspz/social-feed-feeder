@@ -28,6 +28,22 @@ class Campaign extends BaseModel {
     let mongoModel = this.getMongooseModel();
     return this.getPromise(mongoModel, userID, 'campaigns');
   }
+
+  delete(req, res, field = 'campaignID') {
+    let thisCampaign = this.getObject(field, req.params.id);
+
+    this.getMongooseModel().remove(thisCampaign, (err, removed) => {
+      if (err) {
+        console.log(`Error deleting campaign: ${err}`);
+      } else {
+        console.log(`Campaign removed: ${removed}`);
+
+        if (field === 'campaignID') {
+          res.send(JSON.stringify({ a: `${err ? err : removed}` }));
+        }
+      }
+    });
+  }
 }
 
 module.exports = new Campaign();
