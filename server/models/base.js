@@ -5,6 +5,12 @@ class BaseModel {
 
   }
 
+  getObject(key, value){
+    let object = {};
+    object[key] = value;
+    return object;
+  }
+
   // Return a promise for retrieving the data from the database
   getPromise(mongoModel, userID, model) {
     return new Promise(

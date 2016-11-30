@@ -89,14 +89,21 @@ class Post extends BaseModel{
     });
   }
 
-  delete(req, res) {
-    this.getMongooseModel().remove({ postID: req.params.id }, (err, removed) => {
+  // TODO: Switch to promises to handle res.send
+  delete(req, res, field = 'postID') {
+    let thisPost = this.getObject(field, req.params.id);
+
+    this.getMongooseModel().remove(thisPost, (err, removed) => {
       if (err) {
         console.log(`Error deleting post ${err}`);
       } else {
         console.log(`Post removed: ${removed}`);
       }
-      res.send(JSON.stringify({ a: `${err ? err : removed}` }));
+
+      // quick fix to prevent 4 deep nested callbacks
+      if (field === 'postID'){
+        res.send(JSON.stringify({ a: `${err ? err : removed}` }));
+      }
     });
   }
 }

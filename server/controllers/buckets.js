@@ -4,32 +4,11 @@ let BaseController = require('./base');
 let Bucket = require('../models/bucket');
 let MongoBucket = Bucket.getMongooseModel();
 let MongoPost = require('../models/post').getMongooseModel();
+let Post = require('../models/post');
 
 class BucketController extends BaseController {
   constructor() {
     super('bucket controller');
-  }
-
-  // GET /buckets
-  index(req, res) {
-    console.log('[ROUTE] Bucket:GET hit');
-    res.send(JSON.stringify({ a: 'Response from Buckets GET' }));
-  }
-
-  // GET /buckets/:id
-  show(req, res) {
-    console.log('[ROUTE] Buckets:GET:id hit');
-    res.send(JSON.stringify({ a: 'Response from Buckets GET:id' }));
-  }
-
-  // GET /buckets/new
-  new(req, res) {
-
-  }
-
-  // GET /buckets/:id/edit
-  edit(req, res) {
-
   }
 
   // POST /buckets
@@ -89,23 +68,8 @@ class BucketController extends BaseController {
   delete(req, res) {
     console.log('[ROUTE] Buckets:DELETE hit');
 
-    MongoBucket.remove({ bucketID: req.params.id }, (err, removed) => {
-      if (err) {
-        console.log(`Error deleting bucket ${err}`);
-      } else {
-        console.log(`Buckets removed: ${removed}`);
-      }
-    });
-
-    MongoPost.remove({ bucketID: req.params.id }, (err, removed) => {
-      if (err) {
-        console.log(`Error deleting posts from buckets ${err}`);
-      } else {
-        console.log(`Posts removed: ${removed}`);
-      }
-    });
-
-    res.send(JSON.stringify({ a: 'Response from Buckets DELETE' }));
+    Bucket.delete(req, res);
+    Post.delete(req, res, 'bucketID');
   }
 }
 
