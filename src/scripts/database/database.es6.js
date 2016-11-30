@@ -100,8 +100,4 @@ class Database {
       console.log('Fetch Error :-S', err);
     });
   }
-
-  createFormData(){
-
-  }
 }

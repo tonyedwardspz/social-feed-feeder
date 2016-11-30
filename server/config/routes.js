@@ -68,14 +68,8 @@ module.exports = function(app, passport) {
 
    //-------------- Bucket Routes --------------\\
 
-   // GET: finds all buckets
-   app.get('/buckets', buckets.index);
-
    // POST: creates a new buckets
    app.post('/buckets', buckets.create);
-
-   // GET: find buckets by id
-   app.get('/buckets/:id', buckets.show);
 
    // PUT: update buckets by id
    app.put('/buckets/:id', buckets.update);
