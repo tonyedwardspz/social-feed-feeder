@@ -93,7 +93,13 @@ module.exports = function(app, passport) {
 
    // Serve manifest file
    app.get('/manifest.json', function(req, res){
-     res.sendFile(path.join(__dirname + '/public/manifest.json'));
+     res.sendFile(path.join(__dirname + '/../../public/manifest.json'));
+   });
+
+   app.get('/sw.js', (req, res) => {
+     console.log('sw route hita');
+     res.setHeader('content-type', 'text/javascript');
+     res.sendFile(path.join(__dirname + '/../../public/sw.js'));
    });
 
    // Catch all Route to the main dash (MUST BE LAST ROUTE)

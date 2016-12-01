@@ -26,11 +26,19 @@ var app;
   // Routes
   addRoutes();
 
-  // Settup twitter message listener
+  // Setup twitter message listener
   registerTwiiterInputDetection();
 
   // Setup popstate listener for user using the back/forward button
   setupPopStateListener();
 
+  // Setup listener for the post attachment
   setupAttachmentChangeListener();
+
+  // Register service worker to enable offline lovelyness
+  if ('serviceWorker' in navigator) {
+  navigator.serviceWorker.register('/sw.js').then((reg) => {
+    console.log('Service Worker Registered');
+  });
+}
 })();

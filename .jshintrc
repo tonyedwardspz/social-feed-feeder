@@ -36,6 +36,7 @@
     "readImageFile": true,
     "_root": true,
     "getRandomFileName": true,
+    "setupAttachmentChangeListener": true,
 
     "require": true,
     "module": true,
