@@ -2,150 +2,125 @@
 
 const version = 'v1.15::';
 const cacheName = version + 'static';
-const pagesCacheName = version + 'pages';
-const imagesCacheName = version + 'images';
-const offlinePages = [
-    '/'
+const cacheFiles = [
+  '/scripts/app.js',
+  '/index.html',
+  '/manifest.json',
+  '/images/pencil.svg',
+  '/images/placeholder-image.jpg',
+  '/images/placeholder-image-not-available.jpg',
+  '/images/x.svg',
+  '/'
 ];
 
+// Open the cache and store static files
 function updateStaticCache() {
-    return caches.open(staticCacheName)
-        .then( cache => {
-            // These items won't block the installation of the Service Worker
-            cache.addAll([].concat(offlinePages));
-
-            // These items must be cached for the Service Worker to complete installation
-            return cache.addAll([
-                '/scripts/app.js',
-                '/index.html',
-                '/manifest.json',
-                '/images/pencil.svg',
-                '/images/placeholder-image.jpg',
-                '/images/placeholder-image-not-available.jpg',
-                '/images/x.svg'
-            ]);
-        });
+  return caches.open(cacheName)
+    .then( cache => { return cache.addAll(cacheFiles);});
 }
 
+// Save an item into the cache
 function stashInCache(cacheName, request, response) {
-    caches.open(cacheName)
-        .then( cache => cache.put(request, response));
+  caches.open(cacheName).then( cache => cache.put(request, response));
 }
 
-// Limit the number of items in a specified cache.
+// Remove excess items over the passed limit
 function trimCache(cacheName, maxItems) {
-    caches.open(cacheName)
-        .then( cache => {
-            cache.keys()
-                .then(keys => {
-                    console.log('[SW] Trimming Cache');
-                    if (keys.length > maxItems) {
-                        cache.delete(keys[0])
-                            .then(trimCache(cacheName, maxItems));
-                    }
-                });
-        });
+  caches.open(cacheName).then( cache => {
+    cache.keys().then(keys => {
+      if (keys.length > maxItems) {
+        cache.delete(keys[0])
+        .then(trimCache(cacheName, maxItems));
+      }
+    });
+  });
 }
 
 // Remove caches whose name is no longer valid
 function clearOldCaches() {
-    return caches.keys()
-        .then( keys => {
-            console.log('[SW] Clearing old caches');
-            return Promise.all(keys
-                .filter(key => key.indexOf(version) !== 0)
-                .map(key => caches.delete(key))
-            );
-        });
+  return caches.keys()
+  .then( keys => {
+    return Promise.all(keys.filter(key => key.indexOf(version) !== 0)
+      .map(key => caches.delete(key))
+    );
+  });
 }
 
+// Save items to the cache upon installation
 self.addEventListener('install', event => {
-    event.waitUntil(updateStaticCache()
-        .then( () => {
-        console.log('[SW] Installed');
-        self.skipWaiting(); })
-    );
+  event.waitUntil(updateStaticCache()
+  .then( () => {
+    console.log('[SW] Installed');
+    self.skipWaiting(); })
+  );
 });
 
+// Clear cache and make this service worker the active one for the page.
+// This allows the SW to function immediately, rather than waiting for reload.
 self.addEventListener('activate', event => {
-    event.waitUntil(clearOldCaches()
-        .then( () => self.clients.claim() )
-    );
+  event.waitUntil(clearOldCaches()
+    .then( () => self.clients.claim() )
+);
 });
 
+// Listen for the message event, do some funky stuff
 self.addEventListener('message', event => {
-    if (event.data.command === 'trimCaches') {
-        trimCache(pagesCacheName, 35);
-        trimCache(imagesCacheName, 20);
-    }
+  if (event.data.command === 'trimCaches') {
+    trimCache(cacheName, 50);
+  }
 });
 
+// Intercept the fetch request and do some funky stuff
 self.addEventListener('fetch', event => {
-    let request = event.request;
-    let url = new URL(request.url);
+  let request = event.request;
+  let url = new URL(request.url);
 
-    // Ignore non-GET requests
-    console.log('[SW] Fetch event: ', request);
-    if (request.method !== 'GET') {
-      console.log('Not a get request: ', url);
-      return;
-    }
+  // Ignore non-GET requests, SW can't deal with them
+  if (request.method !== 'GET') {
+    return;
+  }
 
-    if (request.url.indexOf('dashboard_index') !== -1) {
-      console.log('Requesting Dashboard ', url);
-      return;
-    }
+  // // Don't check the cache for the dashboard to allow app.js to route the user
+  // if (request.url.indexOf('dashboard_index') !== -1) {
+  //   return;
+  // }
 
-    // For HTML requests, try the network first, fall back to the cache, finally the offline page
-    if (request.headers.get('Accept').indexOf('text/html') !== -1) {
-        console.log('[SW] HTML Request');
-
-        event.respondWith(
-            fetch(request)
-                .then( response => {
-                    // NETWORK
-                    // Stash a copy of this page in the pages cache
-                    let copy = response.clone();
-                    if (offlinePages.includes(url.pathname) || offlinePages.includes(url.pathname + '/')) {
-                        stashInCache(staticCacheName, request, copy);
-                    } else {
-                        stashInCache(pagesCacheName, request, copy);
-                    }
-                    return response;
-                })
-                .catch( () => {
-                    // CACHE or FALLBACK
-                    console.log('HTML catch');
-                    return caches.match(request)
-                        .then( response => response || caches.match('/') );
-                })
-        );
-        return;
-    }
-
-    // For non-HTML requests, look in the cache first, fall back to the network
+  // For HTML requests, try the network first, fall back to the cache,
+  // finally redirect to base url to allow app.js to send user to dashboard
+  if (request.headers.get('Accept').indexOf('text/html') !== -1) {
     event.respondWith(
-        caches.match(request)
-            .then(response => {
-                // CACHE
-                console.log('[SW] Non HTML Requet: ', request);
-                return response || fetch(request)
-                    .then( response => {
-                        // NETWORK
-                        // If the request is for an image, stash a copy of this image in the images cache
-                        // if (request.headers.get('Accept').indexOf('image') !== -1) {
-                            let copy = response.clone();
-                            stashInCache(imagesCacheName, request, copy);
-                        // }
-                        return response;
-                    })
-                    .catch( () => {
-                        // OFFLINE
-                        // If the request is for an image, show an offline placeholder
-                        if (request.headers.get('Accept').indexOf('image') !== -1) {
-                            return new Response('<svg role="img" aria-labelledby="offline-title" viewBox="0 0 400 300" xmlns="http://www.w3.org/2000/svg"><title id="offline-title">Offline</title><g fill="none" fill-rule="evenodd"><path fill="#D8D8D8" d="M0 0h400v300H0z"/><text fill="#9B9B9B" font-family="Helvetica Neue,Arial,Helvetica,sans-serif" font-size="72" font-weight="bold"><tspan x="93" y="172">offline</tspan></text></g></svg>', {headers: {'Content-Type': 'image/svg+xml'}});
-                        }
-                    });
-            })
+      fetch(request).then( response => {
+        // NETWORK - Stash a copy of this page in the pages cache
+        let copy = response.clone();
+        stashInCache(cacheName, request, copy);
+        return response;
+      })
+      .catch( () => {
+        // CACHE - Check cache or fallback to base
+        return caches.match(request)
+          .then( response => response || caches.match('/') );
+      })
     );
+    return;
+  }
+
+  // For non-HTML requests, look in the cache first, fall back to the network
+  event.respondWith(
+    caches.match(request)
+    .then(response => {
+      // CACHE
+      return response || fetch(request).then( response => {
+        // NETWORK - stash a copy of anything in the cache
+        let copy = response.clone();
+        stashInCache(cacheName, request, copy);
+        return response;
+      })
+      .catch( () => {
+        // OFFLINE - If the request is for an image, show an offline placeholder
+        if (request.headers.get('Accept').indexOf('image') !== -1) {
+          return new Response('<svg role="img" aria-labelledby="offline-title" viewBox="0 0 400 300" xmlns="http://www.w3.org/2000/svg"><title id="offline-title">Offline</title><g fill="none" fill-rule="evenodd"><path fill="#D8D8D8" d="M0 0h400v300H0z"/><text fill="#9B9B9B" font-family="Helvetica Neue,Arial,Helvetica,sans-serif" font-size="72" font-weight="bold"><tspan x="93" y="172">offline</tspan></text></g></svg>', {headers: {'Content-Type': 'image/svg+xml'}});
+        }
+      });
+    })
+  );
 });
