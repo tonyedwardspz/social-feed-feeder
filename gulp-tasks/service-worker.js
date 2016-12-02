@@ -5,7 +5,12 @@ let del = require('del');
 let runSequence = require('run-sequence');
 let fs = require('fs');
 let file = require('gulp-file');
+let gulpif = require('gulp-if');
+let stripDebug = require('gulp-strip-debug');
+let gutil = require('gulp-util');
+let uglify = require('gulp-uglify');
 
+let env = gutil.env.env === 'PRODUCTION' ? true : false;
 
 gulp.task('service-worker:watch', function() {
   gulp.watch('./src/service-worker.js', ['service-worker']);
@@ -17,6 +22,8 @@ gulp.task('generate-service-worker', function(){
   });
 
   return file('service-worker.js', swContents, { src: true })
+    .pipe(gulpif(env, uglify()))
+    .pipe(gulpif(env, stripDebug()))
     .pipe(gulp.dest('./public'));
 });
 

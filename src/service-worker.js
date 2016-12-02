@@ -1,6 +1,8 @@
 /* global version */
 'use strict';
 
+// Using a date string ensures that the new service worker is always used,
+// plus makes cache busting super easy. Hooray!
 //VERSION-HERE
 const cacheName = version + 'static';
 const cacheFiles = [
