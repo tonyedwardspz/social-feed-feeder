@@ -28,7 +28,7 @@ module.exports = function(app, passport) {
 
   //-------------- Dashboard / Data Routes --------------\\
 
-  app.post('/getAllData', ensureAuthenticated, dash.getAllData);
+  app.get('/getAllData/:id', ensureAuthenticated, dash.getAllData);
 
   //-------------- User / Authentication Routes --------------\\
 
@@ -96,10 +96,10 @@ module.exports = function(app, passport) {
      res.sendFile(path.join(__dirname + '/../../public/manifest.json'));
    });
 
-   app.get('/sw.js', (req, res) => {
-     console.log('sw route hita');
+   app.get('/serw.js', (req, res) => {
+     console.log('[SW] route hit');
      res.setHeader('content-type', 'text/javascript');
-     res.sendFile(path.join(__dirname + '/../../public/sw.js'));
+     res.sendFile(path.join(__dirname + '/../../public/serw.js'));
    });
 
    // Catch all Route to the main dash (MUST BE LAST ROUTE)

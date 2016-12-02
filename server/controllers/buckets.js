@@ -55,9 +55,9 @@ class BucketController extends BaseController {
       frequency: req.body.frequency
     }}, (err, updated) => {
       if (err) {
-        console.log(`Error deleting campaign: ${err}`);
+        console.log(`Error updateing bucket: ${err}`);
       } else {
-        console.log(`Campaign removed: ${updated}`);
+        console.log(`Bucket Updated: ${updated}`);
         res.send(JSON.stringify({ a: 'Bucket Updated Succesfully' }));
       }
     });

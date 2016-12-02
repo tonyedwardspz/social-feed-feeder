@@ -37,6 +37,8 @@
     "_root": true,
     "getRandomFileName": true,
     "setupAttachmentChangeListener": true,
+    "self": true,
+    "caches": true,
 
     "require": true,
     "module": true,

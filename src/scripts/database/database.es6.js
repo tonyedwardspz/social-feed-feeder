@@ -72,16 +72,16 @@ class Database {
     // Send request to DB
     console.log(`[DB] Retrieve`);
 
-    let str = JSON.stringify(user);
+    // let str = JSON.stringify(user);
 
     let headers = new Headers({
       'Content-Type': 'application/json'
     });
 
     fetch(route, {
-      method:'POST',
+      method:'GET',
       headers: headers,
-      body: str
+      // data: str
     }).then(response => {
       // console.log('[STATUS]', response);
       if (response.status !== 200) {

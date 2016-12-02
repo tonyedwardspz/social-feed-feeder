@@ -8,7 +8,7 @@ class DashboardController extends BaseController {
 
   /** Fetches all user data, extracts it and displays the dashboard view. */
   index() {
-    app.db.retrieve('/getAllData', app.user, data => {
+    app.db.retrieve(`/getAllData/${app.user.id}`, app.user, data => {
       console.log('[DASH]: Fetch all data');
 
       for(let i = 0; i < data.length; i++){

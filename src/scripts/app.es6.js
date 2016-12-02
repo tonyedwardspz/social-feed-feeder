@@ -37,8 +37,10 @@ var app;
 
   // Register service worker to enable offline lovelyness
   if ('serviceWorker' in navigator) {
-  navigator.serviceWorker.register('/sw.js').then((reg) => {
-    console.log('Service Worker Registered');
+  navigator.serviceWorker.register('/serw.js').then((reg) => {
+    console.log('[SW] Registered with scope: ', reg.scope);
+  }).catch((error) => {
+    console.log('[SW] Failed to registered: ', error);
   });
 }
 })();

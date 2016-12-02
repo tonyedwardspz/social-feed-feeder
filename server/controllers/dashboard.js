@@ -12,14 +12,14 @@ class DashboardController extends BaseController {
   }
 
   getAllData(req, res) {
-    console.log('[Dashboard] Get all data');
+    console.log('[Dashboard] Get all data for user: ', req.params.id);
 
     // Fetch and store all required promises
     let promises = [];
-    promises.push(Campaign.getDatabasePromise(req.body.id));
-    promises.push(User.getDatabasePromise(req.body.id));
-    promises.push(Bucket.getDatabasePromise(req.body.id));
-    promises.push(Post.getDatabasePromise(req.body.id));
+    promises.push(Campaign.getDatabasePromise(req.params.id));
+    promises.push(User.getDatabasePromise(req.params.id));
+    promises.push(Bucket.getDatabasePromise(req.params.id));
+    promises.push(Post.getDatabasePromise(req.params.id));
 
     // Run all promises and process when all return data or error
     Promise.all(promises).then(function() {

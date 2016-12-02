@@ -59,7 +59,7 @@
     "request": "^2.76.0",
     "require-dir": "^0.3.0",
     "run-sequence": "^1.1.4",
-    "sw-precache": "^2.3.0",
+    "sw-precache": "^4.2.3",
     "twitter-text": "^1.14.1",
     "vinyl-buffer": "^1.0.0",
     "vinyl-source-stream": "^1.1.0"
