@@ -22,7 +22,7 @@ gulp.task('generate-service-worker', function(){
   });
 
   return file('service-worker.js', swContents, { src: true })
-    .pipe(gulpif(env, uglify()))
+    // .pipe(gulpif(env, uglify()))
     .pipe(gulpif(env, stripDebug()))
     .pipe(gulp.dest('./public'));
 });
