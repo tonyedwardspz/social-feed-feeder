@@ -96,10 +96,10 @@ module.exports = function(app, passport) {
      res.sendFile(path.join(__dirname + '/../../public/manifest.json'));
    });
 
-   app.get('/serw.js', (req, res) => {
+   app.get('/service-worker.js', (req, res) => {
      console.log('[SW] route hit');
      res.setHeader('content-type', 'text/javascript');
-     res.sendFile(path.join(__dirname + '/../../public/serw.js'));
+     res.sendFile(path.join(__dirname + '/../../public/service-worker.js'));
    });
 
    // Catch all Route to the main dash (MUST BE LAST ROUTE)

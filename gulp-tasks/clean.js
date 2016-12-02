@@ -8,7 +8,8 @@ gulp.task('clean', function(cb) {
        './public/styles',
        './public/manifest.json',
        './public/index.html',
-       './public/images/*.{png,gif,jpg,jpeg,svg}'], {dot: true})
+       './public/images/*.{png,gif,jpg,jpeg,svg}',
+       './public/service-worker.js'], {dot: true})
     .then(function() {
       cb();
     });
