@@ -6,7 +6,6 @@ let runSequence = require('run-sequence');
 let minifyCSS = require('gulp-minify-css');
 let autoprefixer = require('gulp-autoprefixer');
 let sass = require('gulp-sass');
-// let sourcemaps = require('gulp-sourcemaps');
 let fs = require('fs');
 let file = require('gulp-file');
 let concat = require('gulp-concat');
@@ -17,7 +16,6 @@ gulp.task('styles:watch', function() {
 
 gulp.task('styles:sass', function() {
   return gulp.src(['./node_modules/milligram/dist/milligram.css', './src/styles/*.scss'])
-    // .pipe(sourcemaps.init())
     .pipe(concat('inline.scss'))
     .pipe(sass().on('error', sass.logError))
     .pipe(autoprefixer([
@@ -32,12 +30,11 @@ gulp.task('styles:sass', function() {
       'bb >= 10'
     ]))
     .pipe(minifyCSS())
-    // .pipe(sourcemaps.write())
     .pipe(gulp.dest('./public/styles'));
 });
 
 gulp.task('styles:inline', function(){
-    let indexContents = fs.readFileSync('./src/index.html', 'utf8').replace(/INLINE-CSS/g, function() {
+  let indexContents = fs.readFileSync('./src/index.html', 'utf8').replace(/INLINE-CSS/g, function() {
     let style = fs.readFileSync('./public/styles/inline.css', 'utf8');
     return '<style>\n' + style + '\n</style>';
   });

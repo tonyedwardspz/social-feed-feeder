@@ -12,13 +12,13 @@ gulp.task('default', function(cb) {
     'clean',
     // 'bump',
     allTasks,
-    //'generate-service-worker',
+    'service-worker',
     cb);
 });
 
 gulp.task('dev', function() {
   return runSequence('clean', allTasks,
-  // 'generate-service-worker',
+  'service-worker',
   'watch', 'nodemon');
 });
 

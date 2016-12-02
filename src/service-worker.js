@@ -1,6 +1,7 @@
+/* global version */
 'use strict';
 
-const version = 'v1.15::';
+//VERSION-HERE
 const cacheName = version + 'static';
 const cacheFiles = [
   '/scripts/app.js',
