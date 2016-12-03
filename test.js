@@ -1,4 +1,7 @@
-require('require-dir')('tests/method_tests/helpers');
+'use strict';
+
+require('require-dir')('tests/mocha_tests/helpers');
+// require('require-dir')('tests/mocha_tests/controllers');
 
 
 // Basic test to enable initial CI

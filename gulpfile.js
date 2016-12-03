@@ -30,9 +30,9 @@ gulp.task('dev', function() {
 
 gulp.task('tests', function(cb) {
   runSequence(
-    'clean',
-    allTasks,
-    'styles',
+    // 'clean',
+    // allTasks,
+    // 'styles',
     'test:qunit',
     cb);
 });

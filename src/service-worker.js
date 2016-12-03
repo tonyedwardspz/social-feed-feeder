@@ -18,9 +18,9 @@ const cacheFiles = [
   '/images/x.svg',
   '/scripts/offline-google-analytics-import.js',
   '/favicon.ico',
-  '/images/icons/favicon-16x16.png',
-  '/images/icons/favicon-194x194.png',
-  '/images/icons/favicon-32x32.png',
+  '/favicon-16x16.png',
+  '/favicon-194x194.png',
+  '/favicon-32x32.png',
   '/',
 ];
 

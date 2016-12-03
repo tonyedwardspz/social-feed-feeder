@@ -19,4 +19,20 @@ describe('String Helpers', () => {
     });
 
   });
+
+  describe('#getRandomFileName(fileName)', () => {
+
+    it('Returns a new, random filename', () => {
+      assert.notEqual('abcdefg.jpg', getRandomFileName('abcdefg.jpg'));
+    });
+
+    it('Returns a filename ending in .jpg', () => {
+      assert.equal(true, getRandomFileName('abcdefg.jpg').includes('.jpg'));
+    });
+
+    it('Returns a long filename ending in .png', () => {
+      assert.equal(true, getRandomFileName('abcdefg.png').length > 32 && getRandomFileName('abcdefg.png').includes('.png'));
+    });
+
+  });
 });

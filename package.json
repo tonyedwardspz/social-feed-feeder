@@ -11,7 +11,7 @@
   "repository": "https://gihub.com/tonyedwardspz/social-feed-feeder",
   "scripts": {
     "start": "node server.js",
-    "test": "mocha test && gulp tests",
+    "test": "gulp && mocha test && gulp tests",
     "postinstall": "gulp --env=PRODUCTION"
   },
   "author": "tonyedwardspz",
@@ -57,6 +57,7 @@
     "mongoose": "^4.6.5",
     "passport": "^0.3.2",
     "passport-bufferapp": "^0.1.1",
+    "read-multiple-files": "^1.1.1",
     "request": "^2.76.0",
     "require-dir": "^0.3.0",
     "run-sequence": "^1.1.4",
