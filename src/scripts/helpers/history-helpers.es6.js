@@ -37,8 +37,9 @@ let loadContent = (state) => {
 * Updates the browser's history
 * @param {String} view '_' deliminated string of controller/action
 * @param {String} id The id object relating to the contoller/action
+* @callback Trigger a Google Analytics event, passing in the current view
 */
-let updateBrowserHistory = (view, id) => {
+let updateBrowserHistory = (view, id, cb) => {
   let state = {
     id: id,
     controller: view.split('_')[0],
@@ -46,4 +47,5 @@ let updateBrowserHistory = (view, id) => {
   };
 
   history.pushState(state, 'Random Page', view);
+  cb(view);
 };

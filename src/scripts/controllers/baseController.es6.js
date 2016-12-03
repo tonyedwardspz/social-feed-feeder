@@ -57,7 +57,10 @@ class BaseController {
     if (updateHistory) {
       try{
         console.log('[History] update for view: ' + view);
-        updateBrowserHistory(view, id);
+        updateBrowserHistory(view, id, (view) => {
+          updateGoogleAnalytics(view);
+        });
+
       } catch (error) {
         console.warn('There was an error updating the browsers history', error);
       }
