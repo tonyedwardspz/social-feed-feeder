@@ -39,7 +39,8 @@
     "setupAttachmentChangeListener": true,
     "self": true,
     "caches": true,
-    "capitalize": true,
+    "importScripts": true,
+    "goog": true,
 
     "updateGoogleAnalytics": true,
     "ga": true,

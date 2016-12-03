@@ -1,6 +1,9 @@
 /* global version */
 'use strict';
 
+// Import Offline Google Analytics script
+importScripts('/scripts/offline-google-analytics-import.js');
+
 // Using a date string ensures that the new service worker is always used,
 // plus makes cache busting super easy. Hooray!
 //VERSION-HERE
@@ -13,8 +16,12 @@ const cacheFiles = [
   '/images/placeholder-image.jpg',
   '/images/placeholder-image-not-available.jpg',
   '/images/x.svg',
-  '/'
+  '/',
+  '/scripts/offline-google-analytics-import.js'
 ];
+
+// Initialize offline analytics tracking
+goog.offlineGoogleAnalytics.initialize();
 
 // Open the cache and store static files
 function updateStaticCache() {
