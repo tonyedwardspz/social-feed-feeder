@@ -12,6 +12,7 @@ gulp.task('default', function(cb) {
     'clean',
     allTasks,
     'styles',
+    'google-analytics',
     'service-worker',
     cb);
 });
@@ -21,6 +22,7 @@ gulp.task('dev', function() {
     'clean',
     allTasks,
     'styles',
+    'google-analytics',
     'service-worker',
     'watch',
     'nodemon');

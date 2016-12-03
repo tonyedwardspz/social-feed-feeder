@@ -39,6 +39,11 @@
     "setupAttachmentChangeListener": true,
     "self": true,
     "caches": true,
+    "importScripts": true,
+    "goog": true,
+
+    "updateGoogleAnalytics": true,
+    "ga": true,
 
     "require": true,
     "module": true,

@@ -15,6 +15,11 @@ let randomString = (length = 32) => {
   return result;
 };
 
+/**
+* Generates a random filename with the passed filenames extention.
+* @param {String} filename The original filename with extention
+* @return The new random string filename
+*/
 let getRandomFileName = (fileName) => {
   let extention = fileName.split('.').pop();
   let newFileName = `${randomString()}.${extention}`;
