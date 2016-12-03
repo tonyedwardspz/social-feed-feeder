@@ -8,7 +8,6 @@ let file = require('gulp-file');
 let gulpif = require('gulp-if');
 let stripDebug = require('gulp-strip-debug');
 let gutil = require('gulp-util');
-let uglify = require('gulp-uglify');
 
 let env = gutil.env.env === 'PRODUCTION' ? true : false;
 
@@ -22,7 +21,6 @@ gulp.task('generate-service-worker', function(){
   });
 
   return file('service-worker.js', swContents, { src: true })
-    // .pipe(gulpif(env, uglify()))
     .pipe(gulpif(env, stripDebug()))
     .pipe(gulp.dest('./public'));
 });

@@ -11,13 +11,13 @@ class PostController extends BaseController {
 
   // POST /posts
   create(req, res) {
-    console.log('[ROUTE] Posts:POST hit');
+    console.log('[ROUTE] Posts: POST hit');
     Post.saveNewPost(req, res, req.body);
   }
 
   // PATCH/PUT /posts/:id
   update(req, res) {
-    console.log('[ROUTE] Posts:PUT hit');
+    console.log('[ROUTE] Posts: PUT hit');
     Post.updatePost(req, res, req.body);
   }
 
@@ -35,7 +35,7 @@ class PostController extends BaseController {
 
   // DELETE /posts/:id
   delete(req, res) {
-    console.log('[ROUTE] Posts:DELETE hit');
+    console.log('[ROUTE] Posts: DELETE hit');
     Post.delete(req, res);
   }
 }

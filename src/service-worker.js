@@ -16,8 +16,12 @@ const cacheFiles = [
   '/images/placeholder-image.jpg',
   '/images/placeholder-image-not-available.jpg',
   '/images/x.svg',
+  '/scripts/offline-google-analytics-import.js',
+  '/favicon.ico',
+  '/images/icons/favicon-16x16.png',
+  '/images/icons/favicon-194x194.png',
+  '/images/icons/favicon-32x32.png',
   '/',
-  '/scripts/offline-google-analytics-import.js'
 ];
 
 // Initialize offline analytics tracking

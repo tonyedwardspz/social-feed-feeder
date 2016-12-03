@@ -7,7 +7,7 @@ let ga = require('gulp-ga');
 gulp.task('google-analytics', function(){
   gulp.src('./public/index.html')
   .pipe(ga({
-    url: 'social-feed-feeder.herokuapp.com/dashboard_index',
+    url: 'social-feed-feeder.herokuapp.com/',
     uid: 'UA-88377745-1',
     tag: 'body',
     demographics: true,
