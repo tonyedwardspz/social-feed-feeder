@@ -63,6 +63,7 @@ self.addEventListener('install', event => {
   event.waitUntil(updateStaticCache()
   .then( () => {
     console.log('[SW] Installed');
+    // startNotificationTimer(triggerNotification);
     self.skipWaiting(); })
   );
 });
@@ -70,9 +71,11 @@ self.addEventListener('install', event => {
 // Clear cache and make this service worker the active one for the page.
 // This allows the SW to function immediately, rather than waiting for reload.
 self.addEventListener('activate', event => {
+  console.log('[SW] Activated');
   event.waitUntil(clearOldCaches()
     .then( () => self.clients.claim() )
-);
+    // .then( () => startNotificationTimer(triggerNotification))
+  );
 });
 
 // Listen for the message event, do some funky stuff
@@ -135,4 +138,37 @@ self.addEventListener('fetch', event => {
       });
     })
   );
+});
+
+var startNotificationTimer = (cb) => {
+  console.log('current hour', new Date().getHours());
+  // cb();
+
+};
+
+// Trigger push notifications between a specific hours.
+// This is really dirty..... :(
+function triggerNotification(){
+    var hours = new Date().getHours();
+
+    // if (hours >= 10 && hours < 11) {
+      console.log('[SW] Trigger notification');
+      fetch('/user/notification', {
+        method: 'GET',
+        credentials: 'include'
+      }).then(response => {
+
+      }).catch(err => {
+        console.log('Failed to fetch: ', err);
+      });
+    // }
+
+}
+triggerNotification();
+setInterval(triggerNotification, 3600000);
+// setInterval(triggerNotification, 30000);
+
+self.addEventListener('message', function(event){
+    console.log('SW Received Message: ' + event.data);
+    event.ports[0].postMessage('SW Says \'Hello back!\'');
 });
