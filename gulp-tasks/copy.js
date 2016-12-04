@@ -25,6 +25,6 @@ gulp.task('copy:watch', function() {
 gulp.task('copy', function(cb) {
   runSequence(
     'copy:root',
-    'copy:offline-analytics',
-  cb);
+    cb
+  );
 });
