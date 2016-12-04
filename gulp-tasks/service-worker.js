@@ -16,11 +16,10 @@ gulp.task('service-worker:watch', function() {
 });
 
 gulp.task('generate-service-worker', function(){
-  let swContents = fs.readFileSync('./src/service-worker.js', 'utf8').replace(/\/\/VERSION-HERE/g, function() {
-    return `const version = ${Date.now()};`;
-  });
+  let swContents = fs.readFileSync('./src/service-worker.js', 'utf8');
+  let versionedContents = swContents.replace(/\/\/VERSION-HERE/g, `const version = ${Date.now()}`);
 
-  return file('service-worker.js', swContents, { src: true })
+  return file('service-worker.js', versionedContents, { src: true })
     .pipe(gulpif(env, stripDebug()))
     .pipe(gulp.dest('./public'));
 });

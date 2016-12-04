@@ -19,7 +19,7 @@ gulp.task('copy:offline-analytics', function() {
 });
 
 gulp.task('copy:watch', function() {
-  gulp.watch('./public/*.{json,txt,ico,js}', ['copy:root']);
+  gulp.watch('./public/*.{json,txt,ico}', ['copy:root']);
 });
 
 gulp.task('copy', function(cb) {
