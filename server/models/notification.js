@@ -42,7 +42,8 @@ class Notification {
     let titles = [
       'It\'s top up time',
       'Top up your queue',
-      'Time to top up'
+      'Time to top up',
+      'Schedule some posts'
     ];
     return titles[Math.floor(Math.random() * titles.length)];
   }

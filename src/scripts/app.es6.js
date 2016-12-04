@@ -17,7 +17,9 @@ var app;
     bucketView: new BucketView(),
     bucketController: new BucketController(),
     postView: new PostView(),
-    postController: new PostController()
+    postController: new PostController(),
+    publishView: new PublishView(),
+    publishController: new PublishController()
   };
 
   // Authenticate and direct user flow when landing on page
@@ -25,6 +27,9 @@ var app;
 
   // Routes
   addRoutes();
+
+  // Register service worker to enable PWA lovelyness
+  setupServiceWorker();
 
   // Setup twitter message listener
   registerTwiiterInputDetection();
@@ -34,8 +39,5 @@ var app;
 
   // Setup listener for the post attachment
   setupAttachmentChangeListener();
-
-  // Register service worker to enable PWA lovelyness
-  setupServiceWorker();
 
 })();
