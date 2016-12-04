@@ -14,11 +14,6 @@ class DashboardController extends BaseController {
   getAllData(req, res) {
     console.log('[Dashboard] Get all data for user: ', req.params.id);
 
-    var hmac = global.pushPadProject.signatureFor(req.params.id);
-    console.log(hmac);
-
-    console.log(global.pushPadProject.pathFor(req.params.id));
-
     // Fetch and store all required promises
     let promises = [];
     promises.push(Campaign.getDatabasePromise(req.params.id));

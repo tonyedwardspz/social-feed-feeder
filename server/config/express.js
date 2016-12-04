@@ -31,12 +31,6 @@ module.exports = function(app, passport, root){
   // make the root directory accessable
   global._root = root;
 
-  // make the pushpad object accessable
-  global.pushPadProject = new pushpad.Pushpad({
-    authToken: process.env.PUSHPAD_AUTH_TOKEN,
-    projectId: process.env.PUSHPAD_PROJECT_ID
-  });
-
   app.use(passport.initialize());
   app.use(passport.session());
 

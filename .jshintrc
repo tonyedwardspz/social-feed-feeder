@@ -49,6 +49,7 @@
     "module": true,
     "$": true,
     "Headers": true,
+    "Response": true,
 
     "describe": true,
     "it": true,
