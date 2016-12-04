@@ -48,7 +48,7 @@ module.exports = function(app, passport) {
 
   app.put('/users/:id', users.update);
 
-  app.get('/user/:id/notification', users.notification);
+  app.get('/user/notification', users.notification);
 
   //-------------- Campaign Routes --------------\\
 
