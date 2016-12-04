@@ -14,6 +14,11 @@ class DashboardController extends BaseController {
   getAllData(req, res) {
     console.log('[Dashboard] Get all data for user: ', req.params.id);
 
+    var hmac = global.pushPadProject.signatureFor(req.params.id);
+    console.log(hmac);
+
+    console.log(global.pushPadProject.pathFor(req.params.id));
+
     // Fetch and store all required promises
     let promises = [];
     promises.push(Campaign.getDatabasePromise(req.params.id));
@@ -24,7 +29,8 @@ class DashboardController extends BaseController {
     // Run all promises and process when all return data or error
     Promise.all(promises).then(function() {
       console.log('[Dashboard] All database promises resolved');
-      // returned data is in arguments[n
+      // returned data is in arguments[n]
+      console.log(arguments[0]);
 
       res.send(JSON.stringify(arguments[0]));
     }, function(err) {

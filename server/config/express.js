@@ -4,6 +4,7 @@ let cookieParser = require('cookie-parser');
 let express = require('express');
 let bodyParser = require('body-parser');
 let session = require('express-session');
+var pushpad = require('pushpad');
 
 module.exports = function(app, passport, root){
 
@@ -29,6 +30,12 @@ module.exports = function(app, passport, root){
 
   // make the root directory accessable
   global._root = root;
+
+  // make the pushpad object accessable
+  global.pushPadProject = new pushpad.Pushpad({
+    authToken: process.env.PUSHPAD_AUTH_TOKEN,
+    projectId: process.env.PUSHPAD_PROJECT_ID
+  });
 
   app.use(passport.initialize());
   app.use(passport.session());
