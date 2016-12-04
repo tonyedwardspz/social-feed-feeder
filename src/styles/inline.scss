@@ -76,6 +76,48 @@ input.before-today::after {
   max-width: 300px;
 }
 
+
+.offline-ready {
+  background-color: #66A2F5;
+  position: absolute;
+  right: -1000px;
+  color: white;
+  bottom: 20px;
+  transition: right 2s;
+  transition-duration: 2s;
+  transition-timing-function: ease;
+  width: 100%;
+  max-width: 300px;
+
+  &.active {
+    right: 10px;
+    transition: right 2s;
+    transition-duration: 2s;
+    transition-timing-function: ease;
+  }
+
+  p {
+    margin-bottom: 0;
+    padding: 1rem;
+  }
+
+  span {
+    float: right;
+    color: black;
+    font-weight: 600;
+  }
+
+  a:link p { color: white; }
+  a:visited p { color: white; }
+  a:hover p { color: white; }
+  a:active p { color: white; }
+
+  a:hover span {
+    color: $light-grey;
+  }
+}
+
+
 @media (max-width: 40.0rem) {
   .image-preview-wrapper {
     float: none;
