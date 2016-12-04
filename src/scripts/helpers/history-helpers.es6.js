@@ -46,6 +46,10 @@ let updateBrowserHistory = (view, id, cb) => {
     action: view.split('_')[1]
   };
 
-  history.pushState(state, 'Random Page', view);
+  try {
+    history.pushState(state, 'Random Page', view);
+  } catch (error) {
+    console.log('could not update the browser history. Are these tests? ', error);
+  }
   cb(view);
 };

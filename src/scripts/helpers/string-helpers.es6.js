@@ -21,8 +21,13 @@ let randomString = (length = 32) => {
 * @return The new random string filename
 */
 let getRandomFileName = (fileName) => {
-  let extention = fileName.split('.').pop();
-  let newFileName = `${randomString()}.${extention}`;
-  console.log('New file name: ', newFileName);
-  return newFileName;
+  try {
+    let extention = fileName.split('.').pop();
+    let newFileName = `${randomString()}.${extention}`;
+    return newFileName;
+  } catch (error) {
+    console.log('Failed to generate new random filename: ', error);
+    return fileName;
+  }
+
 };

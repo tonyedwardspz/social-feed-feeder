@@ -35,8 +35,7 @@ let convertDateForInput = (date) => {
 * Returns todays date in the correct format for date input (min)
 * @return {String} Formatted date string
 */
-let defaultDateInputMin = () => {
-  let _date = new Date();
+let defaultDateInputMin = (_date = new Date()) => {
   let month = ('0' + (_date.getMonth() + 1)).slice(-2);
   let day = ('0' + _date.getDate()).slice(-2);
   return `${_date.getFullYear()}-${month}-${day}`;
@@ -46,8 +45,7 @@ let defaultDateInputMin = () => {
 * Get a date in five years time in the correct format for date input (max)
 * @return {String} Formatted date string
 */
-let defaultDateInputMax = () => {
-  let _date = new Date();
+let defaultDateInputMax = (_date = new Date()) => {
   let month = ('0' + (_date.getMonth() + 1)).slice(-2);
   let day = ('0' + _date.getDate()).slice(-2);
   return `${(_date.getFullYear() + 5)}-${month}-${day}`;

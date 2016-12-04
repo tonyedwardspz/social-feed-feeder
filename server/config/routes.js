@@ -91,7 +91,6 @@ module.exports = function(app, passport) {
 
    //-------------- Misc Routes --------------\\
 
-   // Serve manifest file
    app.get('/manifest.json', function(req, res){
      res.sendFile(path.join(__dirname + '/../../public/manifest.json'));
    });
@@ -101,6 +100,16 @@ module.exports = function(app, passport) {
      res.setHeader('content-type', 'text/javascript');
      res.sendFile(path.join(__dirname + '/../../public/service-worker.js'));
    });
+
+    app.get('/favicon-16x16.png', (req, res) => {
+      console.log('[ICO] route hit');
+      res.sendFile(path.join(__dirname + '/../../public//favicon-16x16.png'));
+    });
+
+    app.get('/favicon.ico', (req, res) => {
+      console.log('[ICO] route hit');
+      res.sendFile(path.join(__dirname + '/../../public//favicon-16x16.png'));
+    });
 
    // Catch all Route to the main dash (MUST BE LAST ROUTE)
    app.get('*', function(req, res){

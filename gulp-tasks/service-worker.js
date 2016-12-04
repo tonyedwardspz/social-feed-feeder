@@ -16,11 +16,10 @@ gulp.task('service-worker:watch', function() {
 });
 
 gulp.task('generate-service-worker', function(){
-  let swContents = fs.readFileSync('./src/service-worker.js', 'utf8').replace(/\/\/VERSION-HERE/g, function() {
-    return `const version = ${Date.now()};`;
-  });
+  let swContents = fs.readFileSync('./src/service-worker.js', 'utf8');
+  let versionedContents = swContents.replace(/\/\/VERSION-HERE/g, `const version = ${Date.now()}`);
 
-  return file('service-worker.js', swContents, { src: true })
+  return file('service-worker.js', versionedContents, { src: true })
     .pipe(gulpif(env, stripDebug()))
     .pipe(gulp.dest('./public'));
 });
@@ -33,29 +32,3 @@ gulp.task('service-worker', function(cb) {
     cb
   );
 });
-
-
-
-// From failed attempt at using sw-precache. For some reason it didn't like the
-// apps architecture, and I have rolled my own instead to figure out why.
-//
-//
-// var swPrecache = require('sw-precache');
-//
-//
-// gulp.task('generate-service-worker', function(callback) {
-//   var  rootDir = './public';
-//
-//   swPrecache.write(path.join(rootDir, 'serw.js'), {
-//     staticFileGlobs: [rootDir + '/*/*.{js,html,png,jpg,gif,svg}',
-//                       rootDir + '/*.{html,png,jpg,gif,json}'],
-//     stripPrefix: rootDir,
-//     navigateFallback: '/',
-//     navigateFallbackWhitelist: [/\/dashboard\_index/],
-//     runtimeCaching: [{
-//       urlPattern: /^http:\/\/127\.0\.0\.1\:8080\/getAllData/,
-//       handler: 'cacheFirst'
-//     }],
-//     verbose: true
-//   }, callback);
-// });
