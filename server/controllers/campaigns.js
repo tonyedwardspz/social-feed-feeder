@@ -4,6 +4,7 @@ let BaseController = require('./base');
 let MongoCampaign = require('../models/campaign').getMongooseModel();
 let Bucket = require('../models/bucket');
 let Post = require('../models/post');
+let Campaign = require('../models/campaign');
 
 class CampaignController extends BaseController {
   constructor() {

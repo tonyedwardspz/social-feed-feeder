@@ -29,6 +29,7 @@ class Database {
     // Send data to the server
     fetch(route, {
       method: method,
+      credentials: 'include',
       mode: 'cors',
       headers: headers,
       body: data
@@ -49,6 +50,7 @@ class Database {
 
     fetch(route, {
       method: method,
+      credentials: 'include',
       mode: 'cors',
       body: data
     })

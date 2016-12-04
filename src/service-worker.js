@@ -70,9 +70,10 @@ self.addEventListener('install', event => {
 // Clear cache and make this service worker the active one for the page.
 // This allows the SW to function immediately, rather than waiting for reload.
 self.addEventListener('activate', event => {
+  console.log('[SW] Activated');
   event.waitUntil(clearOldCaches()
     .then( () => self.clients.claim() )
-);
+  );
 });
 
 // Listen for the message event, do some funky stuff
@@ -92,17 +93,11 @@ self.addEventListener('fetch', event => {
     return;
   }
 
-  // // Don't check the cache for the dashboard to allow app.js to route the user
-  // if (request.url.indexOf('dashboard_index') !== -1) {
-  //   return;
-  // }
-
-  // For HTML requests, try the network first, fall back to the cache,
+  // Try the network first, fall back to the cache,
   // finally redirect to base url to allow app.js to send user to dashboard
-  if (request.headers.get('Accept').indexOf('text/html') !== -1) {
     event.respondWith(
       fetch(request).then( response => {
-        // NETWORK - Stash a copy of this page in the pages cache
+        // NETWORK - Stash a copy of this response in the pages cache
         let copy = response.clone();
         stashInCache(cacheName, request, copy);
         return response;
@@ -114,25 +109,27 @@ self.addEventListener('fetch', event => {
       })
     );
     return;
-  }
-
-  // For non-HTML requests, look in the cache first, fall back to the network
-  event.respondWith(
-    caches.match(request)
-    .then(response => {
-      // CACHE
-      return response || fetch(request).then( response => {
-        // NETWORK - stash a copy of anything in the cache
-        let copy = response.clone();
-        stashInCache(cacheName, request, copy);
-        return response;
-      })
-      .catch( () => {
-        // OFFLINE - If the request is for an image, show an offline placeholder
-        if (request.headers.get('Accept').indexOf('image') !== -1) {
-          return new Response('<svg role="img" aria-labelledby="offline-title" viewBox="0 0 400 300" xmlns="http://www.w3.org/2000/svg"><title id="offline-title">Offline</title><g fill="none" fill-rule="evenodd"><path fill="#D8D8D8" d="M0 0h400v300H0z"/><text fill="#9B9B9B" font-family="Helvetica Neue,Arial,Helvetica,sans-serif" font-size="72" font-weight="bold"><tspan x="93" y="172">offline</tspan></text></g></svg>', {headers: {'Content-Type': 'image/svg+xml'}});
-        }
-      });
-    })
-  );
 });
+
+// Trigger push notifications between a specific hours. This is really dirty :(
+// Have to use trigger them in this way as Heroku Dynos aren't always on and
+// I'm too tight to pay for the upgrade.
+function triggerNotification(){
+    var hours = new Date().getHours();
+
+    if (hours >= 10 && hours < 11) {
+      console.log('[SW] Trigger notification');
+      fetch('/user/notification', {
+        method: 'GET',
+        credentials: 'include'
+      }).then(response => {
+
+      }).catch(err => {
+        console.log('Failed to fetch: ', err);
+      });
+    }
+}
+
+triggerNotification();
+setInterval(triggerNotification, 3600000);
+// setInterval(triggerNotification, 30000);

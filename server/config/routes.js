@@ -48,6 +48,8 @@ module.exports = function(app, passport) {
 
   app.put('/users/:id', users.update);
 
+  app.get('/user/notification', users.notification);
+
   //-------------- Campaign Routes --------------\\
 
   // POST: creates a new campaign

@@ -41,6 +41,7 @@
     "caches": true,
     "importScripts": true,
     "goog": true,
+    "setupServiceWorker": true,
 
     "updateGoogleAnalytics": true,
     "ga": true,
@@ -49,6 +50,7 @@
     "module": true,
     "$": true,
     "Headers": true,
+    "Response": true,
 
     "describe": true,
     "it": true,
@@ -66,11 +68,13 @@
     "PostController": true,
     "UserController": true,
     "DashboardController": true,
+    "PublishController": true,
 
     "CampaignView": true,
     "BucketView": true,
     "PostView": true,
     "UserView": true,
-    "DashboardView": true
+    "DashboardView": true,
+    "PublishView": true
   }
 }

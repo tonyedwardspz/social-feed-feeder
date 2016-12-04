@@ -4,6 +4,7 @@ let cookieParser = require('cookie-parser');
 let express = require('express');
 let bodyParser = require('body-parser');
 let session = require('express-session');
+var pushpad = require('pushpad');
 
 module.exports = function(app, passport, root){
 
