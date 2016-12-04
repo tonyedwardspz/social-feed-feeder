@@ -21,7 +21,7 @@ let registerServiceWorker = () => {
 let offlineReadyShow = () => {
   navigator.serviceWorker.addEventListener('controllerchange', event => {
     navigator.serviceWorker.controller.addEventListener('statechange', () => {
-      if (navigator.serviceWorker.state === 'activated') {
+      if (navigator.serviceWorker.controller.state === 'activated') {
         document.getElementById('offline-ready').classList.add('active');
       }
     });
