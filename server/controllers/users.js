@@ -1,9 +1,7 @@
 'use strict';
 
 let BaseController = require('./base');
-var pushpad = require('pushpad');
-// var User = require('../singletons/user-singleton').getInstance();
-// var UserMM = User.getMongooseModel();
+let notifications = require('../models/notification');
 
 
 class UserController extends BaseController {
@@ -27,7 +25,6 @@ class UserController extends BaseController {
 
   authFailure(err, req, res, next) {
     console.log('[User] Auth failure: ' + err);
-
     res.send(err);
   }
 
@@ -36,24 +33,31 @@ class UserController extends BaseController {
     console.log('[User] Update user');
   }
 
-  // GET /user/:id/notification
+  // GET /user/notification
   notification(req, res) {
-    console.log('[User] Notification hit');
 
-    let notification = new pushpad.Notification({
-      project: global.pushPadProject,
-      body: 'Hello world!', // max 120 characters
-      title: 'Website Name', // optional, defaults to your project name, max 30 characters
-      targetUrl: 'http://example.com', // optional, defaults to your project website
-      iconUrl: 'http://example.com/assets/icon.png', // optional, defaults to the project icon
-      ttl: 604800 // optional, drop the notification after this number of seconds if a device is offline
-    });
+    // make the pushpad object accessable
+    console.log('[User] Notification hit for user ' + req.cookies.user_id);
 
-    notification.deliverTo(req.params.id, function (err, result) {
-      console.log('Send notification to user: ', req.params.id);
-      console.log(err || result);
-    });
+    if (req.cookies.user_id) {
 
+      try {
+        let notification = notifications.getNewNotification();
+
+        notification.deliverTo(req.cookies.user_id, function (err, result) {
+          console.log('Notification sent to user: ', req.cookies.user_id);
+          console.log(err || result);
+          if (err) {
+            res.send(err);
+          } else {
+            res.sendStatus(200);
+          }
+        });
+      } catch (error){
+        res.send(error);
+      }
+
+    }
   }
 }
 
