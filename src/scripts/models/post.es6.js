@@ -6,13 +6,18 @@ class Post {
     this.postID = postID;
     this.bucketID = bucketID;
     this.message = message;
-    this.lastPostDate = lastPostDate;
+    this._lastPostDate = lastPostDate;
     this.attachment = attachment;
     this.userID =userID;
   }
 
   getDisplayLastPost() {
-    return convertDateToLocale(this.lastPostDate);
+    let date = convertDateToLocale(this._lastPostDate);
+    if (date === '01/01/1970'){
+      return 'Never';
+    } else {
+      return date;
+    }
   }
 
   getAttachmentString() {

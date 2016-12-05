@@ -162,7 +162,7 @@ class BucketView {
                  <td>${convertDateToLocale(bucket.expiry)}</td>
                  <td>${bucket.displayPriority()}</td>
                  <td>${bucket.maxPerDay}</td>
-                 <td>
+                 <td class="actions">
                    <a href="#" class="bucket_edit" data-id="${bucket.bucketID}">
                      <img src="/images/pencil.svg" alt="edit bucket" class="icon"/>
                    </a>

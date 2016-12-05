@@ -49,7 +49,7 @@ body textarea {
 }
 
 .container {
-  margin-top: 6rem;
+  margin-top: 7rem;
 }
 
 .breadcrumb,
@@ -58,9 +58,9 @@ body textarea {
 }
 
 
-.column.stats {
 
-}
+// Info boxes
+
 .row.stat-container {
   padding: 1rem 1rem 2rem;
 
@@ -89,15 +89,15 @@ body textarea {
 
     span {
       padding: 1.5rem .5rem;
+      font-size: 2.5rem;
 
       @media (max-width: $mobile-breakpoint) {
-        font-size: 2rem;
+        font-size: 1.5rem;
       }
 
       &:first-child {
         padding: 2rem;
         font-weight: 600;
-        font-size: 3rem;
 
         @media (max-width: $mobile-breakpoint) {
           padding: 0 3rem;
@@ -110,7 +110,6 @@ body textarea {
         color: $white;
         width: 100%;
         text-align: center;
-        font-size: 2rem;
 
         &.green {
           background-color: $groovy-green;
@@ -262,6 +261,8 @@ td.table-message {
   width: 100%;
 }
 
+
+
 .icon {
   padding: 7px 5px 0;
   pointer-events: none;
@@ -272,6 +273,12 @@ td a.bucket_delete,
 td a.post_edit,
 td a.post_delete {
   display: inline-block;
+}
+
+@media (min-width: $mobile-breakpoint) {
+  td.actions {
+    padding-left: 0;
+  }
 }
 
 @media (max-width: $mobile-breakpoint) {
@@ -343,7 +350,7 @@ td a.post_delete {
 
   &.post-list {
     td:nth-of-type(1) { padding: 1rem; }
-    td:nth-of-type(2)::before { content: 'Expiry'; }
+    td:nth-of-type(2)::before { content: 'Last Posted'; }
     td:nth-of-type(3)::before { content: 'Repeat'; }
     td:nth-of-type(4)::before { content: 'Actions'; }
   }
