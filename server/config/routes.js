@@ -6,23 +6,14 @@ let campaigns = require('../controllers/campaigns');
 let buckets = require('../controllers/buckets');
 let posts = require('../controllers/posts');
 let dash = require('../controllers/dashboard');
-// var cookieParser = require('cookie-parser');
 
 module.exports = function(app, passport) {
 
   function ensureAuthenticated(req, res, next) {
-    // Test to see if user is authenticated
-
-    // TODO - Actually check that this is the user. Struggling to hook up
-    // session's for the user
-    return next();
-
-    if (req.isAuthenticated()) {
+    if (req.isAuthenticated) {
       return next();
     }
-
     console.log('Not authenticated');
-    // redirect to login
     res.redirect('/');
   }
 
@@ -46,49 +37,49 @@ module.exports = function(app, passport) {
     }
   );
 
-  app.put('/user/:id', users.update);
+  app.put('/user/:id', ensureAuthenticated, users.update);
 
-  app.get('/user/notification', users.notification);
+  app.get('/user/notification', ensureAuthenticated, users.notification);
 
   //-------------- Campaign Routes --------------\\
 
   // POST: creates a new campaign
-  app.post('/campaigns', campaigns.create);
+  app.post('/campaigns', ensureAuthenticated, campaigns.create);
 
   // PUT: update campaign by id
-  app.put('/campaigns/:id', campaigns.update);
+  app.put('/campaigns/:id', ensureAuthenticated, campaigns.update);
 
   // DELETE: deletes campaign by id
-  app.delete('/campaigns/:id', campaigns.delete);
+  app.delete('/campaigns/:id', ensureAuthenticated, campaigns.delete);
 
 
    //-------------- Bucket Routes --------------\\
 
    // POST: creates a new buckets
-   app.post('/buckets', buckets.create);
+   app.post('/buckets', ensureAuthenticated, buckets.create);
 
    // PUT: update buckets by id
-   app.put('/buckets/:id', buckets.update);
+   app.put('/buckets/:id', ensureAuthenticated, buckets.update);
 
    // DELETE: deletes buckets by id
-   app.delete('/buckets/:id', buckets.delete);
+   app.delete('/buckets/:id', ensureAuthenticated, buckets.delete);
 
 
    //-------------- Post Routes --------------\\
 
-   app.post('/posts', posts.create);
+   app.post('/posts', ensureAuthenticated, posts.create);
 
    // PUT: update posts by id
-   app.put('/posts/:id', posts.update);
+   app.put('/posts/:id', ensureAuthenticated, posts.update);
 
    // DELETE: deletes posts by id
-   app.delete('/posts/:id', posts.delete);
+   app.delete('/posts/:id', ensureAuthenticated, posts.delete);
 
    // POST: creates a new post with image
-   app.post('/posts/image', posts.createImage);
+   app.post('/posts/image', ensureAuthenticated, posts.createImage);
 
    // PUT: update posts with an image by id
-   app.put('/posts/:id/image', posts.updateImage);
+   app.put('/posts/:id/image', ensureAuthenticated, posts.updateImage);
 
 
    //-------------- Misc Routes --------------\\
