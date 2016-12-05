@@ -32,7 +32,7 @@ let addRoutes = () => {
       // CAMPAIGNS
       else if (e.target.id === 'campaign_index') {
         app.campaignController.index();
-      } else if (e.target.className === 'campaign_show'){
+      } else if (e.target.classList.contains('campaign_show')){
         app.campaignController.show(e.target.dataset.id);
       } else if (e.target.id === 'campaign_new') {
         app.campaignController.new();
@@ -51,11 +51,11 @@ let addRoutes = () => {
         app.bucketController.new(e.target.dataset.campaignid);
       } else if (e.target.id === 'bucket_save') {
         app.bucketController.create();
-      } else if (e.target.className === 'bucket_show') {
+      } else if (e.target.classList.contains('bucket_show')) {
         app.bucketController.show(e.target.dataset.id);
-      } else if (e.target.className === 'bucket_edit') {
+      } else if (e.target.classList.contains('bucket_edit')) {
         app.bucketController.edit(e.target.dataset.id);
-      } else if (e.target.className === 'bucket_delete') {
+      } else if (e.target.classList.contains('bucket_delete')) {
         app.bucketController.delete(e.target.dataset.id,
                                     e.target.dataset.name,
                                     e.target.dataset.campaignid);
@@ -68,11 +68,11 @@ let addRoutes = () => {
         app.postController.new(e.target.dataset.id);
       } else if (e.target.id === 'post_save') {
         app.postController.create();
-      } else if (e.target.className === 'post_show') {
+      } else if (e.target.classList.contains('post_show')) {
         app.postController.show(e.target.dataset.id);
-      } else if (e.target.className === 'post_edit') {
+      } else if (e.target.classList.contains('post_edit')) {
         app.postController.edit(e.target.dataset.id);
-      } else if (e.target.className === 'post_delete') {
+      } else if (e.target.classList.contains('post_delete')) {
         app.postController.delete(e.target.dataset.id,
                                   e.target.dataset.name,
                                   e.target.dataset.bucketid);

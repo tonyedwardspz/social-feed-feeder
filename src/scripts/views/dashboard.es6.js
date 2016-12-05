@@ -15,23 +15,40 @@ class DashboardView {
   */
   getDashboard(campaigns, buckets, posts){
     console.log('[Dashboard] Get');
-    return `${getBreadcrumbs('dashboard', null)}
-            <h2>Dashboard View</h2>
-            <p>This is the main dashboard view<p>
+    return `<div class="row">
+              <div class="column">
+              ${getBreadcrumbs('dashboard', null)}
+              </div>
+            </div>
             <div class="row">
               <div class="column">
+                <h2>Welcome</h2>
+              </div>
+            </div>
+            <div class="row">
+              <div class="column">
+                <p>Welcome to Social Feed Feeder, your personal social media
+                   scheduler.</p>
+              </div>
+            </div>
+            <div class="row stat-container">
+              <div class="column stats">
                 <span>${campaigns.length}</span>
                 <span>Campaigns</span>
               </div>
-              <div class="column">
+              <div class="column stats">
                 <span>${buckets.length}</span>
-                <span>Buckets</span>
+                <span class="green">Buckets</span>
               </div>
-              <div class="column">
+              <div class="column stats">
                 <span>${posts.length}</span>
-                <span>Posts</span>
+                <span class="orange">Posts</span>
               </div>
             </div>
-            <button id='campaign_index'>View Campaigns</button>`;
+            <div class="row">
+              <div class="column">
+                <button id='campaign_index'>View Campaigns</button>
+              </div>
+            </div>`;
   }
 }

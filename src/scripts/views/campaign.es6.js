@@ -68,7 +68,7 @@ class CampaignView {
     let exists = campaign.name !== undefined ? true : false;
     let html = `<form name='form_campaign_new'>
                 <label for='name'>Campaign Name</label>
-                <input name='name' id='name' type="text"
+                <input name='name' id='name' type="text" autofocus required
                        value="${exists ? campaign.name : ''}"
                        />
 
@@ -76,18 +76,22 @@ class CampaignView {
                 <textarea name='description' required
                  id='description'>${exists ? campaign.description : ''}</textarea>
 
-                <label for='expiry'>Expiry Date</label>
-                <input name='expiry' id='expiry' type='date'
-                 value="${exists ? convertDateForInput(campaign.expiry) : ''}"/>
+                <div class="half-width">
+                  <label for='expiry'>Expiry Date</label>
+                  <input name='expiry' id='expiry' type='date' required
+                   value="${exists ? convertDateForInput(campaign.expiry) : ''}"/>
+                 </div>
 
-                <label for='dailyPosts'>Daily Posts</label>
-                <input name='dailyPosts' id='dailyPosts' type='number' min='0'
-                       max='10' value='${exists ? campaign.dailyPosts : 1}'/>
+                <div class="half-width second">
+                  <label for='dailyPosts'>Daily Posts</label>
+                  <input name='dailyPosts' id='dailyPosts' type='number' min='0'
+                  required max='10' value='${exists ? campaign.dailyPosts : 1}'/>
+                </div>
 
                 <button id="${!exists ? 'campaign_save' : 'campaign_save_edit'}"
                         data-id="${campaign.campaignID}">Save</button>
                 <button id="${!exists ? 'campaign_index' : ''}"
-                        class="${exists ? 'campaign_show' : ''}"
+                        class="${exists ? 'campaign_show' : ''} danger"
                         data-id="${campaign.campaignID}">Cancel</button>
                 </form>
               `;
@@ -104,21 +108,25 @@ class CampaignView {
     return `${getBreadcrumbs('campaign_show')}
             <h2 id="name">${campaign.name}</h2>
             <p>${campaign.description}</p>
-            <div class="row">
-              <div class="column">
+            <div class="row stat-container">
+              <div class="column stats">
                 <span>${campaign.dailyPosts}</span>
-                <span>Daily Posts</span>
+                <span>Max Daily Posts</span>
               </div>
-              <div class="column">
+              <div class="column stats">
+                <span>${campaign.buckets.length}</span>
+                <span class="green">Buckets</span>
+              </div>
+              <div class="column stats">
                 <span>${date}</span>
-                <span>Expiry</span>
+                <span class="orange">Expiry</span>
               </div>
             </div>
             <div class="row">
               <div class="column">
                 <button id="campaign_edit" data-campaignid="${campaign.campaignID}">Edit Campaign</button>
-                <button id="campaign_delete" data-campaignid="${campaign.campaignID}">Delete Campaign</button>
                 <button id="bucket_new" data-campaignid="${campaign.campaignID}">Add Bucket</button>
+                <button id="campaign_delete" data-campaignid="${campaign.campaignID}" class="danger">Delete Campaign</button>
               </div>
             </div>
             <div class="row">

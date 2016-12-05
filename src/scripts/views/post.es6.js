@@ -26,7 +26,7 @@ class PostView {
     return `<form name="form_post_new" method="POST" data-bucketid="${bucketID}">
 
               <label for="message">Message</label>
-              <textarea name='message' id='message' required
+              <textarea name='message' id='message' required autofocus
               >${exists ? post.message : ''}</textarea>
               <p class="char-count">Characters Remaing:
                 <span id="tweet-char-remaining">140</span></p>
@@ -48,14 +48,14 @@ class PostView {
                 <button id="${!exists ? 'post_save' : 'post_save_edit'}"
                         data-id="${!exists ? bucketID : post.postID}">
                         Save</button>
-                <button class='bucket_show' data-id="${bucketID}">
+                <button class='bucket_show danger' data-id="${bucketID}">
                         Cancel</button>
               </div>
             </form>`;
   }
 
   postList(posts) {
-    let html = `<table>
+    let html = `<table class="post-list">
                   <thead>
                     <tr>
                       <th>Message</th>
