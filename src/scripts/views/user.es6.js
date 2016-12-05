@@ -11,8 +11,23 @@ class UserView {
   }
 
   edit(user) {
-    return `<h2>Edit User</h2>
-            <p>This is view to edit the user</p>`;
+    return `<h2>Edit Your Details</h2>
+            ${this.form(user)}`;
+  }
+
+  form(user) {
+    return `<form>
+              <label for="email">
+              <input type="email" value="${user.email ? user.email : ''}"
+                     placeholder="example@email.com" required/>
+
+              <label for="maxDailyPosts">
+              <input type="number" name="maxDailyPosts" id="maxDailyPosts"
+                     value="${user.maxDailyPosts ? user.maxDailyPosts : 1}"/>
+
+              <button id="user_save">Save</button>
+              <button id="dashboard_index" class="danger">Cancel</button>
+            </form>`;
   }
 
   loginScreen(){

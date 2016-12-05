@@ -11,4 +11,9 @@ class User {
     app.user.id = userData[0].userID;
     app.user.name = userData[0].name;
   }
+
+  updateFromForm(form) {
+    this.email = form.email.value;
+    this.maxDailyPosts = form.maxDailyPosts.value;
+  }
 }

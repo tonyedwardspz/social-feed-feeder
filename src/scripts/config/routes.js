@@ -81,4 +81,13 @@ let addRoutes = () => {
       }
     }
   });
+  setupSettingsListener();
+};
+
+let setupSettingsListener = () => {
+  document.getElementById('settings').addEventListener('click', e => {
+    e.preventDefault();
+    console.log('User settings clicked');
+    app.userController.edit();
+  });
 };

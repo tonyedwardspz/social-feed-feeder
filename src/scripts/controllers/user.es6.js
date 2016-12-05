@@ -39,4 +39,25 @@ class UserController extends BaseController {
       app.shell.innerHTML = app.userView.loginScreen();
     }
   }
+
+  edit() {
+    console.log('[User Controller] Edit: ' + app.user.id);
+    let html = app.userView.edit(app.user);
+    this.updateShell(html);
+  }
+
+  update() {
+    console.log('[User Controller] Update: ' + app.user.id);
+    let form = document.querySelector('form');
+
+    this.validateFormData(form, () => {
+      document.getElementById('user_save').disabled = true;
+
+      app.user.updateFromForm(form);
+      app.db.publish('/user/${app.user.id}', app.user, 'PUT');
+
+      app.dashboardController.show();
+    });
+
+  }
 }
