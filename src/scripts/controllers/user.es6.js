@@ -56,7 +56,7 @@ class UserController extends BaseController {
       app.user.updateFromForm(form);
       app.db.publish('/user/${app.user.id}', app.user, 'PUT');
 
-      app.dashboardController.show();
+      app.dashboardController.index();
     });
 
   }

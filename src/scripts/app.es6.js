@@ -39,8 +39,4 @@ var app;
 
   // Setup listener for the post attachment
   setupAttachmentChangeListener();
-
-  // Setup the user setting button listener
-  setupSettingsListener();
-
 })();

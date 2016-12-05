@@ -46,7 +46,7 @@ module.exports = function(app, passport) {
     }
   );
 
-  app.put('/users/:id', users.update);
+  app.put('/user/:id', users.update);
 
   app.get('/user/notification', users.notification);
 

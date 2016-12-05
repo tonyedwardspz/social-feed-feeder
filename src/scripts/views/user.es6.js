@@ -16,12 +16,13 @@ class UserView {
   }
 
   form(user) {
-    return `<form>
-              <label for="email">
-              <input type="email" value="${user.email ? user.email : ''}"
+    return `<form name="edit-user-form">
+              <label for="email">Email</label>
+              <input type="email" name="email" id="email"
+                     value="${user.email ? user.email : ''}"
                      placeholder="example@email.com" required/>
 
-              <label for="maxDailyPosts">
+              <label for="maxDailyPosts">Maximum Daily Posts</label>
               <input type="number" name="maxDailyPosts" id="maxDailyPosts"
                      value="${user.maxDailyPosts ? user.maxDailyPosts : 1}"/>
 
