@@ -33,7 +33,7 @@ gulp.task('styles:sass', function() {
     .pipe(gulp.dest('./public/styles'));
 });
 
-gulp.task('styles:inline', function(){
+gulp.task('styles:inline', ['html', 'styles:sass'], function(){
   let indexContents = fs.readFileSync('./src/index.html', 'utf8').replace(/INLINE-CSS/g, function() {
     let style = fs.readFileSync('./public/styles/inline.css', 'utf8');
     return '<style>\n' + style + '\n</style>';

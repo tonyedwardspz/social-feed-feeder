@@ -29,24 +29,28 @@ class BucketView {
     return `${getBreadcrumbs('bucket_show', [bucket.campaignID, bucket.bucketID])}
             <h2 id="name">${bucket.name}</h2>
             <p>${bucket.description}</p>
-            <div class="row">
-              <div class="column">
+            <div class="row stat-container">
+              <div class="column stats">
                 <span>${bucket.maxPerDay}</span>
-                <span>Daily Posts</span>
+                <span>Max Daily Posts</span>
               </div>
-              <div class="column">
+              <div class="column stats">
+                <span>${bucket.posts.length}</span>
+                <span class="green">Posts</span>
+              </div>
+              <div class="column stats">
                 <span>${date}</span>
-                <span>Expiry</span>
+                <span class="orange">Expiry</span>
               </div>
             </div>
             <div class="row">
               <div class="column">
                 <button class="bucket_edit" data-id="${bucket.bucketID}">
                   Edit Bucket</button>
-                <button class="bucket_delete" data-id="${bucket.bucketID}"
-                  data-campaignid="${bucket.campaignID}">Delete Bucket</button>
                 <button id="post_new" data-id="${bucket.bucketID}"
                   data-campaignid="${bucket.campaignID}">Add New Post</button>
+                <button class="bucket_delete danger" data-id="${bucket.bucketID}"
+                  data-campaignid="${bucket.campaignID}">Delete Bucket</button>
               </div>
             </div>
             <div class="row">
@@ -83,7 +87,7 @@ class BucketView {
 
     return `<form name="form_bucket_new" method="POST" data-id="${campaignID}">
               <label for="name">Name</label>
-              <input type="text" name="name" id="name" required
+              <input type="text" name="name" id="name" required autofocus
                 value="${exists ? bucket.name : ''}"/>
 
               <label for="description">Description</label>
@@ -123,7 +127,7 @@ class BucketView {
               <button id='${!exists ? 'bucket_save' : 'bucket_save_edit'}'
                       data-id="${!exists ? campaignID : bucket.bucketID}">Save</button>
               <button id="${!exists ? 'campaign_index' : ''}"
-                      class="${exists ? 'campaign_show' : ''}"
+                      class="${exists ? 'campaign_show' : ''} danger"
                       data-id="${campaignID}">Cancel</button>
             </form>`;
   }
@@ -134,7 +138,7 @@ class BucketView {
   * @return {String} The HTML string for display
   */
   bucketList(buckets) {
-    let html = `<table>
+    let html = `<table class="bucket-list">
                   <thead>
                     <tr>
                       <th>Name</th>
