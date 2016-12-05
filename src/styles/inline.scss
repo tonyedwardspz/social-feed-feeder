@@ -193,6 +193,17 @@ input[type=submit] {
   float: right;
   margin-top: -3rem;
   max-width: 300px;
+  text-align: center;
+}
+
+@media (max-width: $mobile-breakpoint) {
+  .image-preview-wrapper {
+    float: none;
+    margin-top: 0;
+    max-width: auto;
+    text-align: center;
+    max-width: 100%;
+  }
 }
 
 // Ofline notification stuff
@@ -261,8 +272,6 @@ td.table-message {
   width: 100%;
 }
 
-
-
 .icon {
   padding: 7px 5px 0;
   pointer-events: none;
@@ -282,13 +291,6 @@ td a.post_delete {
 }
 
 @media (max-width: $mobile-breakpoint) {
-  .image-preview-wrapper {
-    float: none;
-    margin-top: 0;
-    max-width: auto;
-    text-align: center;
-  }
-
   table,
   thead,
   tbody,
