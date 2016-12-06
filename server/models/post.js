@@ -5,6 +5,7 @@ let BaseModel = require('./base');
 let formidable = require('formidable');
 let path = require('path');
 let fs = require('fs');
+var cloudinary = require('cloudinary');
 
 class Post extends BaseModel{
   constructor() {
@@ -72,7 +73,9 @@ class Post extends BaseModel{
           console.log(`Error saving post: ${err}`);
         } else {
           console.log(`Post Updated: ${updated}`);
-          res.send(JSON.stringify({ a: 'Post Updated Succesfully' }));
+          res.setHeader('Content-Type', 'application/json');
+          res.body = updated;
+          res.json(JSON.stringify(updated));
         }
       }
     );
@@ -81,20 +84,23 @@ class Post extends BaseModel{
   extractImageAndSave(req, res) {
     let form = new formidable.IncomingForm();
     form.multiples = true;
-    form.uploadDir = path.join(_root , `/public/images/uploads`);
-
-    // save the attached image to '/public/images/uploads/'
-    form.on('file', function(field, file) {
-      fs.rename(file.path, path.join(form.uploadDir, file.name.split(' ').join('_')));
-    });
 
     form.on('error', function(err) {
       console.log('An error has occured: \n' + err);
     });
 
-    // parse the incoming request containing the form data and save
+    // parse the incoming request containing the form data
+    // upload to cloudinary and save
     form.parse(req, (err, fields, files) => {
-      this.updatePost(req, res, JSON.parse(fields.post));
+      cloudinary.uploader.upload(files.image.path,
+        (result) => {
+          console.log(result);
+
+          let post = JSON.parse(fields.post);
+          post.attachment = result.secure_url;
+          this.updatePost(req, res, post);
+        }
+      );
     });
   }
 
