@@ -54,11 +54,7 @@ class UserController extends BaseController {
       document.getElementById('user_save').disabled = true;
 
       app.user.updateFromForm(form);
-      let uploadUser = app.user;
-      delete uploadUser.campaigns;
-      delete uploadUser.posts;
-      delete uploadUser.buckets;
-      console.log(uploadUser);
+      let uploadUser = User.perpareForUpload(app.user);
       app.db.publish(`/user/${app.user.id}`, uploadUser, 'PUT');
 
       app.dashboardController.index();

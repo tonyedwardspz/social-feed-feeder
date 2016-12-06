@@ -19,4 +19,11 @@ class User {
     this.email = form.email.value;
     this.maxDailyPosts = form.maxDailyPosts.value;
   }
+
+  static perpareForUpload(user){
+    delete user.campaigns;
+    delete user.posts;
+    delete user.buckets;
+    return user;
+  }
 }
