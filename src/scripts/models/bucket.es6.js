@@ -45,8 +45,8 @@ class Bucket {
   }
 
   updateFromForm(form) {
-    this.name = form.name.value;
-    this.description = form.description.value;
+    this.name = form.name.value.trim();
+    this.description = form.description.value.trim();
     this.expiry = form.expiry.value;
     this.priority = form.priority.value;
     this.maxPerDay = form.maxPerDay.value;
@@ -93,8 +93,8 @@ class Bucket {
     return new Bucket(
       randomString(),
       form.campaignID.value,
-      form.name.value,
-      form.description.value,
+      form.name.value.trim(),
+      form.description.value.trim(),
       form.expiry.value,
       form.priority.value,
       form.maxPerDay.value,

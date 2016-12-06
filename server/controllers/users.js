@@ -2,6 +2,8 @@
 
 let BaseController = require('./base');
 let notifications = require('../models/notification');
+let UserMongooseModel = require('../singletons/user-singleton')
+                                              .getInstance().getMongooseModel();
 
 
 class UserController extends BaseController {
@@ -30,17 +32,27 @@ class UserController extends BaseController {
 
   // PATCH/PUT /users/:id
   update(req, res) {
-    console.log('[User] Update user');
+    console.log('[User] Update user: ' + req.body.id);
+
+    UserMongooseModel.update({userID: req.body.id.trim()}, { $set: {
+      name: req.body.name,
+      email: req.body.email,
+      maxDailyPosts: req.body.maxDailyPosts
+    }}, (err, updated) => {
+      if (err){
+        console.log('Error updating user', err);
+      } else {
+        console.log(`[User] updated: ${updated}`);
+        res.send(JSON.stringify({ a: '[User] Updated Succesfully' }));
+      }
+    });
   }
 
   // GET /user/notification
   notification(req, res) {
-
-    // make the pushpad object accessable
     console.log('[User] Notification hit for user ' + req.cookies.user_id);
 
     if (req.cookies.user_id) {
-
       try {
         let notification = notifications.getNewNotification();
 
@@ -56,7 +68,6 @@ class UserController extends BaseController {
       } catch (error){
         res.send(error);
       }
-
     }
   }
 }

@@ -30,6 +30,8 @@ module.exports = function(passport) {
           user = new User({
               name: profile._json.name,
               userID: profile.id,
+              email: null,
+              maxDailyPosts : 1,
               accessToken: accessToken,
               refreshToken: refreshToken
           });

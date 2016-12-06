@@ -79,6 +79,20 @@ let addRoutes = () => {
       } else if (e.target.id === 'post_save_edit') {
         app.postController.update(e.target.dataset.id);
       }
+
+      // USER
+      else if (e.target.id === 'user_save') {
+        app.userController.update();
+      }
     }
+  });
+  setupSettingsListener();
+};
+
+let setupSettingsListener = () => {
+  document.getElementById('settings').addEventListener('click', e => {
+    e.preventDefault();
+    console.log('User settings clicked');
+    app.userController.edit();
   });
 };

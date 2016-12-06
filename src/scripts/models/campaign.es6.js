@@ -28,8 +28,8 @@ class Campaign {
   }
 
   updateFromForm(form) {
-    this.name = form.name.value;
-    this.description = form.description.value;
+    this.name = form.name.value.trim();
+    this.description = form.description.valuetrim();
     this.expiry = form.expiry.value;
     this.dailyPosts = form.dailyPosts.value;
 
@@ -64,10 +64,10 @@ class Campaign {
   // Used during the creation of object from user input
   static createFromForm(form) {
     return new Campaign(
-      form.name.value,
-      form.description.value,
-      form.expiry.value,
-      form.dailyPosts.value
+      form.name.value.trim(),
+      form.description.value.trim(),
+      form.expiry.value.trim(),
+      form.dailyPosts.value.trim()
     );
   }
 

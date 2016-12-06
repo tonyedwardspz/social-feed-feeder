@@ -44,7 +44,8 @@ let highlightErrors = (elements, form) => {
 
         if (domElement.type === 'text' ||
             domElement.type === 'textarea' ||
-            domElement.type === 'date') {
+            domElement.type === 'date' ||
+            domElement.type === 'email') {
           domElement.classList.add('invalid');
           app.shell.addEventListener('keyup', e => {
             if (e.target.id === domElement.id && e.target.value.length > 0) {
@@ -62,7 +63,6 @@ let highlightErrors = (elements, form) => {
             }
           });
         }
-
       }
     }
   }

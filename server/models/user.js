@@ -24,6 +24,8 @@ class User extends BaseModel{
   getMongooseSchema() {
     return new mongoose.Schema({
         name: String,
+        email: String,
+        maxDailyPosts: Number,
         userID: String,
         accessToken: String,
         refreshToken: String,

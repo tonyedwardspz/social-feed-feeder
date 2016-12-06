@@ -9,6 +9,21 @@ class User {
   // This would overwrite data returned from the server
   static extractUserData(userData) {
     app.user.id = userData[0].userID;
+    app.user.email = userData[0].email;
+    app.user.maxDailyPosts = userData[0].maxDailyPosts;
     app.user.name = userData[0].name;
+  }
+
+  updateFromForm(form) {
+    this.name = form.name.value;
+    this.email = form.email.value;
+    this.maxDailyPosts = form.maxDailyPosts.value;
+  }
+
+  static perpareForUpload(user){
+    delete user.campaigns;
+    delete user.posts;
+    delete user.buckets;
+    return user;
   }
 }
