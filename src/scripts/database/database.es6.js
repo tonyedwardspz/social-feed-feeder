@@ -74,8 +74,6 @@ class Database {
     // Send request to DB
     console.log(`[DB] Retrieve`);
 
-    // let str = JSON.stringify(user);
-
     let headers = new Headers({
       'Content-Type': 'application/json'
     });
@@ -83,9 +81,7 @@ class Database {
     fetch(route, {
       method:'GET',
       headers: headers,
-      // data: str
     }).then(response => {
-      // console.log('[STATUS]', response);
       if (response.status !== 200) {
         console.log('Looks like there was a problem. Status Code: ' +
           response.status);

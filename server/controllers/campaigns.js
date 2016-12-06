@@ -40,16 +40,16 @@ class CampaignController extends BaseController {
   update(req, res) {
     console.log('[ROUTE] Campaign:PUT hit');
 
-    MongoCampaign.update({ campaignID: req.params.id }, {$set: {
+    MongoCampaign.update({ campaignID: req.params.id }, { $set: {
       name: req.body.name,
       description: req.body.description,
       expiry: req.body.expiry,
       dailyPosts: req.body.dailyPosts
     }}, (err, updated) => {
       if (err) {
-        console.log(`Error deleting campaign: ${err}`);
+        console.log(`Error updating campaign: ${err}`);
       } else {
-        console.log(`Campaign removed: ${updated}`);
+        console.log(`Campaign updated: ${updated}`);
         res.send(JSON.stringify({ a: 'Campaign Updated Succesfully' }));
       }
     });
