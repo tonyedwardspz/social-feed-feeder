@@ -55,7 +55,10 @@ class Database {
       body: data
     })
     .then(response => {
-      console.log(`[DB] Post with image published succesfully: ${response}`);
+      return response.json();
+    }).then((json) => {
+      let updatedPost = JSON.parse(json);
+      Post.updatePostAttachment(updatedPost.postID, updatedPost.attachment);
     })
     .catch(error => {
       console.log(`[DB] Error Publishing post with image: ${error}`);

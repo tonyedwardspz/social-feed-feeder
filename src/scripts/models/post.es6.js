@@ -22,7 +22,7 @@ class Post {
 
   getAttachmentString() {
     if (this.attachment) {
-      return `public/images/uploads/${this.attachment}`;
+      return this.attachment;
     } else {
       return 'public/images/placeholder-image.jpg';
     }
@@ -56,6 +56,14 @@ class Post {
       getDefaultDate(),
       form.attachment.value
     );
+  }
+
+  static updatePostAttachment(id, url){
+    app.user.posts.forEach(post => {
+      if (post.postID === id) {
+        post.attachment = url;
+      }
+    });
   }
 
   updateFromForm(form) {
