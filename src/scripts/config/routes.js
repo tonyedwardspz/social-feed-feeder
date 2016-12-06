@@ -91,9 +91,14 @@ let addRoutes = () => {
 };
 
 let setupSettingsListener = () => {
-  document.getElementById('settings').addEventListener('click', e => {
-    e.preventDefault();
-    console.log('User settings clicked');
-    app.userController.edit();
-  });
+  try {
+    document.getElementById('settings').addEventListener('click', e => {
+      e.preventDefault();
+      console.log('User settings clicked');
+      app.userController.edit();
+    });
+  } catch(err) {
+    console.log('Error setting listener. You\'re probably testing. ', err);
+  }
+
 };
