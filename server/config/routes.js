@@ -6,6 +6,7 @@ let campaigns = require('../controllers/campaigns');
 let buckets = require('../controllers/buckets');
 let posts = require('../controllers/posts');
 let dash = require('../controllers/dashboard');
+let publish = require('../controllers/publish');
 
 module.exports = function(app, passport) {
 
@@ -67,6 +68,7 @@ module.exports = function(app, passport) {
 
    //-------------- Post Routes --------------\\
 
+   // POST: Creates a new post
    app.post('/posts', ensureAuthenticated, posts.create);
 
    // PUT: update posts by id
@@ -80,6 +82,12 @@ module.exports = function(app, passport) {
 
    // PUT: update posts with an image by id
    app.put('/posts/:id/image', ensureAuthenticated, posts.updateImage);
+
+
+   //-------------- Publish Routes --------------\\
+
+   // POST: Publish posts to buffer
+   app.post('/publish/:id', ensureAuthenticated, publish.publishPosts);
 
 
    //-------------- Misc Routes --------------\\

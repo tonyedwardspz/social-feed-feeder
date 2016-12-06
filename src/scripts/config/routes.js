@@ -85,6 +85,11 @@ let addRoutes = () => {
       else if (e.target.id === 'user_save') {
         app.userController.update();
       }
+
+      // PUBLISH POSTS
+      else if (e.target.id === 'publish_posts') {
+        app.publishController.create();
+      }
     }
   });
   setupSettingsListener();

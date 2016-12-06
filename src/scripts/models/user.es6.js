@@ -12,6 +12,8 @@ class User {
     app.user.email = userData[0].email;
     app.user.maxDailyPosts = userData[0].maxDailyPosts;
     app.user.name = userData[0].name;
+
+    // do I store locally? YES! Tea first tho....
   }
 
   updateFromForm(form) {
@@ -20,7 +22,7 @@ class User {
     this.maxDailyPosts = form.maxDailyPosts.value;
   }
 
-  static perpareForUpload(user){
+  static prepareForUpload(user){
     delete user.campaigns;
     delete user.posts;
     delete user.buckets;
