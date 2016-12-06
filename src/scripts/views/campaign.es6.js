@@ -37,11 +37,11 @@ class CampaignView {
                        </div>
                       `;
       if (i % 3 === 0) {
-        campaignHTML += `</div><div class="row>"`;
+        campaignHTML += `</div><hr /><div class="row">`;
       }
     }
 
-    campaignHTML += `<hr /></div></div>`;
+    campaignHTML += `</div></div>`;
 
     return campaignHTML;
   }

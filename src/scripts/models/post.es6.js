@@ -5,14 +5,14 @@ class Post {
               lastPostDate, attachment, userID = app.user.id) {
     this.postID = postID;
     this.bucketID = bucketID;
-    this.message = message.trim();
-    this._lastPostDate = lastPostDate;
+    this.message = message;
+    this.lastPostDate = lastPostDate;
     this.attachment = attachment;
     this.userID =userID;
   }
 
   getDisplayLastPost() {
-    let date = convertDateToLocale(this._lastPostDate);
+    let date = convertDateToLocale(this.lastPostDate);
     if (date === '01/01/1970'){
       return 'Never';
     } else {
@@ -52,7 +52,7 @@ class Post {
     return new Post (
       randomString(),
       form.bucketID.value,
-      form.message.value,
+      form.message.value.trim(),
       getDefaultDate(),
       form.attachment.value
     );

@@ -55,18 +55,27 @@ class Post extends BaseModel{
   }
 
   updatePost(req, res, post) {
-    this.getMongooseModel().update({ postID: post.postID }, {$set: {
-      message: post.message,
-      lastPostDate: post.lastPostDate,
-      attachment: post.attachment
-    }}, (err, updated) => {
-      if (err) {
-        console.log(`Error saving post: ${err}`);
-      } else {
-        console.log(`Post Updated: ${updated}`);
-        res.send(JSON.stringify({ a: 'Post Updated Succesfully' }));
+    this.getMongooseModel().findOneAndUpdate(
+      { postID: post.postID },
+      {
+        message: post.message,
+        lastPostDate: post.lastPostDate,
+        attachment: post.attachment,
+        userID: post.userID,
+        bucketID: post.bucketID
+      },
+      {
+        new: true,
+        upsert: true
+      }, (err, updated) => {
+        if (err) {
+          console.log(`Error saving post: ${err}`);
+        } else {
+          console.log(`Post Updated: ${updated}`);
+          res.send(JSON.stringify({ a: 'Post Updated Succesfully' }));
+        }
       }
-    });
+    );
   }
 
   extractImageAndSave(req, res) {

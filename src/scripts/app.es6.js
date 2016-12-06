@@ -29,7 +29,7 @@ var app;
   addRoutes();
 
   // Register service worker to enable PWA lovelyness
-  setupServiceWorker();
+  // setupServiceWorker();
 
   // Setup twitter message listener
   registerTwiiterInputDetection();
