@@ -59,8 +59,8 @@ body textarea {
 
 .settings {
   position: fixed;
-  top: 1.5rem;
-  right: 1.5rem;
+  top: 2rem;
+  right: 2rem;
 
   img {
     height: 2rem;
@@ -68,7 +68,7 @@ body textarea {
   }
 
   .fill-white {
-    fill: $white; 
+    fill: $white;
   }
 }
 
@@ -168,6 +168,9 @@ input.before-today::after {
 
 input[type=date] {
   border: 1px solid $grey;
+}
+select{
+  font-size: 1.5rem;
 }
 
 .button-wrapper {

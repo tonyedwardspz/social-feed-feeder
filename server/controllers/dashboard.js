@@ -24,9 +24,6 @@ class DashboardController extends BaseController {
     // Run all promises and process when all return data or error
     Promise.all(promises).then(function() {
       console.log('[Dashboard] All database promises resolved');
-      // returned data is in arguments[n]
-      console.log(arguments[0]);
-
       res.send(JSON.stringify(arguments[0]));
     }, function(err) {
       console.log('ERROR: ' + err);

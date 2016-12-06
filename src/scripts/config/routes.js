@@ -14,7 +14,8 @@ let addRoutes = () => {
         !e.target.className.includes('tweet-url') &&
         e.target.id !== 'repeat' &&
         e.target.id !== 'attachment' &&
-        e.target.id !== 'dismiss'
+        e.target.id !== 'dismiss' &&
+        e.target.id !== 'enable-push'
       ) {
       e.preventDefault();
 

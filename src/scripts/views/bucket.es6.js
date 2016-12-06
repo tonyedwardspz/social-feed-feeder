@@ -94,41 +94,52 @@ class BucketView {
               <textarea name='description' id='description'
                 >${exists ? bucket.description : ''}</textarea>
 
-              <label for="priority">Priority</label>
-              <select name='priority' id='priority' required>
-                <option value="2" ${priority === 2 ? 'selected' : ''}>
-                        High</option>
-                <option value="1" ${priority === 1 ? 'selected' : ''}>
-                        Medium</option>
-                <option value="0" ${priority === 0 ? 'selected' : ''}>
-                        Low</option>
-              </select>
+              <div class="half-width">
+                <label for="priority">Priority</label>
+                <select name='priority' id='priority' required>
+                  <option value="2" ${priority === 2 ? 'selected' : ''}>
+                          High</option>
+                  <option value="1" ${priority === 1 ? 'selected' : ''}>
+                          Medium</option>
+                  <option value="0" ${priority === 0 ? 'selected' : ''}>
+                          Low</option>
+                </select>
+              </div>
 
-              <label for='expiry'>Expiry Date</label>
-              <input name='expiry' id='expiry' type='date'
-                value="${exists ? convertDateForInput(bucket.expiry) : ''}"
-                min="${defaultDateInputMin()}" max="${defaultDateInputMax()}"/>
+              <div class="half-width">
+                <label for='expiry'>Expiry Date</label>
+                <input name='expiry' id='expiry' type='date'
+                  value="${exists ? convertDateForInput(bucket.expiry) : ''}"
+                  min="${defaultDateInputMin()}" max="${defaultDateInputMax()}"/>
+              </div>
 
-              <label for="maxPerDay">Max posts per day</label>
-              <input type="number" name="maxPerDay" id="maxPerDay" min="0"
-                     max="5" default="0"
-                     value="${exists ? bucket.maxPerDay : 1}"/>
+              <div class="half-width">
+                <label for="maxPerDay">Max posts per day</label>
+                <input type="number" name="maxPerDay" id="maxPerDay" min="0"
+                       max="5" default="0"
+                       value="${exists ? bucket.maxPerDay : 1}"/>
+              </div>
+
+              <div class="half-width">
+                <label for="frequency">Max Per Week</label>
+                <input type="number" name="frequency" id="frequency" min="0"
+                       max="7" value="${exists? bucket.frequency : '1'}" required/>
+              </div>
 
               <label for="repeat">Repeat?</label>
               <input type="checkbox" name="repeat" id="repeat"
                 ${checked ? 'checked' : ''}/>
 
-              <label for="frequency">Max Per Week</label>
-              <input type="number" name="frequency" id="frequency" min="0"
-                     max="7" value="${exists? bucket.frequency : '1'}" required/>
-
               <input type="hidden" id="campaignID" value="${campaignID}" />
 
-              <button id='${!exists ? 'bucket_save' : 'bucket_save_edit'}'
-                      data-id="${!exists ? campaignID : bucket.bucketID}">Save</button>
-              <button id="${!exists ? 'campaign_index' : ''}"
-                      class="${exists ? 'campaign_show' : ''} danger"
-                      data-id="${campaignID}">Cancel</button>
+              <div>
+                <button id='${!exists ? 'bucket_save' : 'bucket_save_edit'}'
+                        data-id="${!exists ? campaignID : bucket.bucketID}"
+                        >Save</button>
+                <button id="${!exists ? 'campaign_index' : ''}"
+                        class="${exists ? 'campaign_show' : ''} danger"
+                        data-id="${campaignID}">Cancel</button>
+              </div>
             </form>`;
   }
 
