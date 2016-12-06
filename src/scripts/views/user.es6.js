@@ -12,6 +12,10 @@ class UserView {
 
   edit(user) {
     return `<h2>Edit Your Details</h2>
+            <p>To get the most from this application, please
+            <a href="https://socialfeedfeeder.pushpad.xyz/p/2376"
+            title="Enable Push Notifications" id="enable-push">enable push
+            notifications</a>.<p>
             ${this.form(user)}`;
   }
 
