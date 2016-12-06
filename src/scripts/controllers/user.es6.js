@@ -25,14 +25,21 @@ class UserController extends BaseController {
 
   /**
   * Checks that the user is authenticated by looking for the 'user_auth' cookie.
-  * It the generates a new user from a retrieved id
+  * It the generates a new user from a retrieved id, and directs the flow.
+  * If the current URL includes 'publish_posts', display the publish scree,
+  * otherwise direct the user to the root URL
   */
   checkAuthentication() {
     if (this.getCookie('user_auth') === 'true'){
       console.log('[User Controller] Succesfully authenticated');
       if (app.user === null) {
         app.user = new User(this.getCookie('user_id'));
-        app.dashboardController.index(app.user);
+
+        if (window.location.href.includes('publish_posts')){
+          app.publishController.index();
+        } else {
+          app.dashboardController.index(app.user);
+        }
       }
     } else {
       console.log('[User Contoller] Not authenticated');

@@ -9,9 +9,9 @@ class PublishController extends BaseController {
     console.log('[Publish] Index Hit');
 
     let posts = {};
-    let html = app.postView.index(posts);
+    let html = app.publishView.index(posts);
 
-    this.updateDom(html);
+    this.updateShell(html);
   }
 
   create() {
