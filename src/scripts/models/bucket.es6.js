@@ -5,8 +5,8 @@ class Bucket {
               maxPerDay, repeat, frequency, userID = app.user.id) {
     this.bucketID = bucketID;
     this.campaignID = campaignID;
-    this.name = name;
-    this.description = description;
+    this.name = name.trim();
+    this.description = description.trim();
     this.expiry = expiry;
     this.priority = priority;
     this.maxPerDay = maxPerDay;

@@ -4,8 +4,8 @@ class Campaign {
   constructor(name, description, expiry, dailyPosts, userID = app.user.id,
               campaignID = randomString()) {
     this.campaignID = campaignID;
-    this.name = name;
-    this.description = description;
+    this.name = name.trim();
+    this.description = description.trim();
     this.expiry = expiry;
     this.dailyPosts = dailyPosts;
     this.userID = userID;

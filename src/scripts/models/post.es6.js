@@ -5,7 +5,7 @@ class Post {
               lastPostDate, attachment, userID = app.user.id) {
     this.postID = postID;
     this.bucketID = bucketID;
-    this.message = message;
+    this.message = message.trim();
     this._lastPostDate = lastPostDate;
     this.attachment = attachment;
     this.userID =userID;
