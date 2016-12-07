@@ -19,7 +19,14 @@ let registerTwiiterInputDetection = () => {
 */
 let updateCharCount = text => {
   let remaining = getCharCount(text);
-  document.getElementById('tweet-char-remaining').innerHTML = remaining;
+  let charEl = document.getElementById('tweet-char-remaining');
+  charEl.innerHTML = remaining;
+
+  if (remaining <= -1){
+    charEl.classList.add('red');
+  } else {
+    charEl.classList.remove('red');
+  }
 };
 
 /**
