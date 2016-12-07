@@ -8,7 +8,7 @@ goog.offlineGoogleAnalytics.initialize();
 // Using a date string ensures that the new service worker is always used,
 // plus makes cache busting super easy. Hopefully!
 //VERSION-HERE
-const cacheName = version + 'static';
+const cacheName = `SFF-${version}-static`;
 const cacheFiles = [
   '/scripts/app.js',
   '/index.html',
