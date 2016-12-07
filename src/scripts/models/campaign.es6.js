@@ -1,5 +1,6 @@
 'use strict';
 
+/** A class representing a users campaign */
 class Campaign {
   constructor(name, description, expiry, dailyPosts, userID = app.user.id,
               campaignID = randomString()) {
@@ -29,7 +30,7 @@ class Campaign {
 
   updateFromForm(form) {
     this.name = form.name.value.trim();
-    this.description = form.description.valuetrim();
+    this.description = form.description.value.trim();
     this.expiry = form.expiry.value;
     this.dailyPosts = form.dailyPosts.value;
 
@@ -58,6 +59,16 @@ class Campaign {
     });
 
     return thisCampaign;
+  }
+
+  getNumberOfPosts() {
+    let total = 0;
+
+    this.buckets.forEach(bucket => {
+      total += bucket.posts.length;
+    });
+
+    return total;
   }
 
   // Create and return a new campaign from a passed form
