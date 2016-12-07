@@ -8,7 +8,7 @@ class UserView {
 
   /**
   * Returns HTML for the user setting page
-  * @param {USERt} user The user object to populate the view with
+  * @param {User} user The user object to populate the view with
   * @return {String} The HTML string to display
   */
   edit(user) {
@@ -22,7 +22,7 @@ class UserView {
 
   /**
   * Returns HTML for the user settings form
-  * @param {USERt} user The user object to populate the form with
+  * @param {User} user The user object to populate the form with
   * @return {String} The HTML string for the form
   */
   form(user) {

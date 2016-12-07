@@ -2,6 +2,18 @@
 
 /** A class representing a bucket */
 class Bucket {
+  /**
+  * @param {String} bucketID The id of the bucket
+  * @param {String} campaignID The id of the parent campaign
+  * @param {String} name The title of the bucket
+  * @param {String} description The description of the bucket
+  * @param {String} expiry The date string to expire the bucket on
+  * @param {Integer} priority The priority of the bucket
+  * @param {Integer} maxPerDay The maximun posts from the bucket to post
+  * @param {Boolean} repeat Should the bucket's posts repeat?
+  * @param {Intenger} frequency How many time a week should this buckets content be posted
+  * @param {String} [userID=app.user.id] The id of user this bucket belongs to
+  */
   constructor(bucketID, campaignID, name, description, expiry, priority,
               maxPerDay, repeat, frequency, userID = app.user.id) {
     this.bucketID = bucketID;
@@ -32,11 +44,11 @@ class Bucket {
         return 'Drekly';
     }
   }
-  /**
-  * Generates the display value for the repetirion of posting of posts
-  * withing a bucket
-  */
 
+  /**
+  * Generates the display value for the repetition of the posting of posts
+  * within a bucket
+  */
   displayRepeat() {
     return this.repeat ? 'Yes' : 'No';
   }
@@ -58,7 +70,7 @@ class Bucket {
   }
 
   /**
-  * Updates the current bucket from the values entered in the bucket form
+  * Updates the current bucket from the values entered in the bucket's form
   * @param {Form} form HTML form for values to be extracted from
   */
   updateFromForm(form) {
