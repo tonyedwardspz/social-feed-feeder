@@ -5,6 +5,10 @@ class PublishController extends BaseController {
     super('PublishController');
   }
 
+  /**
+  * Displays the publish post view when the publish_index url is hit.
+  * Gets an array of post suggestions and displays them to the user.
+  */
   index() {
     console.log('[Publish] Index Hit');
 
@@ -14,7 +18,10 @@ class PublishController extends BaseController {
     this.updateShell(html);
   }
 
-  create(req, res) {
+  /**
+  * Sends a request to the server to send the selected posts to buffer.
+  */
+  create() {
     console.log('[Publish] Create Hit');
 
     // get the remaining post ids from the document and create an object

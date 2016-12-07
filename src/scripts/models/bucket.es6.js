@@ -1,5 +1,6 @@
 'use strict';
 
+/** A class representing a bucket */
 class Bucket {
   constructor(bucketID, campaignID, name, description, expiry, priority,
               maxPerDay, repeat, frequency, userID = app.user.id) {
@@ -15,6 +16,10 @@ class Bucket {
     this.userID = userID;
   }
 
+  /**
+  * Generates the priority to be displayed in the UI. If no prioity is set
+  * it does things the Cornish way.
+  */
   displayPriority() {
     switch (parseInt(this.priority)) {
       case 0:
@@ -27,11 +32,19 @@ class Bucket {
         return 'Drekly';
     }
   }
+  /**
+  * Generates the display value for the repetirion of posting of posts
+  * withing a bucket
+  */
 
   displayRepeat() {
     return this.repeat ? 'Yes' : 'No';
   }
 
+  /**
+  * Itterates over the apps posts, returning those related to the current bucket
+  * @return {Array.Post} An array of posts for the current bucket
+  */
   get posts(){
     let posts = [];
 
@@ -44,6 +57,10 @@ class Bucket {
     return posts;
   }
 
+  /**
+  * Updates the current bucket from the values entered in the bucket form
+  * @param {Form} form HTML form for values to be extracted from
+  */
   updateFromForm(form) {
     this.name = form.name.value.trim();
     this.description = form.description.value.trim();
@@ -60,14 +77,27 @@ class Bucket {
     });
   }
 
+  /**
+  * Get all buckets for the current user
+  * @return {Array.Buckets} The users buckets
+  */
   static getAllBuckets() {
     return app.user.buckets;
   }
 
+  /**
+  * Sets the users buckets to be the provided array of values
+  * @param {Array.Buckets} buckets The users buckets
+  */
   static setBuckets(buckets) {
     app.user.buckets = buckets;
   }
 
+  /**
+  * Creates an arrays of bucket objects from the passed array of JSON objects
+  * @param {Array.String} buckets JSON data returned from the server
+  * @return {Array.Buckets} An array of bucket objects
+  */
   static extractBucketData(buckets) {
     var sortedBuckets = [];
 
@@ -89,6 +119,11 @@ class Bucket {
     return sortedBuckets;
   }
 
+  /**
+  * Creates a new bucket from the passed form object, generating a new local
+  * ID and triming whitespace from string inputs.
+  * @param {Form} form The form containing the new buckets data
+  */
   static createFromForm(form) {
     return new Bucket(
       randomString(),
@@ -103,7 +138,12 @@ class Bucket {
     );
   }
 
-  // Search the users bucket for a specific item
+  /**
+  * Finds a bucket from the users buckets by the passed ID
+  * @param {String} id ID of the requested bucket
+  * @param {Array.Bucket} buckets An array containing all user buckets
+  * @return {Bucket} The bucket for the passed ID
+  */
   static findByID(id, buckets) {
     let thisBucket = {};
     buckets.forEach(bucket => {
@@ -115,6 +155,10 @@ class Bucket {
     return thisBucket;
   }
 
+  /**
+  * Removes a bucket from the users array of objects by the passed ID
+  * @param {String} id ID of the bucket to delete
+  */
   static removeBucket(id) {
     console.log('removing bucket');
     let buckets = this.getAllBuckets();

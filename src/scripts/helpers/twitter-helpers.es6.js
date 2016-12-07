@@ -31,7 +31,7 @@ let updateCharCount = text => {
 
 /**
 * Gets the remaining charachter count for a post
-* @param {String} text The text whos length shold be checked
+* @param {String} text The string whose length shold be checked
 * @return {Int} The difference between the input length and twitter max length
 */
 let getCharCount = text => {

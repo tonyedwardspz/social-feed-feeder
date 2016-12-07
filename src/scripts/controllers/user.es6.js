@@ -47,12 +47,19 @@ class UserController extends BaseController {
     }
   }
 
+  /**
+  * Displays the edit user form. Called when the settings button is pressed.
+  */
   edit() {
     console.log('[User Controller] Edit: ' + app.user.id);
     let html = app.userView.edit(app.user);
     this.updateShell(html);
   }
 
+  /**
+  * Updates the users information by sending details to the server, after
+  * updating the local copy.
+  */
   update() {
     console.log('[User Controller] Update: ' + app.user.id);
     let form = document.querySelector('form');
