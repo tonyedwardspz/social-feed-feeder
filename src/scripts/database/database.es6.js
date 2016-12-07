@@ -5,7 +5,6 @@
 */
 class Database {
   constructor() {
-    // Connect to DB
     console.log(`[DB] Constructor`);
   }
 

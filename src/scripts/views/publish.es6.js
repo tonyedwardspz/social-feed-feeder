@@ -1,10 +1,12 @@
 'use strict';
 
+/** A class representing the publish posts view */
 class PublishView {
   constructor() {
 
   }
 
+  /**  Generates the html for the publish posts view */
   index() {
     return `<h2>Publish new posts</h2>
             <div class="row">

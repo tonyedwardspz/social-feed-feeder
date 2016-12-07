@@ -1,10 +1,17 @@
 'use strict';
 
+/** A class representing a posts views */
 class PostView {
   constructor(){
 
   }
 
+  /**
+  * Returns HTML for the 'new post' screen
+  * @param {Array.String} ids The ids of the parent objects, starting at the top
+  * of the heiarchy
+  * @return {String} The HTML string for display
+  */
   new(parents) {
     return `${getBreadcrumbs('post_new', parents)}
             <h2>New Post</h2>
@@ -13,6 +20,12 @@ class PostView {
             `;
   }
 
+  /**
+  * Returns HTML for the 'edit post' screen. Fetches the form for the post via
+  * the 'form()' method.
+  * @param {Post} post A post object to generate html for
+  * @return {String} The HTML string for display
+  */
   edit(post) {
     return `${getBreadcrumbs('post_edit', [post.campaignID, post.bucketID, post.postID])}
             <h2>Edit Post</h2>
@@ -20,6 +33,13 @@ class PostView {
             ${this.form(post.campaignID, post.bucketID, post)}`;
   }
 
+  /**
+  * Returns HTML for the post form
+  * @param {String} campaignID The ID of the parent campaign
+  * @param {String} bucketID The ID of the parent bucket
+  * @param {Post} [post] The post to populate the form with
+  * @return {String} The HTML string for display
+  */
   form(campaignID, bucketID, post = new Post()) {
     let exists = post.message !== undefined ? true : false;
 
@@ -54,6 +74,11 @@ class PostView {
             </form>`;
   }
 
+  /**
+  * Returns HTML for a list of posts. Called from the bucket show & publish views
+  * @param {Array.Post} posts The collection of posts to generate HTML for
+  * @return {String} The HTML string for display
+  */
   postList(posts) {
     let html = `<table class="post-list">
                   <thead>

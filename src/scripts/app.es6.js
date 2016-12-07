@@ -2,6 +2,7 @@
 
 var app;
 
+/** Set up the app on first load */
 (function(){
 
   app = {
