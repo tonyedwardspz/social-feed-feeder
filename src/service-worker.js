@@ -17,6 +17,7 @@ const cacheFiles = [
   '/images/placeholder-image.jpg',
   '/images/placeholder-image-not-available.jpg',
   '/images/x.svg',
+  '/images/settings.svg',
   '/scripts/offline-google-analytics-import.js',
   '/favicon.ico',
   '/favicon-16x16.png',
