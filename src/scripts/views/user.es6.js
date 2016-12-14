@@ -46,8 +46,13 @@ class UserView {
   }
 
   loginScreen(){
-    return `<h2>Feed Feeder</h2>
+    return `<div class="login-screen"><div class="inner">
+            <h2>Social Media Promotion.</br>Automated.</h2>
             <button id='login' name='login'>Login</button>
-            <p>Feed Feeder is a social media queing tool</p>`;
+            <p></p>
+            <p>Social Feed Feeder is an automated social media queing tool
+            for buffer</p>
+            <div class="cover"></div>
+            </div></div>`;
   }
 }

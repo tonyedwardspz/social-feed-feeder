@@ -16,6 +16,7 @@ const cacheFiles = [
   '/images/pencil.svg',
   '/images/placeholder-image.jpg',
   '/images/placeholder-image-not-available.jpg',
+  '/images/cover-image.jpeg',
   '/images/x.svg',
   '/images/settings.svg',
   '/scripts/offline-google-analytics-import.js',
@@ -91,6 +92,10 @@ self.addEventListener('fetch', event => {
 
   // Ignore non-GET requests, SW can't deal with them
   if (request.method !== 'GET') {
+    return;
+  }
+
+  if (request.url.includes('chrome-extension')) {
     return;
   }
 
