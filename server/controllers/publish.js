@@ -3,6 +3,7 @@
 let BaseController = require('./base');
 let bufferAPI = require('buffer-node');
 let User = require('../singletons/user-singleton').getInstance().getMongooseModel();
+let Post = require('../models/post');
 
 class PublishController extends BaseController {
   constructor() {
@@ -21,21 +22,28 @@ class PublishController extends BaseController {
 
       let buffer = bufferAPI(req.cookies.auth_token);
 
-      buffer.updates.create('This is the first update from social feed reader',
-                            user.accountIDS,
-                            null
-                          );
-
-      buffer.updates.create('This is the secons update from social feed reader',
-                            user.accountIDS,
-                            { top: true}
-                          );
+      Post.getMongooseModel().find({ 'postID': { $in: req.body.posts }}, (err, posts) => {
+        posts.forEach(post => {
+          let options = {};
+          options.media = {};
+          options.media.photo = post.attachment;
+          // options.media.image = post.attachment;
+          // options.media.photo = post.attachment;
+          // options.media.image = post.attachment;
+          // if (post.attachment.length > 10) {
+          //   options = {
+          //     media: [ 'photo' post.attachment ]
+          //   }
+          // }
+          console.log(options);
+          buffer.updates.create(post.message,
+                                user.accountIDS,
+                                options
+                              );
+        });
+      });
     });
-
-    console.log(req.cookies.auth_token);
   }
-
-
 }
 
 module.exports = new PublishController();
