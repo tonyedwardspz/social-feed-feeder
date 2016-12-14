@@ -108,10 +108,9 @@ class PostView {
                            class="icon"/>
                    </a>
                  </td>
-               </tr>
-
-             `;
+               </tr>`;
     });
+    html += '</tbody></table>'
 
     return html;
   }
