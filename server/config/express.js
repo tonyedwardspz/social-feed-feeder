@@ -4,6 +4,7 @@ let cookieParser = require('cookie-parser');
 let express = require('express');
 let bodyParser = require('body-parser');
 let session = require('express-session');
+let compress = require('compression');
 
 /**
 * Returns HTML for the user setting page
@@ -24,6 +25,9 @@ module.exports = function(app, passport, root){
 
   // MMMMM..... cookies
   app.use(cookieParser());
+
+  // Enable gzip
+  app.use(compress());
 
   // Configure express to you passport for auth / middleware
   app.use(session({
