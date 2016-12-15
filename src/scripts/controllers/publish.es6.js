@@ -143,7 +143,8 @@ class PublishController extends BaseController {
     app.db.publish(`/publish/${app.user.id}`, posts);
 
     // update the dom
-    this.updateShell('Posts sent');
+    let html = app.publishView.sucess();
+    this.updateShell(html);
     this.updateHistory('publish_confirm');
   }
 }

@@ -30,6 +30,6 @@ class PublishView {
             <p>Your posts have been sucessfully posted to buffer.</p>
             <p>Keep a beady eye on your twitter stream for your shiney new content!</p>
             <p>In the mean time.....
-            <a href="/dashboard_index" title="Dashboard">head to the dashboard</a> to add some more.`;
+            <a href="#" id="dashboard_index" title="Dashboard">head to the dashboard</a> to add some more.`;
   }
 }
