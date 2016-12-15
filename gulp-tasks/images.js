@@ -13,6 +13,7 @@ gulp.task('images', function() {
 
   return gulp.src('./src/images/**/*.{png,jpg,jpeg,gif,svg}')
     .pipe(imagemin({
+      optimizationLevel: 7,
       progressive: true,
       interlaced: true,
       svgoPlugins: [{removeViewBox: false}],
