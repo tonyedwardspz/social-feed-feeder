@@ -16,7 +16,7 @@ let setupPopStateListener = () => {
 * the new url in the browser address bar and calls the appropriate action
 * @param {State} state The browser history state object
 */
-let loadContent = (state) => {
+let loadContent = (state = {id: null}) => {
   try {
     let url = window.location.href.split('/');
     let controller = url[url.length - 1].split('_')[0];

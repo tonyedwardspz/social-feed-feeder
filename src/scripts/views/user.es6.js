@@ -1,15 +1,16 @@
 'use strict';
 
+/** A class representing the User settings views */
 class UserView {
   constructor(){
 
   }
 
-  show(user) {
-    return `<h2>Show User</h2>
-            <p>This is the show user view</p>`;
-  }
-
+  /**
+  * Returns HTML for the user setting page
+  * @param {User} user The user object to populate the view with
+  * @return {String} The HTML string to display
+  */
   edit(user) {
     return `<h2>Edit Your Details</h2>
             <p>To get the most from this application, please
@@ -19,6 +20,11 @@ class UserView {
             ${this.form(user)}`;
   }
 
+  /**
+  * Returns HTML for the user settings form
+  * @param {User} user The user object to populate the form with
+  * @return {String} The HTML string for the form
+  */
   form(user) {
     return `<form name="edit-user-form">
               <label for="name">Name</label>
@@ -40,8 +46,13 @@ class UserView {
   }
 
   loginScreen(){
-    return `<h2>Feed Feeder</h2>
+    return `<div class="login-screen"><div class="inner">
+            <h2>Social Media Promotion.</br>Automated.</h2>
             <button id='login' name='login'>Login</button>
-            <p>Feed Feeder is a social media queing tool</p>`;
+            <p></p>
+            <p>Social Feed Feeder is an automated social media queing tool
+            for buffer</p>
+            <div class="cover"></div>
+            </div></div>`;
   }
 }

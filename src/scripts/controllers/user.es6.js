@@ -26,8 +26,8 @@ class UserController extends BaseController {
   /**
   * Checks that the user is authenticated by looking for the 'user_auth' cookie.
   * It the generates a new user from a retrieved id, and directs the flow.
-  * If the current URL includes 'publish_posts', display the publish scree,
-  * otherwise direct the user to the root URL
+  * If the current URL includes 'publish_posts' load content,
+  * otherwise direct the user to the dashboard.
   */
   checkAuthentication() {
     if (this.getCookie('user_auth') === 'true'){
@@ -35,8 +35,8 @@ class UserController extends BaseController {
       if (app.user === null) {
         app.user = new User(this.getCookie('user_id'));
 
-        if (window.location.href.includes('publish_posts')){
-          app.publishController.index();
+        if (window.location.href.includes('publish_index')){
+          loadContent();
         } else {
           app.dashboardController.index(app.user);
         }
@@ -47,12 +47,19 @@ class UserController extends BaseController {
     }
   }
 
+  /**
+  * Displays the edit user form. Called when the settings button is pressed.
+  */
   edit() {
     console.log('[User Controller] Edit: ' + app.user.id);
     let html = app.userView.edit(app.user);
     this.updateShell(html);
   }
 
+  /**
+  * Updates the users information by sending details to the server, after
+  * updating the local copy.
+  */
   update() {
     console.log('[User Controller] Update: ' + app.user.id);
     let form = document.querySelector('form');
@@ -61,7 +68,7 @@ class UserController extends BaseController {
       document.getElementById('user_save').disabled = true;
 
       app.user.updateFromForm(form);
-      let uploadUser = User.perpareForUpload(app.user);
+      let uploadUser = User.prepareForUpload(app.user);
       app.db.publish(`/user/${app.user.id}`, uploadUser, 'PUT');
 
       app.dashboardController.index();

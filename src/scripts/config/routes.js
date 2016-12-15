@@ -85,11 +85,22 @@ let addRoutes = () => {
       else if (e.target.id === 'user_save') {
         app.userController.update();
       }
+
+      // PUBLISH POSTS
+      else if (e.target.id === 'publish_index') {
+        app.publishController.index();
+      } else if (e.target.id === 'publish_these_posts'){
+        app.publishController.create(e.target.dataset.ids);
+      }
     }
   });
   setupSettingsListener();
 };
 
+/**
+* Adds an event listener for the settings button. Wrapped in a try/catch
+* to prevent error during the running of tests
+*/
 let setupSettingsListener = () => {
   try {
     document.getElementById('settings').addEventListener('click', e => {

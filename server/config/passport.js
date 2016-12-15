@@ -1,8 +1,9 @@
 'use strict';
 
-var BufferAppStrategy = require('passport-bufferapp').Strategy;
-var request = require('request');
-var User = require('../singletons/user-singleton').getInstance().getMongooseModel();
+let BufferAppStrategy = require('passport-bufferapp').Strategy;
+let request = require('request');
+let User = require('../singletons/user-singleton').getInstance();
+let UserModel = User.getMongooseModel();
 
 module.exports = function(passport) {
   passport.serializeUser(function(user, done) {
@@ -10,7 +11,7 @@ module.exports = function(passport) {
   });
 
   passport.deserializeUser(function(id, done) {
-    User.findById(id, function(err, user) {
+    UserModel.findById(id, function(err, user) {
       done(err, user);
     });
   });
@@ -22,12 +23,11 @@ module.exports = function(passport) {
     },
     function(accessToken, refreshToken, profile, done) {
 
-      User.findOne({ 'userID': profile.id }, function(err, user) {
-        // console.log('User: ' + user);
+      UserModel.findOne({ 'userID': profile.id }, function(err, user) {
         if (err) {
           return done(err);
         } else if (!user) {
-          user = new User({
+          user = new UserModel({
               name: profile._json.name,
               userID: profile.id,
               email: null,
@@ -38,12 +38,7 @@ module.exports = function(passport) {
 
           request.get('https://api.bufferapp.com/1/profiles.json?access_token=' + accessToken, function (e, r, body) {
 
-            let accs = JSON.parse(body);
-            for(let i = 0; i < accs.length; i++) {
-              console.log(accs[i].id);
-              user.accountIDS.push(accs[i].id);
-            }
-
+            user.accountIDS = User.sortBufferAccountIDs(JSON.parse(body));
             user.save(function(err) {
                 if (err) {console.log(err);}
                 return done(err, user);
@@ -51,15 +46,8 @@ module.exports = function(passport) {
           });
         } else {
           request.get('https://api.bufferapp.com/1/profiles.json?access_token=' + accessToken, function (e, r, body) {
-            // console.log('BUFFER RESPONSE: ' + body);
 
-            if (user.accountIDS.length < 1) {
-              let accs = JSON.parse(body);
-              for(let i = 0; i < accs.length; i++) {
-                user.accountIDS.push(accs[i].id);
-              }
-            }
-
+            user.accountIDS = User.sortBufferAccountIDs(JSON.parse(body));
             user.save(function(err) {
                 if (err) {console.log(err);}
                 return done(err, user);

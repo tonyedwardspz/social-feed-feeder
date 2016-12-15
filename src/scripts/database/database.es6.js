@@ -5,7 +5,6 @@
 */
 class Database {
   constructor() {
-    // Connect to DB
     console.log(`[DB] Constructor`);
   }
 
@@ -42,6 +41,16 @@ class Database {
     });
   }
 
+  /**
+  * Publish an object to the remote database with an attached image. Requires a
+  * seperate methos because of the way data is sent. It creates a form
+  * object for the passed object and attaches the image before sending. When a
+  * response is recieved it then updates the cloal URL with the CDN value.
+  * @param {String} route The API route which should be published to
+  * @param {Object} object The object to publish to the remote DB
+  * @param {String} [method='POST'] The HTTP action to use
+  * @param {Blob} image The inage the user has requested to upload
+  */
   publishWithImage(route, object, method, image) {
 
     let data = new FormData();

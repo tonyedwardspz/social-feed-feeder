@@ -1,5 +1,9 @@
 'use strict';
 
+/**
+* Triggers the setting up of the service workers, if available in browser,
+* and related listeners.
+*/
 let setupServiceWorker = () => {
   if ('serviceWorker' in navigator) {
     offlineReadyShow();
@@ -10,6 +14,10 @@ let setupServiceWorker = () => {
   }
 };
 
+/**
+* Registers a service worker to enable caching, push notifications and
+* app installation.
+*/
 let registerServiceWorker = () => {
   navigator.serviceWorker.register('/service-worker.js').then((registration) => {
     console.log('[SW-APP] Registered');
@@ -18,6 +26,10 @@ let registerServiceWorker = () => {
   });
 };
 
+/**
+* Listens for the state change event of the service worker in order to display
+* the ready to work offline message.
+*/
 let offlineReadyShow = () => {
   navigator.serviceWorker.addEventListener('controllerchange', event => {
     navigator.serviceWorker.controller.addEventListener('statechange', () => {
@@ -28,6 +40,9 @@ let offlineReadyShow = () => {
   });
 };
 
+/**
+* Sets a listener for the dismissal of the offline ready message.
+*/
 let offlineReadyDismissal = () => {
   document.getElementById('offline-ready').addEventListener('click', (e) => {
     e.preventDefault();

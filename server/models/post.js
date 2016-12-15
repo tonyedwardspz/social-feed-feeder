@@ -81,11 +81,29 @@ class Post extends BaseModel{
     );
   }
 
+  updatePostDatePromise(post){
+    return new Promise((resolve, reject) =>{
+        this.getMongooseModel().findOneAndUpdate(
+          { postID: post.postID },
+          { $set:
+            { lastPostDate: new Date().toISOString() }
+          }, (err, updated) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(updated);
+            }
+          }
+        );
+      }
+    );
+  }
+
   extractImageAndSave(req, res) {
     let form = new formidable.IncomingForm();
     form.multiples = true;
 
-    form.on('error', function(err) {
+    form.on('error', (err) => {
       console.log('An error has occured: \n' + err);
     });
 
