@@ -66,12 +66,4 @@ class BaseController {
       }
     }
   }
-
-  indicateOffline() {
-    if ('serviceWorker' in navigator) {
-      if (!navigator.onLine) {
-        
-      }
-    }
-  }
 }
