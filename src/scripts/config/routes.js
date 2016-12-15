@@ -87,8 +87,8 @@ let addRoutes = () => {
       }
 
       // PUBLISH POSTS
-      else if (e.target.id === 'publish_posts') {
-        app.publishController.create();
+      else if (e.target.id === 'publish_index') {
+        app.publishController.index();
       } else if (e.target.id === 'publish_these_posts'){
         app.publishController.create(e.target.dataset.ids);
       }

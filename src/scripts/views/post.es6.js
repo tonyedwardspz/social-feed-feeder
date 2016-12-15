@@ -93,10 +93,11 @@ class PostView {
                `;
 
     posts.forEach(post => {
+      let attachmentIMG = `<img src="${post.attachment}" />`;
       html += `<tr>
                  <td class="table-message">${post.message}</td>
                  <td>${post.getDisplayLastPost()}</td>
-                 <td>${post.attachment ? 'Yes' : 'No'}</td>
+                 <td>${post.attachment ? attachmentIMG : 'No'}</td>
                  <td>
                    <a href="#" class="post_edit" data-id="${post.postID}">
                      <img src="/images/pencil.svg" alt="edit post" class="icon"/>
@@ -110,7 +111,7 @@ class PostView {
                  </td>
                </tr>`;
     });
-    html += '</tbody></table>'
+    html += '</tbody></table>';
 
     return html;
   }

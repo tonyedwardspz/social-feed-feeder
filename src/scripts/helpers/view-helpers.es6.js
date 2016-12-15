@@ -13,7 +13,7 @@ let getBreadcrumbs = (view, ids = null) => {
 
   if (view === 'campaign_index') {
     breadcrumb += `&nbsp;&raquo;&nbsp;Campaigns`;
-  } else if (view !== 'dashboard'){
+  } else if (view !== 'dashboard' && view !== 'publish_index' && view !== 'publish_sucess'){
     breadcrumb += `&nbsp;&raquo;&nbsp;
               <a href="#" id="campaign_index" class="breadcrumb">Campaigns</a>`;
   }
@@ -50,6 +50,12 @@ let getBreadcrumbs = (view, ids = null) => {
     breadcrumb += `&nbsp;&raquo;&nbsp;Edit Post`;
   } else if (view === 'post_new') {
     breadcrumb += `&nbsp;&raquo;&nbsp;New Post`;
+  }
+
+  if (view === 'publish_index') {
+    breadcrumb += `&nbsp;&raquo;&nbsp;Publish Posts`;
+  } else if (view === 'publish_sucess') {
+    breadcrumb += `&nbsp;&raquo;&nbsp;Posts Published`;
   }
 
   return breadcrumb;

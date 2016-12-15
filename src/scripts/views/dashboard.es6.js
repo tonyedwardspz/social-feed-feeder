@@ -48,6 +48,7 @@ class DashboardView {
             <div class="row">
               <div class="column">
                 <button id='campaign_index'>View Campaigns</button>
+                <button id='publish_index'>Schedule Posts</button>
               </div>
             </div>`;
   }

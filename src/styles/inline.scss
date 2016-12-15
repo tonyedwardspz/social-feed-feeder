@@ -426,3 +426,10 @@ td a.post_delete {
     td:nth-of-type(4)::before { content: 'Actions'; }
   }
 }
+
+.publish-posts td:nth-of-type(2),
+.publish-posts td:nth-of-type(4),
+.publish-posts th:nth-of-type(2),
+.publish-posts th:nth-of-type(4) {
+  display: none;
+}

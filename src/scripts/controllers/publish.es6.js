@@ -11,7 +11,7 @@ class PublishController extends BaseController {
   */
   index() {
     console.log('[Publish] Index Hit');
-    this.updateShell('Content Loading');
+    this.updateShell('<h2>Sorting posts.....</h2>');
 
     let potentialPosts = [];
     let sortedPosts = [];
@@ -119,10 +119,9 @@ class PublishController extends BaseController {
         potentialPosts.splice(randomEl, 1);
       }
 
-      // Update the browser
-      let html = app.postView.postList(toPost);
+      // Generate HTML and update DOM
       let ids = toPost.map(el => { return el.postID; });
-      html += `<button id="publish_these_posts" data-ids="${ids}">Publish These Posts</button>`;
+      let html = app.publishView.index(toPost, ids);
       this.updateShell(html);
       this.updateHistory('publish_index');
     });
@@ -145,5 +144,6 @@ class PublishController extends BaseController {
 
     // update the dom
     this.updateShell('Posts sent');
+    this.updateHistory('publish_confirm');
   }
 }
