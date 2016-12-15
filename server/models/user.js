@@ -37,6 +37,17 @@ class User extends BaseModel{
     let mongoModel = this.getMongooseModel();
     return this.getPromise(mongoModel, userID, 'users');
   }
+
+  sortBufferAccountIDs(accounts) {
+    let accs = [];
+
+    for(let i = 0; i < accounts.length; i++) {
+      if (accounts[i].service === 'twitter') {
+        accs.push(accounts[i].id);
+      }
+    }
+    return accs;
+  }
 }
 
 module.exports = User;

@@ -8,7 +8,7 @@ goog.offlineGoogleAnalytics.initialize();
 // Using a date string ensures that the new service worker is always used,
 // plus makes cache busting super easy. Hopefully!
 //VERSION-HERE
-const cacheName = version + 'static';
+const cacheName = `SFF-${version}-static`;
 const cacheFiles = [
   '/scripts/app.js',
   '/index.html',
@@ -16,7 +16,9 @@ const cacheFiles = [
   '/images/pencil.svg',
   '/images/placeholder-image.jpg',
   '/images/placeholder-image-not-available.jpg',
+  '/images/cover-image.jpeg',
   '/images/x.svg',
+  '/images/settings.svg',
   '/scripts/offline-google-analytics-import.js',
   '/favicon.ico',
   '/favicon-16x16.png',
@@ -90,6 +92,10 @@ self.addEventListener('fetch', event => {
 
   // Ignore non-GET requests, SW can't deal with them
   if (request.method !== 'GET') {
+    return;
+  }
+
+  if (request.url.includes('chrome-extension')) {
     return;
   }
 

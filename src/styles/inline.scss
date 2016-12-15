@@ -7,6 +7,7 @@ $app-blue: #66a2f5;
 $danger-red: #d8152c;
 $groovy-green: #44a334;
 $ominous-orange: #ea8c10;
+$perky-purple: #5111c6;
 
 $mobile-breakpoint: 40rem;
 $tablet-breakpoint: 80rem;
@@ -50,6 +51,44 @@ body textarea {
 
 .container {
   margin-top: 7rem;
+}
+
+.cover {
+  padding: 2rem 0;
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  position: fixed;
+  opacity: 0.6;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  background-color: #1A1A1A;
+  z-index: 1;
+  background-image: url("/public/images/cover-image.jpeg");
+  background-size: cover;
+  z-index: -1;
+}
+
+.login-screen{
+  padding: 2rem 0;
+  text-shadow: 0px 1px 6px rgba(0, 0, 0, 0.6);
+  display: flex;
+  height: 500px;
+  height: 100vh;
+  align-items: center;
+  justify-content: center;
+  -webkit-flex-direction: column;
+  flex-direction: column;
+  z-index: 2;
+  color: $white;
+  text-align: center;
+}
+
+.login-screen .inner {
+  padding: 2rem;
+  background-color: rgba(20, 20, 20, .6);
 }
 
 .breadcrumb,
@@ -133,6 +172,10 @@ body textarea {
         &.orange {
           background-color: $ominous-orange;
         }
+
+        &.purple {
+          background-color: $perky-purple;
+        }
       }
     }
 
@@ -150,6 +193,10 @@ body textarea {
 }
 
 
+
+.red {
+  color: $danger-red;
+}
 
 
 
@@ -175,6 +222,10 @@ select{
 
 .button-wrapper {
   margin-top: 6rem;
+}
+
+#publish_these_posts {
+  float: right;
 }
 
 .button,
@@ -371,7 +422,14 @@ td a.post_delete {
   &.post-list {
     td:nth-of-type(1) { padding: 1rem; }
     td:nth-of-type(2)::before { content: 'Last Posted'; }
-    td:nth-of-type(3)::before { content: 'Repeat'; }
+    td:nth-of-type(3)::before { content: 'Attachment'; }
     td:nth-of-type(4)::before { content: 'Actions'; }
   }
+}
+
+.publish-posts td:nth-of-type(2),
+.publish-posts td:nth-of-type(4),
+.publish-posts th:nth-of-type(2),
+.publish-posts th:nth-of-type(4) {
+  display: none;
 }

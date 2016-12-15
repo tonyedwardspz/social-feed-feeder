@@ -19,12 +19,19 @@ let registerTwiiterInputDetection = () => {
 */
 let updateCharCount = text => {
   let remaining = getCharCount(text);
-  document.getElementById('tweet-char-remaining').innerHTML = remaining;
+  let charEl = document.getElementById('tweet-char-remaining');
+  charEl.innerHTML = remaining;
+
+  if (remaining <= -1){
+    charEl.classList.add('red');
+  } else {
+    charEl.classList.remove('red');
+  }
 };
 
 /**
 * Gets the remaining charachter count for a post
-* @param {String} text The text whos length shold be checked
+* @param {String} text The string whose length shold be checked
 * @return {Int} The difference between the input length and twitter max length
 */
 let getCharCount = text => {

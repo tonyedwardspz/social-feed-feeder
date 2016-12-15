@@ -111,11 +111,15 @@ class CampaignView {
             <div class="row stat-container">
               <div class="column stats">
                 <span>${campaign.dailyPosts}</span>
-                <span>Max Daily Posts</span>
+                <span>Daily Posts</span>
               </div>
               <div class="column stats">
                 <span>${campaign.buckets.length}</span>
                 <span class="green">Buckets</span>
+              </div>
+              <div class="column stats">
+                <span>${campaign.getNumberOfPosts()}</span>
+                <span class="purple">Posts</span>
               </div>
               <div class="column stats">
                 <span>${date}</span>
