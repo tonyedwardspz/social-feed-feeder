@@ -39,7 +39,11 @@ class Post {
   */
   getAttachmentString() {
     if (this.attachment) {
-      return this.attachment;
+      if (this.attachment.length > 40){
+        return this.attachment;
+      } else {
+        return 'public/images/uploading-image.jpg';
+      }
     } else {
       return 'public/images/placeholder-image.jpg';
     }

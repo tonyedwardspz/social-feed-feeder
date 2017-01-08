@@ -93,7 +93,7 @@ class PostView {
                `;
 
     posts.forEach(post => {
-      let attachmentIMG = `<img src="${post.attachment}" />`;
+      let attachmentIMG = `<img src="${post.getAttachmentString()}" />`;
       html += `<tr>
                  <td class="table-message">${post.message}</td>
                  <td>${post.getDisplayLastPost()}</td>
