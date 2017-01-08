@@ -8,16 +8,18 @@ class Post {
   * @param {String} message The content of the post to share via buffer
   * @param {String} lastPostDate The last date of posting of this post
   * @param {String} attachment The URL string of the posts image attachment
-  * @param {String} [userID=app.user.id] The id of user this bucket belongs to
+  * @param {String} campaignID The id of campaign this post belongs to
+  * @param {String} [userID=app.user.id] The id of user this post belongs to
   */
   constructor(postID, bucketID, message,
-              lastPostDate, attachment, userID = app.user.id) {
+              lastPostDate, attachment, campaignID = '', userID = app.user.id) {
     this.postID = postID;
     this.bucketID = bucketID;
     this.message = message;
     this.lastPostDate = lastPostDate;
     this.attachment = attachment;
-    this.userID =userID;
+    this.campaignID = campaignID;
+    this.userID = userID;
   }
 
   /**
@@ -96,7 +98,8 @@ class Post {
       form.bucketID.value,
       form.message.value.trim(),
       getDefaultDate(),
-      form.attachment.value
+      form.attachment.value,
+      form.campaignID.value
     );
   }
 
@@ -144,6 +147,7 @@ class Post {
         post.message,
         post.lastPostDate,
         post.attachment,
+        post.campaignID,
         post.userID
       ));
     });
@@ -156,7 +160,7 @@ class Post {
   * @param {String} id ID of the post to delete
   */
   static removePost(id) {
-    console.log('Removeing Post');
+    console.log('Removing Post');
     let posts = this.getAllPosts();
 
     for (let i = posts.length -1; i >= 0; i--) {

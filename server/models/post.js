@@ -25,6 +25,7 @@ class Post extends BaseModel{
       message: String,
       lastPostDate: Date,
       attachment: String,
+      campaignID: String
     });
   }
 
@@ -41,7 +42,8 @@ class Post extends BaseModel{
       userID: post.userID,
       message: post.message,
       lastPostDate: post.lastPostDate,
-      attachment: post.attachment
+      attachment: post.attachment,
+      campaignID: post.campaignID
     });
 
     var result = 'sucess';
@@ -63,7 +65,8 @@ class Post extends BaseModel{
         lastPostDate: post.lastPostDate,
         attachment: post.attachment,
         userID: post.userID,
-        bucketID: post.bucketID
+        bucketID: post.bucketID,
+        campaignID: post.campaignID
       },
       {
         new: true,
