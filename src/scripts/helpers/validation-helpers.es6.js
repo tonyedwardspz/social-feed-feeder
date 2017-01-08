@@ -16,7 +16,7 @@ let inputsHaveValues = (elements) => {
 
   for (let i = 0; i < elements.length; i++) {
     let input = elements[i];
-    if (input.type !== 'submit' && input.type !== 'file') {
+    if (input.type !== 'submit' && input.type !== 'file' && input.type !== 'hidden') {
       if (input.value.length <= 0) {
         emptyInputs.push(input);
       }
