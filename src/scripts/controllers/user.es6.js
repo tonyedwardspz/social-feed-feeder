@@ -32,14 +32,12 @@ class UserController extends BaseController {
   checkAuthentication() {
     if (this.getCookie('user_auth') === 'true'){
       console.log('[User Controller] Succesfully authenticated');
-      if (app.user === null) {
-        app.user = new User(this.getCookie('user_id'));
+      app.user = new User(this.getCookie('user_id'));
 
-        if (window.location.href.includes('publish_index')){
-          loadContent();
-        } else {
-          app.dashboardController.index(app.user);
-        }
+      if (window.location.href.includes('publish_index')){
+        loadContent();
+      } else {
+        app.dashboardController.index(app.user);
       }
     } else {
       console.log('[User Contoller] Not authenticated');

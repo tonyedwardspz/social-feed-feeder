@@ -26,7 +26,7 @@ module.exports = function(app, passport, root){
   // MMMMM..... cookies
   app.use(cookieParser());
 
-  // Enable gzip
+  // Enable compression
   app.use(compress());
 
   // Configure express to you passport for auth / middleware

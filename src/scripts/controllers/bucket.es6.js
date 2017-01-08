@@ -96,6 +96,8 @@ class BucketController extends BaseController{
   /**
   * Deletes a bucket both locally and remotely after user confirmation.
   * @param {String} id The id of the bucket to be deleted
+  * @param {String} name The name of the bucket to be deleted
+  * @param {String} campaignID The id of the parent campaign
   */
   delete(id, name, campaignID) {
     console.log('[Bucket] Delete: ', id);

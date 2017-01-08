@@ -5,6 +5,11 @@ let request = require('request');
 let User = require('../singletons/user-singleton').getInstance();
 let UserModel = User.getMongooseModel();
 
+
+/**
+* Sets up passport user authenication for buffer
+* @param {Passport} passport Pass the passport object into 'class'
+*/
 module.exports = function(passport) {
   passport.serializeUser(function(user, done) {
     done(null, user.id);

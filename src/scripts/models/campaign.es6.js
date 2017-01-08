@@ -73,7 +73,7 @@ class Campaign {
   }
 
   /**
-  * Finds a campaign object fromt the supplied array for the provided ID
+  * Finds a campaign object from the supplied array for the provided ID
   * @param {String} id The id of the campaign to find
   * @param {Array.Campaign} campaigns An array of campaigns to search
   * @return {Campaign} The found campaign

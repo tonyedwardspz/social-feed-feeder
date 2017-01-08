@@ -8,6 +8,12 @@ let posts = require('../controllers/posts');
 let dash = require('../controllers/dashboard');
 let publish = require('../controllers/publish');
 
+
+/**
+* Exposes routes for the restful interface
+* @param {Express} app The express app object
+* @param {Passport} passport The instantiated passport authentication library
+*/
 module.exports = function(app, passport) {
 
   function ensureAuthenticated(req, res, next) {

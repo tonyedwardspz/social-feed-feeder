@@ -129,6 +129,7 @@ class PublishController extends BaseController {
 
   /**
   * Sends a request to the server to send the selected posts to buffer.
+  * @param {String} ids A comma seperated list of post ids to publish
   */
   create(ids) {
     console.log('[Publish] Create Hit for: ' + ids);
